@@ -1,6 +1,5 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +20,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -31,7 +27,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -39,14 +34,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -54,7 +47,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.haofiti.R
-import com.example.haofiti.ui.theme.OceanBlue40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +56,8 @@ fun Details() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(360.dp),
-            contentAlignment = Alignment.Center) {
+            contentAlignment = Alignment.Center
+        ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillBounds,
@@ -102,14 +95,22 @@ fun Details() {
                     IconButton(
                         onClick = { /*TODO*/ }
                     ) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "back", tint = Color.White)
+                        Icon(
+                            Icons.Filled.ArrowBack,
+                            contentDescription = "back",
+                            tint = Color.White
+                        )
                     }
                 },
                 actions = {
                     IconButton(
                         onClick = { /* Handle favorites action */ }
                     ) {
-                        Icon(Icons.Filled.Share, contentDescription = "Share", tint = Color.White)
+                        Icon(
+                            Icons.Filled.Share,
+                            contentDescription = "Share",
+                            tint = Color.White
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -163,31 +164,33 @@ fun Details() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(10.dp)) {
+                .padding(10.dp)
+        ) {
             Text(
                 text = "Details",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 style = TextStyle(color = Color.Black),
-
             )
             LazyRow(
-                modifier = Modifier
-                .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 item {
                     Text(
                         text = "3 Bedrooms",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        style = TextStyle(color = Color.Gray))
+                        style = TextStyle(color = Color.Gray)
+                    )
                 }
                 item {
                     Text(
                         text = "2 Guests",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        style = TextStyle(color = Color.Gray))
+                        style = TextStyle(color = Color.Gray)
+                    )
                 }
                 item {
                     Text(
@@ -212,7 +215,10 @@ fun Details() {
                     ) {
                         Icon(
                             modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.park), contentDescription = null, tint = Color.Black)
+                            painter = painterResource(id = R.drawable.park),
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
                         Text("Parking", color = Color.Black)
                     }
                 }
@@ -225,7 +231,10 @@ fun Details() {
                     ) {
                         Icon(
                             modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.towel), contentDescription = null, tint = Color.Black)
+                            painter = painterResource(id = R.drawable.towel),
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
                         Text("Towel", color = Color.Black)
                     }
                 }
@@ -238,7 +247,10 @@ fun Details() {
                     ) {
                         Icon(
                             modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.wifi), contentDescription = null, tint = Color.Black)
+                            painter = painterResource(id = R.drawable.wifi),
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
                         Text("Wi-Fi", color = Color.Black)
                     }
                 }
@@ -251,13 +263,14 @@ fun Details() {
                     ) {
                         Icon(
                             modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.tv), contentDescription = null, tint = Color.Black)
+                            painter = painterResource(id = R.drawable.tv),
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
                         Text("Television", color = Color.Black)
                     }
-
                 }
-
-                }
+            }
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
@@ -268,10 +281,11 @@ fun Details() {
                 style = TextStyle(color = Color.Gray)
             )
             Spacer(modifier = Modifier.height(5.dp))
+
+            // Edward Jake Section
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier
@@ -281,81 +295,55 @@ fun Details() {
                     Image(
                         painter = painterResource(id = R.drawable.kino),
                         contentDescription = "LandLord Pic",
-                        modifier = Modifier
-                            .fillMaxSize()
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
-                Spacer(modifier = Modifier.width(8.dp)) // Add space between image and text
-                Row(
+                Spacer(modifier = Modifier.width(8.dp))
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .weight(1f)
+                        .padding(5.dp)
                 ) {
-                    Column (
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .padding(5.dp),
-                        horizontalAlignment = Alignment.Start) {
-                        Text(
-                            text = "Edward Jake",
-                            fontWeight = FontWeight.Bold
-                        )
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Text(
-                            text = "Owner",
-                            color = Color.Gray
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(1f))
-                    IconButton(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(color = Color.DarkGray)
-                            .pa,
-                        onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector =Icons.Outlined.FavoriteBorder ,
-                            tint = Color.DarkGray,
-                            contentDescription = "Messenger" )
-                    }
-                 }
+                    Text(
+                        text = "Edward Jake",
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Owner",
+                        color = Color.Gray
+                    )
                 }
-                Spacer(modifier = Modifier.width(8.dp)) // Add space between text and button
-            }
-
-            Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    TextButton(
-                        onClick = { /* Handle book now button click */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color(0xFF0077BE))
-                            .clip(RoundedCornerShape(20.dp)),
-                        colors = ButtonDefaults.textButtonColors(contentColor = Color.White)
-                    ) {
-                        Text("Book Now")
-                    }
+                IconButton(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(5.dp))
+                        .background(color = Color.DarkGray),
+                    onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Outlined.FavoriteBorder,
+                        tint = Color.DarkGray,
+                        contentDescription = "Messenger"
+                    )
                 }
-
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = { /* Handle book now button click */ },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(6.dp),
+                colors = ButtonDefaults.buttonColors(Color(0xFF0077BE))
             ) {
-                TextButton(
-                    onClick = { /* Handle book now button click */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(0xFF0077BE))
-                        .clip(RoundedCornerShape(20.dp)),
-                    colors = ButtonDefaults.textButtonColors(contentColor = Color.White)
-                ) {
-                    Text("Book Now")
-                }
+                Text(
+                    text = "Book Now",
+                    color = Color.White,
+                    style = TextStyle(fontSize = 18.sp)
+                )
             }
         }
-
+    }
+}
 
 @Composable
 fun HouseName() {
