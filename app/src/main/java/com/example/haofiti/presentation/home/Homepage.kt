@@ -331,7 +331,7 @@ fun Homepage() {
 
                         Text(
                             modifier = Modifier.padding(5.dp),
-                            text = "Leeds",
+                            text = "Kasarani",
                             overflow = TextOverflow.Ellipsis,
                             style = TextStyle(color = Color.Black))
                     }
@@ -357,7 +357,7 @@ fun Homepage() {
 
                         Text(
                             modifier = Modifier.padding(5.dp),
-                            text = "Edinburgh",
+                            text = "Westlands",
                             overflow = TextOverflow.Ellipsis,
                             style = TextStyle(color = Color.Black))
                     }
@@ -383,7 +383,7 @@ fun Homepage() {
 
                         Text(
                             modifier = Modifier.padding(5.dp),
-                            text = "Redwood",
+                            text = "Ngara",
                             overflow = TextOverflow.Ellipsis,
                             style = TextStyle(color = Color.Black))
                     }
