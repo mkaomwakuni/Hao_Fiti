@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -26,7 +27,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -42,6 +45,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,10 +55,14 @@ import com.example.haofiti.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Details() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xf9f9f9))) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .clip(RoundedCornerShape(bottomEnd = 5.dp, bottomStart = 5.dp))
                 .height(360.dp),
             contentAlignment = Alignment.Center
         ) {
@@ -167,122 +175,102 @@ fun Details() {
                 .padding(10.dp)
         ) {
             Text(
-                text = "Details",
-                fontSize = 24.sp,
+                text = "Property Description",
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 style = TextStyle(color = Color.Black),
             )
             LazyRow(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 5.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 item {
-                    Text(
-                        text = "3 Bedrooms",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        style = TextStyle(color = Color.Gray)
-                    )
+                    OutlinedButton(
+                        onClick = { /*TODO*/ },
+                        border = ButtonDefaults.outlinedButtonBorder,
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.LocationOn,
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "3 Bedrooms")
+                    }
                 }
                 item {
-                    Text(
-                        text = "2 Guests",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        style = TextStyle(color = Color.Gray)
-                    )
+                    OutlinedButton(
+                        onClick = { /*TODO*/ },
+                        border = ButtonDefaults.outlinedButtonBorder,
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Person,
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "2 Guests")
+                    }
                 }
                 item {
-                    Text(
-                        text = "2 Bath",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        style = TextStyle(color = Color.Gray)
-                    )
+                    OutlinedButton(
+                        onClick = { /*TODO*/ },
+                        border = ButtonDefaults.outlinedButtonBorder,
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.LocationOn,
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "2 Bath")
+                    }
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(5.dp))
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                item {
-                    Column(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(colorResource(id = R.color.Graywhite)),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.park),
-                            contentDescription = null,
-                            tint = Color.Black
-                        )
-                        Text("Parking", color = Color.Black)
-                    }
-                }
-                item {
-                    Column(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(colorResource(id = R.color.Graywhite)),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.towel),
-                            contentDescription = null,
-                            tint = Color.Black
-                        )
-                        Text("Towel", color = Color.Black)
-                    }
-                }
-                item {
-                    Column(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(colorResource(id = R.color.Graywhite)),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.wifi),
-                            contentDescription = null,
-                            tint = Color.Black
-                        )
-                        Text("Wi-Fi", color = Color.Black)
-                    }
-                }
-                item {
-                    Column(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(colorResource(id = R.color.Graywhite)),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(60.dp),
-                            painter = painterResource(id = R.drawable.tv),
-                            contentDescription = null,
-                            tint = Color.Black
-                        )
-                        Text("Television", color = Color.Black)
-                    }
+            }
+            Spacer(modifier = Modifier.height(5.dp))
+
+            val annotatedString = buildAnnotatedString {
+                append("Experience luxurious living in our spacious apartment homes, perfect for modern urban lifestyles. With stunning city views, Enjoy the convenience of our prime location, close to shopping, dining, and entertainment. Discover your new home with us today! ")
+                withStyle(style = SpanStyle(color = Color(0xFF0077BE))) {
+                    append("Read more")
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Experience luxurious living in our spacious apartment homes, perfect for modern urban lifestyles. With stunning city views, Enjoy the convenience of our prime location, close to shopping, dining, and entertainment. Discover your new home with us today!",
+                text =  annotatedString,
                 fontSize = 15.sp,
+                maxLines = 4,
+                overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Justify,
                 fontWeight = FontWeight.Normal,
                 style = TextStyle(color = Color.Gray)
             )
-            Spacer(modifier = Modifier.height(5.dp))
 
-            // Edward Jake Section
+            Spacer(modifier = Modifier.height(25.dp))
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -326,21 +314,18 @@ fun Details() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Button(
-                onClick = { /* Handle book now button click */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFF0077BE))
-            ) {
-                Text(
-                    text = "Book Now",
-                    color = Color.White,
-                    style = TextStyle(fontSize = 18.sp)
-                )
-            }
+            Spacer(modifier = Modifier.height(20.dp))
+         TextButton(
+             modifier = Modifier
+                 .background(Color.DarkGray)
+                 .clip(RoundedCornerShape(2.dp))
+                 .fillMaxWidth(),
+             onClick = { /*TODO*/ }) {
+             Text(
+                 text = "Check Availability",
+                 color = Color.White
+             )
+          }
         }
     }
 }
@@ -354,7 +339,7 @@ fun HouseName() {
         Text(
             textAlign = TextAlign.Start,
             text = "Suraya Suites",
-            fontSize = 20.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             style = TextStyle(color = Color.Black),
             modifier = Modifier.padding(start = 10.dp)
@@ -388,5 +373,4 @@ fun HouseName() {
 fun DetailsPreview() {
     Details()
 }
-
 
