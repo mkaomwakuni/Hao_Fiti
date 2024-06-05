@@ -3,4 +3,5 @@
     <string name="splash_screen_title">Find Your\nIdeal Home</string>
     <string name="splash_screen_subtitle">Just within clicks you can search\nand find your Dream Home and stay</string>
     <string name="get_started_button">Get Started</string>
+    <string name="title_activity_map_select">MapSelect</string>
 </resources>

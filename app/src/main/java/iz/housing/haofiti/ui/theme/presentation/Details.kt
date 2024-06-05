@@ -1,4 +1,4 @@
-package com.example.haofiti.presentation.details
+package iz.housing.haofiti.ui.theme.presentation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -50,6 +50,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.haofiti.R
+import com.housing.haofiti.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,7 +69,7 @@ fun Details() {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillBounds,
-                painter = painterResource(id = R.drawable.kino),
+                painter = painterResource(id = R.drawable.villa),
                 contentDescription = "null"
             )
             Row(
@@ -280,7 +281,7 @@ fun Details() {
                         .clip(shape = CircleShape)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.kino),
+                        painter = painterResource(id = R.drawable.villa),
                         contentDescription = "LandLord Pic",
                         modifier = Modifier.fillMaxSize()
                     )

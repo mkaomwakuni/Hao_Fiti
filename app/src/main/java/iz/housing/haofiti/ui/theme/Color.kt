@@ -1,4 +1,4 @@
-package com.example.haofiti.ui.theme
+package iz.housing.haofiti.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
