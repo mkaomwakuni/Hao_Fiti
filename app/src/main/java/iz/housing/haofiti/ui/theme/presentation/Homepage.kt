@@ -47,7 +47,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.haofiti.R
+import com.housing.haofiti.R
 
 @Composable
 fun Homepage() {
@@ -225,7 +225,7 @@ fun Homepage() {
                                 .clip(RoundedCornerShape(5.dp)),
                             contentAlignment = Alignment.BottomStart
                         ) {
-                            ImageFetcher(image = painterResource(id = R.drawable.villa)
+                            ImageFetcher(image = painterResource(id = R.drawable.villa))
                         }
 
                         Text(

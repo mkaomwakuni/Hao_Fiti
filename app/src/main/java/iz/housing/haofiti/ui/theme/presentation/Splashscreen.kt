@@ -27,7 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.haofiti.R
+import com.housing.haofiti.R
+
 
 // SplashScreen.kt
 @Composable
@@ -50,7 +51,7 @@ fun SplashScreen() {
                 Image(
                     modifier = Modifier
                         .fillMaxSize(),
-                    painter = painterResource(id =  R.drawable.h_3),
+                    painter = painterResource(id =  R.drawable.kino),
                     contentDescription = "banner"  )
             }
 

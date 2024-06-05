@@ -1,4 +1,5 @@
 package iz.housing.haofiti.ui.theme.presentation
+import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -49,7 +50,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.haofiti.R
 import com.housing.haofiti.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,7 +69,7 @@ fun Details() {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillBounds,
-                painter = painterResource(id = R.drawable.villa),
+                painter = painterResource(id = R.drawable.images1),
                 contentDescription = "null"
             )
             Row(
@@ -106,7 +106,7 @@ fun Details() {
                         Icon(
                             Icons.Filled.ArrowBack,
                             contentDescription = "back",
-                            tint = Color.White
+                            tint = Color.Black
                         )
                     }
                 },
@@ -117,7 +117,7 @@ fun Details() {
                         Icon(
                             Icons.Filled.Share,
                             contentDescription = "Share",
-                            tint = Color.White
+                            tint = Color.Black
                         )
                     }
                 },
@@ -169,6 +169,7 @@ fun Details() {
                 color = Color.Black
             )
         }
+        Spacer(modifier = Modifier.height(10.dp))
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -180,6 +181,7 @@ fun Details() {
                 fontWeight = FontWeight.Bold,
                 style = TextStyle(color = Color.Black),
             )
+            Spacer(modifier = Modifier.height(10.dp))
             LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -250,7 +252,7 @@ fun Details() {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
             }
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             val annotatedString = buildAnnotatedString {
                 append("Experience luxurious living in our spacious apartment homes, perfect for modern urban lifestyles. With stunning city views, Enjoy the convenience of our prime location, close to shopping, dining, and entertainment. Discover your new home with us today! ")
@@ -281,7 +283,7 @@ fun Details() {
                         .clip(shape = CircleShape)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.villa),
+                        painter = painterResource(id = R.drawable.user),
                         contentDescription = "LandLord Pic",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -308,17 +310,17 @@ fun Details() {
                         .background(color = Color.DarkGray),
                     onClick = { /*TODO*/ }) {
                     Icon(
-                        imageVector = Icons.Outlined.FavoriteBorder,
-                        tint = Color.DarkGray,
+                        painter = painterResource(id = R.drawable.message ),
+                        tint = Color.White,
                         contentDescription = "Messenger"
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(30.dp))
          TextButton(
              modifier = Modifier
-                 .background(Color.DarkGray)
-                 .clip(RoundedCornerShape(2.dp))
+                 .background(Color.DarkGray, shape = RoundedCornerShape(20.dp))
+                 .height(70.dp)
                  .fillMaxWidth(),
              onClick = { /*TODO*/ }) {
              Text(

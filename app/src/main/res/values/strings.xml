@@ -4,4 +4,8 @@
     <string name="splash_screen_subtitle">Just within clicks you can search\nand find your Dream Home and stay</string>
     <string name="get_started_button">Get Started</string>
     <string name="title_activity_map_select">MapSelect</string>
+    <string name="dashboard">Home</string>
+    <string name="Discovery">Discovery</string>
+    <string name="bookmarks">Favorites</string>
+    <string name="Profile">Profile</string>
 </resources>
