@@ -1,4 +1,4 @@
-package com.example.haofiti
+package iz.housing.haofiti
 
 import org.junit.Test
 

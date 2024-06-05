@@ -1,4 +1,4 @@
-package com.example.haofiti.presentation.onboarding
+package iz.housing.haofiti.ui.theme.presentation
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -50,7 +50,7 @@ fun SplashScreen() {
                 Image(
                     modifier = Modifier
                         .fillMaxSize(),
-                    painter = painterResource(id =  R.drawable.kino),
+                    painter = painterResource(id =  R.drawable.h_3),
                     contentDescription = "banner"  )
             }
 

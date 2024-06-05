@@ -1,4 +1,4 @@
-package com.example.haofiti.presentation.details
+package iz.housing.haofiti.ui.theme.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

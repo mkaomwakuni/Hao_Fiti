@@ -1,4 +1,4 @@
-package com.example.haofiti.presentation.home
+package iz.housing.haofiti.ui.theme.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -109,7 +109,7 @@ fun Homepage() {
                                 .clip(RoundedCornerShape(5.dp)),
                             contentAlignment = Alignment.BottomStart
                         ) {
-                            ImageFetcher(image = painterResource(id = R.drawable.kino))
+                            ImageFetcher(image = painterResource(id = R.drawable.h_3))
                         }
 
                         Text(
@@ -167,7 +167,7 @@ fun Homepage() {
                                 .clip(RoundedCornerShape(5.dp)),
                             contentAlignment = Alignment.BottomStart
                         ) {
-                            ImageFetcher(image = painterResource(id = R.drawable.kino))
+                            ImageFetcher(image = painterResource(id = R.drawable.h_3))
                         }
 
                         Text(
@@ -225,7 +225,7 @@ fun Homepage() {
                                 .clip(RoundedCornerShape(5.dp)),
                             contentAlignment = Alignment.BottomStart
                         ) {
-                            ImageFetcher(image = painterResource(id = R.drawable.kino))
+                            ImageFetcher(image = painterResource(id = R.drawable.villa)
                         }
 
                         Text(
