@@ -1,20 +1,8 @@
 package iz.housing.haofiti.ui.theme.presentation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun  MapsDetails() {
-    Column(modifier = Modifier.fillMaxSize()) {
-    }
-}
+fun MapScreen() {
 
-@Preview(showBackground = true)
-@Composable
-fun DetailsPreview2() {
-    MapsDetails()
 }
-

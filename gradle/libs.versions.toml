@@ -15,6 +15,10 @@ firebaseDatabase = "21.0.0"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
 runtimeAndroid = "1.6.7"
+googleGmsGoogleServicesVersion = "4.4.2"
+firebaseAuth = "23.0.0"
+maps = "3.1.0-beta"
+playServicesMaps = "18.2.0"
 
 
 [libraries]
@@ -35,9 +39,13 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+maps = { group = "com.google.android.libraries.maps", name = "maps", version.ref = "maps" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServicesVersion" }
 
 

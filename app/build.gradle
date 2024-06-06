@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace 'com.housing.haofiti'
+    namespace 'iz.housing.haofiti'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.housing.haofiti"
+        applicationId "iz.housing.haofiti"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -60,6 +61,9 @@ dependencies {
     implementation libs.androidx.navigation.runtime.ktx
     implementation libs.androidx.navigation.compose
     implementation libs.androidx.runtime.android
+    implementation libs.firebase.auth
+    implementation libs.maps
+    implementation libs.play.services.maps
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

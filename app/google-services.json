@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "445706357995",
+    "firebase_url": "https://haofiti-cc6c5-default-rtdb.firebaseio.com",
+    "project_id": "haofiti-cc6c5",
+    "storage_bucket": "haofiti-cc6c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445706357995:android:877fdbc5de13b065d5c2ae",
+        "android_client_info": {
+          "package_name": "com.housing.haofiti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNJvO1C27BrTzQYHA6L1sUDP6jv96bf9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445706357995:android:6f173b304a3a0c75d5c2ae",
+        "android_client_info": {
+          "package_name": "iz.housing.haofiti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNJvO1C27BrTzQYHA6L1sUDP6jv96bf9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
