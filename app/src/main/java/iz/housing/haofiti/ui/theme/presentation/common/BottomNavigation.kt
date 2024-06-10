@@ -1,4 +1,4 @@
-package iz.housing.haofiti.ui.theme.presentation
+package iz.housing.haofiti.ui.theme.presentation.common
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons

@@ -1,4 +1,4 @@
-package iz.housing.haofiti.ui.theme.presentation
+package iz.housing.haofiti.ui.theme.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,10 +35,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
 
 @Composable
-fun Homepage() {
+fun Homepage(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -309,7 +311,7 @@ fun CircleCityImage(city: Painter) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun HomepagePreview() {
-    Homepage()
+    Homepage(rememberNavController())
 }
 
 data class House(
@@ -331,8 +333,8 @@ val sampleHouses = listOf(
 )
 
 val sampleCities = listOf(
-    City("Northern Ridge", R.drawable.manchester),
-    City("Kasarani", R.drawable.leeds),
-    City("Westlands", R.drawable.edinburgh),
-    City("Ngara", R.drawable.images1)
+    City("Northern Ridge", R.drawable.ngara),
+    City("Kasarani", R.drawable.westlands),
+    City("Westlands", R.drawable.kileleshwa),
+    City("Ngara", R.drawable.lavington)
 )

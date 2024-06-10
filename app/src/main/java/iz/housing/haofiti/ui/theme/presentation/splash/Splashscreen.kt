@@ -1,4 +1,4 @@
-package iz.housing.haofiti.ui.theme.presentation
+package iz.housing.haofiti.ui.theme.presentation.splash
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -27,12 +27,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
 
 
 // SplashScreen.kt
 @Composable
-fun SplashScreen() {
+fun SplashScreen( navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -134,6 +136,6 @@ fun TextButtonSplash(
 @Preview(showBackground = true)
 @Composable
 fun PreviewSplashScreen() {
-    SplashScreen()
+    SplashScreen(rememberNavController())
 }
 
