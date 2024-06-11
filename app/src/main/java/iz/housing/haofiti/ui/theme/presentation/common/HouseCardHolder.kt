@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import iz.housing.haofiti.R
 import iz.housing.haofiti.data.database.HouseInfo
 
@@ -50,14 +51,14 @@ fun HouseCardHolder(
             )
             Spacer(modifier = Modifier.width(5.dp))
             Column {
-                TitlePreview(title = houseInfo.title, rating = houseInfo.rating)
+                TitlePreview(title = houseInfo.name, rating = houseInfo.rating)
                 Spacer(modifier = Modifier.height(5.dp))
                 Row {
                     Icon(painter = painterResource(id = R.drawable.location), contentDescription = "Location")
                     Spacer(modifier = Modifier.width(5.dp))
                     Text(text = houseInfo.location, style = MaterialTheme.typography.titleSmall)
                     Spacer(modifier = Modifier.width(5.dp))
-                    BarAmenities(noOfBedrooms = houseInfo.noOfBedrooms, noOfBathrooms = houseInfo.noOfBathrooms, areaSize = houseInfo.areaSize)
+                    BarAmenities(noOfBedroom = houseInfo.noOfBedrooms, noOfBathroom = houseInfo.noOfBathrooms, areaSize = houseInfo.areaSize)
                 }
             }
         }

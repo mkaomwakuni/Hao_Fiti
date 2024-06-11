@@ -64,6 +64,7 @@ dependencies {
     implementation libs.androidx.material
     implementation platform(libs.androidx.compose.bom.v20240500)
     implementation platform(libs.androidx.compose.bom.v20240500)
+    implementation libs.firebase.database.ktx
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -72,11 +73,13 @@ dependencies {
     androidTestImplementation platform(libs.androidx.compose.compose.bom.v20221000.x3)
     debugImplementation libs.ui.tooling
     debugImplementation libs.ui.test.manifest
+    implementation 'com.google.firebase:firebase-database:21.0.0'
     implementation libs.androidx.navigation.compose.v270beta02
 
     // Compose Navigation
     implementation(libs.navigation.compose.v240alpha10)
     implementation(libs.kotlinx.serialization.json)
+    implementation 'com.google.dagger:hilt-android:2.45'
 
     // Coil
     implementation(libs.coil.compose)

@@ -22,10 +22,7 @@ composeBom = "2023.08.00"
 lifecycleRuntimeKtxVersion = "2.6.1"
 mapsCompose = "2.11.4"
 material = "1.6.7"
-material3Android = "1.2.0"
 
-googleGmsGoogleServices = "4.4.1"
-firebaseDatabase = "21.0.0"
 navigationComposeVersion = "2.7.0-beta02"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
@@ -36,6 +33,7 @@ firebaseAuth = "23.0.0"
 maps = "3.1.0-beta"
 playServicesMaps = "18.2.0"
 volley = "1.2.1"
+firebaseDatabaseKtx = "21.0.0"
 
 
 [libraries]
@@ -83,6 +81,7 @@ ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import iz.housing.haofiti.data.database.HouseInfo
 
 @Composable
@@ -52,11 +53,11 @@ fun HouseCard(
                 )
             }
             Spacer(modifier = Modifier.height(5.dp))
-            TitPreview(title = houseInfo.title, rating = houseInfo.rating)
+            TitlePreview(title = houseInfo.name, rating = houseInfo.rating)
             Spacer(modifier = Modifier.height(5.dp))
             BarAmenities(
-                noOfBedrooms = houseInfo.noOfBedrooms,
-                noOfBathrooms = houseInfo.noOfBathrooms,
+                noOfBedroom = houseInfo.noOfBedrooms,
+                noOfBathroom = houseInfo.noOfBathrooms,
                 areaSize = houseInfo.areaSize
             )
         }
