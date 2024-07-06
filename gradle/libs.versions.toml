@@ -7,7 +7,10 @@ androidxNavigationCompose = "2.4.0-alpha10"
 appcompat = "1.7.0"
 coilCompose = "2.6.0"
 composeBomVersion = "2024.05.00"
+converterGson = "2.9.0"
 coreKtxVersion = "1.10.1"
+hiltAndroid = "<latest_version>"
+hiltAndroidVersion = "2.51"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -30,6 +33,8 @@ navigationComposeVersion = "2.7.0-beta02"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
 playServicesMapsVersion = "18.1.0"
+retrofit = "2.9.0"
+roomTesting = "2.4.0"
 runtimeAndroid = "1.6.7"
 googleGmsGoogleServicesVersion = "4.4.2"
 firebaseAuth = "23.0.0"
@@ -49,7 +54,15 @@ androidx-core-ktx-v1101 = { module = "androidx.core:core-ktx", version.ref = "co
 androidx-lifecycle-runtime-ktx-v261 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-navigation-compose-v270beta02 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomTesting" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomTesting" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomTesting" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidVersion" }
+hilt-android-v244 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -76,6 +89,7 @@ material3 = { module = "androidx.compose.material3:material3" }
 navigation-compose-v240alpha10 = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 play-services-maps-v1810 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 ui = { module = "androidx.compose.ui:ui" }
 ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }

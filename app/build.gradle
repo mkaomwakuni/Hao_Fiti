@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -49,7 +51,7 @@ android {
 }
 
 dependencies {
-
+    def room_version = "2.4.0"
     implementation libs.kotlin.stdlib.jdk8
     implementation libs.androidx.core.ktx.v1101
     implementation platform(libs.kotlin.bom)
@@ -85,5 +87,19 @@ dependencies {
     implementation libs.maps.compose
     implementation libs.play.services.maps.v1810
     implementation libs.accompanist.permissions
+    //Room Database
+    implementation libs.androidx.room.runtime
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    //Kotlin Extensions and Coroutines support
+    implementation libs.androidx.room.ktx
+    // For Testing Room components
+    testImplementation libs.androidx.room.testing
+    //Retrofit for Networking
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    //Dependency Injection
+    implementation(libs.hilt.android.v244)
+    kapt(libs.hilt.android.compiler)
+
 
 }
