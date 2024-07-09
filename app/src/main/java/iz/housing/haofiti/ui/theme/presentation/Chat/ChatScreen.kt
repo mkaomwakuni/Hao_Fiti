@@ -40,13 +40,13 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactForm() {
-//    var name by remember { mutableStateOf("") }
-//    var email by remember { mutableStateOf("") }
-//    var phone by remember { mutableStateOf("") }
-//    var message by remember { mutableStateOf("") }
-//    var lastname by remember { mutableStateOf("") }
-//    var residence by remember { mutableStateOf("") }
-//    var isAgreed by remember { mutableStateOf(false) }
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var message by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf("") }
+    var residence by remember { mutableStateOf("") }
+    var isAgreed by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(

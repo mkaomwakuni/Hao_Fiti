@@ -5,9 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import iz.housing.haofiti.ui.theme.HaoFitiTheme
-import iz.housing.haofiti.ui.theme.presentation.navigation.NavGraph
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +15,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             HaoFitiTheme {
                 navController = rememberNavController()
-                NavGraph(navController = navController)
                 }
             }
         }
