@@ -36,14 +36,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
 import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCard
 
 @Composable
-fun RentalListingScreen(navHostController: NavController) {
+fun RentalListingScreen(navController: NavController) {
     var selectedPropertyType by remember { mutableStateOf("Villa") }
 
     Scaffold(
-        topBar = { TopAppBar() }
+        topBar = { TopAppBar() },
+        bottomBar = { BottomNavComponent(navController = navController) }
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             SearchBar()
@@ -73,7 +75,7 @@ fun TopAppBar() {
                     Icon(Icons.Default.Notifications, contentDescription = "Notifications")
                 }
             }
-        }
+        },
     )
 }
 
@@ -137,5 +139,5 @@ data class Property(
 @Composable
 fun PreviewRel(){
     val navController = rememberNavController()
-    RentalListingScreen(navHostController = navController)
+    RentalListingScreen(navController =  navController)
 }
