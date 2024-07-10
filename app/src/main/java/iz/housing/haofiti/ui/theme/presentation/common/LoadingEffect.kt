@@ -33,7 +33,7 @@ fun Modifier.shimmerEffect() = composed {
             repeatMode = RepeatMode.Reverse
         ), label = ""
     ).value
-    background(Color.LightGray.copy(alpha = alpha)) 
+    background(Color.LightGray.copy(alpha = alpha))
 }
 
 @Composable
