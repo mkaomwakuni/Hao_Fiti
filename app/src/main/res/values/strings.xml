@@ -7,5 +7,6 @@
     <string name="dashboard">Home</string>
     <string name="Discovery">Discovery</string>
     <string name="bookmarks">Favorites</string>
+    <string name="maps">Maps</string>
     <string name="Profile">Profile</string>
 </resources>

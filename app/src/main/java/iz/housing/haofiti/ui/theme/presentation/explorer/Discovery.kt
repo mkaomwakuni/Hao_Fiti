@@ -1,9 +1,17 @@
-package iz.housing.haofiti.ui.theme.presentation.home
+package iz.housing.haofiti.ui.theme.presentation.explorer
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,11 +20,18 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -29,7 +44,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,9 +52,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
+import iz.housing.haofiti.ui.theme.presentation.common.HouseItem
 
 @Composable
-fun Homepage(navController: NavController) {
+fun Discovery(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -65,7 +80,7 @@ fun Homepage(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(25.dp))
         HouseList(houses = sampleHouses)
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(60.dp))
         SectionTitle(
             title = "Explore the City",
             modifier = Modifier.fillMaxWidth()
@@ -106,7 +121,6 @@ fun CustomHeaderTitle(
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -122,6 +136,7 @@ fun SearchBar(
     ) {
         TextField(
             modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
                 .fillMaxWidth(),
             colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Black,
@@ -185,63 +200,7 @@ fun HouseList(houses: List<House>) {
     }
 }
 
-@Composable
-fun HouseItem(house: House) {
-    Box(modifier = Modifier.width(160.dp)) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                modifier = Modifier
-                    .width(160.dp)
-                    .height(160.dp)
-                    .padding(5.dp)
-                    .clip(RoundedCornerShape(5.dp)),
-                contentAlignment = Alignment.BottomStart
-            ) {
-                ImageFetcher(image = painterResource(id = house.imageRes))
-            }
-            Text(
-                modifier = Modifier.padding(5.dp),
-                text = house.name,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(color = Color.Black)
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    textAlign = TextAlign.Start,
-                    text = house.location,
-                    style = TextStyle(color = Color.Gray),
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 10.dp),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = null,
-                        tint = Color.Yellow,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Text(
-                        text = house.rating.toString(),
-                        textAlign = TextAlign.End,
-                        style = TextStyle(color = Color.Black),
-                        modifier = Modifier.padding(start = 4.dp)
-                    )
-                }
-            }
-        }
-    }
-}
+
 
 @Composable
 fun CityList(cities: List<City>) {
@@ -287,8 +246,8 @@ fun CityItem(city: City) {
 fun ImageFetcher(image: Painter) {
     Image(
         modifier = Modifier
-            .height(160.dp)
-            .width(160.dp)
+            .height(180.dp)
+            .width(190.dp)
             .clip(RoundedCornerShape(5.dp)),
         painter = image,
         contentScale = ContentScale.FillBounds,
@@ -311,7 +270,7 @@ fun CircleCityImage(city: Painter) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun HomepagePreview() {
-    Homepage(rememberNavController())
+    Discovery(rememberNavController())
 }
 
 data class House(
@@ -327,9 +286,9 @@ data class City(
 )
 
 val sampleHouses = listOf(
-    House("Green Wood Apartments", "London", 4.9, R.drawable.h_3),
-    House("Blue Stone Villa", "Paris", 4.8, R.drawable.h_3),
-    House("Sunset Bungalow", "New York", 4.7, R.drawable.villa)
+    House("Green Wood Apartments", "London", 4.9, R.drawable.kino),
+    House("Blue Stone Villa", "Paris", 4.8, R.drawable.kiambu),
+    House("Sunset Bungalow", "New York", 4.7, R.drawable.lavington)
 )
 
 val sampleCities = listOf(

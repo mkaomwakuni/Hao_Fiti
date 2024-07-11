@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="iz.housing.haofiti" />
+                  <option name="mobileSdkAppId" value="1:445706357995:android:6f173b304a3a0c75d5c2ae" />
+                  <option name="projectId" value="haofiti-cc6c5" />
+                  <option name="projectNumber" value="445706357995" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

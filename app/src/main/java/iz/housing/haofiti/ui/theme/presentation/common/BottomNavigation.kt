@@ -2,7 +2,10 @@ package iz.housing.haofiti.ui.theme.presentation.common
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -19,15 +22,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
 
-
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun BottomNavComponent(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
     NavigationBar {
         NavigationBarItem(
-            icon = { Icon(painter = painterResource(id = R.drawable.home), contentDescription = "Home") },
+            icon = { Icon(imageVector = Icons.Outlined.Home, contentDescription = "Home") },
             label = { Text(stringResource(R.string.dashboard)) },
             selected = currentRoute == "article_screen",
             onClick = {
@@ -51,7 +53,7 @@ fun BottomNavigationBar(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Bookmarks") },
+            icon = { Icon(imageVector = Icons.Outlined.Favorite, contentDescription = "Bookmarks") },
             label = { Text(stringResource(R.string.bookmarks)) },
             selected = currentRoute == "bookmarks_screen",
             onClick = {
@@ -63,7 +65,19 @@ fun BottomNavigationBar(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(painter = painterResource(R.drawable.profile), contentDescription = "Profile")},
+            icon = { Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Explore") },
+            label = { Text(stringResource(R.string.maps)) },
+            selected = currentRoute == "maps_screen",
+            onClick = {
+                navController.navigate("maps_screen") {
+                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
+        NavigationBarItem(
+            icon = { Icon(imageVector =  Icons.Outlined.Person, contentDescription = "Profile")},
             label = { Text(stringResource(R.string.Profile)) },
             selected = currentRoute == "Profile_screen",
             onClick = {
@@ -81,5 +95,5 @@ fun BottomNavigationBar(navController: NavController) {
 @Composable
 fun PreviewBottomItems() {
     val navController = rememberNavController()
-    BottomNavigationBar(navController = navController)
+    BottomNavComponent(navController = navController)
 }

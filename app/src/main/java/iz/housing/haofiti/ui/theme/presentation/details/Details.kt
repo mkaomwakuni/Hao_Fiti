@@ -1,4 +1,4 @@
-package iz.housing.haofiti.ui.theme.presentation
+package iz.housing.haofiti.ui.theme.presentation.details
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -67,7 +67,7 @@ fun Details() {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillBounds,
-                painter = painterResource(id = R.drawable.images1),
+                painter = painterResource(id = R.drawable.intro),
                 contentDescription = "null"
             )
             Row(
