@@ -8,7 +8,7 @@ import iz.housing.haofiti.ui.theme.presentation.details.Hompage
 import iz.housing.haofiti.ui.theme.presentation.home.RentalListingScreen
 
 @Composable
-fun NavGraph(
+fun HouseNavGraph(
     navController: NavHostController
 ) {
     NavHost(navController = navController, startDestination = Route.Home.route) {
