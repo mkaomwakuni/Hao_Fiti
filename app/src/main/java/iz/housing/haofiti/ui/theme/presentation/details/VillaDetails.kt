@@ -45,6 +45,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,17 +66,16 @@ import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
 
 @Composable
-fun Hompage(navController: NavHostController) {
-    Scaffold(
-    ) { innerPadding ->
+fun HouseDetailsPage(navController: NavHostController) {
+    Scaffold { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
         ) {
-            VillaImageCarousel()
-            VillaDescription()
-            VillaFacilities()
+            ImageCarousel()
+            HouseDescription()
+            HouseFacilities()
             LocationAddress()
             AgentDetails()
         }
@@ -100,12 +100,17 @@ fun HomepageTopBar() {
                 Icon(Icons.Default.FavoriteBorder, contentDescription = "Favorite")
             }
         }
+        , colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent,
+            titleContentColor = Color.Transparent,
+            actionIconContentColor = Color.White
+        )
     )
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun VillaImageCarousel() {
+fun ImageCarousel() {
     Box(
         modifier = Modifier
             .height(350.dp)
@@ -117,6 +122,7 @@ fun VillaImageCarousel() {
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
+        HomepageTopBar()
         Column (
             modifier = Modifier
             .fillMaxWidth()
@@ -146,7 +152,7 @@ fun VillaImageCarousel() {
                     Text("Recommended")
                 }
             }
-            VillaInfo()
+            HouseInfo()
         }
         Row(
             modifier = Modifier
@@ -168,7 +174,7 @@ fun VillaImageCarousel() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun VillaInfo() {
+fun HouseInfo() {
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Park Residence Villa", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
         Text("Malang, East Java, Indonesia", color = Color.White)
@@ -176,7 +182,7 @@ fun VillaInfo() {
 }
 
 @Composable
-fun VillaDescription() {
+fun HouseDescription() {
     val text = "Park Residence Villa offers an exceptional villa rental experience, where luxury and tranquility blend harmoniously. Nestled in a serene and picturesque location, each villa is meticulously designed to provide a perfect oasis for guests seeking relaxation and comfort. With spacious living areas..."
     val readMoreText = "Read more"
 
@@ -204,16 +210,16 @@ fun VillaDescription() {
 }
 
 @Composable
-fun VillaFacilities() {
+fun HouseFacilities() {
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(16.dp)) {
+        .padding(14.dp)) {
         Text("Our Facilities", fontWeight = FontWeight.Bold, fontSize = 18.sp)
         Spacer(Modifier.height(4.dp))
 
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)) {
+            .padding(4.dp)) {
             // Left column
             Column(modifier = Modifier.weight(1f)) {
                 FacilityItem(Icons.Default.PlayArrow, "Wi-Fi available")
@@ -304,7 +310,7 @@ fun AgentDetails(){
 @Composable
 fun VillaDetailPreview() {
     val navController = rememberNavController()
-    Hompage(navController = navController)
+    HouseDetailsPage(navController = navController)
 }
 @Preview(showBackground = true)
 @Composable

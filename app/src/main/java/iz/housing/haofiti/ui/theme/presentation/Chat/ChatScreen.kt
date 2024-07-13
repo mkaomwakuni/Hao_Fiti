@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
@@ -54,7 +54,7 @@ fun ContactForm() {
                 navigationIcon = {
                     IconButton(
                         onClick = { /*TODO*/ }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Navigate Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Navigate Back")
                     }
                 }
             )
@@ -103,12 +103,14 @@ fun ContactForm() {
             )
             Spacer(modifier = Modifier.height(16.dp))
             CustomTextField(
+                modifier = Modifier
+                    .height(120.dp),
                 value = message,
                 onValueChange = {message = it},
                 label = "Message",
                 placeholder = "Leave Your Enquaries"
             )
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             CustomCheckBox(
                 checked = isAgreed,
                 onCheckedChange = {isAgreed = it},

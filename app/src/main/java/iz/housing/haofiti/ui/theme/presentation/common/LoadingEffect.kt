@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -28,12 +27,12 @@ import androidx.compose.ui.unit.dp
 fun Modifier.shimmerEffect() = composed {
     val transition = rememberInfiniteTransition()
     val alpha = transition.animateFloat(
-        initialValue = 0.2f, targetValue = 0.9f, animationSpec = infiniteRepeatable(
+        initialValue = 0.2f, targetValue = 0.4f, animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 1000),
             repeatMode = RepeatMode.Reverse
         ), label = ""
     ).value
-    background(Color.LightGray.copy(alpha = alpha))
+    background(color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha))
 }
 
 @Composable
