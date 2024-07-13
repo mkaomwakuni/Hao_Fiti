@@ -73,7 +73,7 @@ fun Discovery(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(30.dp))
         SectionTitle(
-            title = "New Year Best Deal",
+            title = "Best Deals for the Month",
             actionText = "See More",
             actionColor = Color.Blue,
             modifier = Modifier.fillMaxWidth()
@@ -132,7 +132,7 @@ fun SearchBar(
     Surface(
         modifier = modifier
             .border(1.dp, color = Color.LightGray)
-            .background(Color.LightGray)
+            .background(Color.LightGray.copy(alpha = 0.4f))
     ) {
         TextField(
             modifier = Modifier
@@ -223,7 +223,7 @@ fun CityItem(city: City) {
         ) {
             Box(
                 modifier = Modifier
-                    .width(100.dp)
+                    .width(220.dp)
                     .height(100.dp)
                     .padding(5.dp)
                     .clip(CircleShape),
@@ -247,7 +247,7 @@ fun ImageFetcher(image: Painter) {
     Image(
         modifier = Modifier
             .height(180.dp)
-            .width(190.dp)
+            .width(220.dp)
             .clip(RoundedCornerShape(5.dp)),
         painter = image,
         contentScale = ContentScale.FillBounds,
