@@ -2,7 +2,7 @@ package iz.housing.haofiti.ui.theme.presentation.common
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Person
@@ -53,7 +53,7 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(imageVector = Icons.Outlined.Favorite, contentDescription = "Bookmarks") },
+            icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Bookmarks") },
             label = { Text(stringResource(R.string.bookmarks)) },
             selected = currentRoute == "bookmarks_screen",
             onClick = {

@@ -29,15 +29,15 @@ import iz.housing.haofiti.ui.theme.presentation.explorer.ImageFetcher
 
 @Composable
 fun HouseItem(house: House) {
-    Box(modifier = Modifier.width(160.dp)) {
+    Box(modifier = Modifier.width(220.dp)) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
             Box(
                 modifier = Modifier
-                    .width(160.dp)
-                    .height(160.dp)
+                    .width(220.dp)
+                    .height(180.dp)
                     .padding(5.dp)
                     .clip(RoundedCornerShape(5.dp)),
                 contentAlignment = Alignment.BottomStart

@@ -140,6 +140,7 @@ fun CustomTextField(
             .fillMaxWidth()
             .border(border = BorderStroke( 2.dp, MaterialTheme.colorScheme.primary)),
         colors = TextFieldDefaults.colors(
+            unfocusedIndicatorColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
             focusedContainerColor = Color.Transparent
         )
@@ -164,6 +165,7 @@ fun CustomPhoneField(
                 .width(80.dp)
                 .border(border = BorderStroke( 2.dp, MaterialTheme.colorScheme.primary)),
             colors = TextFieldDefaults.colors(
+                unfocusedIndicatorColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent
             )
@@ -178,6 +180,7 @@ fun CustomPhoneField(
             label = {Text("Enter Your Tel Phone")},
             placeholder = { Text("Phone") },
             colors = TextFieldDefaults.colors(
+                unfocusedIndicatorColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent
             )

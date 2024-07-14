@@ -1,8 +1,8 @@
 package iz.housing.haofiti.ui.theme.presentation.explorer
 
+//noinspection UsingMaterialAndMaterial3Libraries
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,14 +18,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -73,7 +74,7 @@ fun Discovery(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(30.dp))
         SectionTitle(
-            title = "Best Deals for the Month",
+            title = "Best Deals",
             actionText = "See More",
             actionColor = Color.Blue,
             modifier = Modifier.fillMaxWidth()
@@ -121,6 +122,7 @@ fun CustomHeaderTitle(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -129,19 +131,15 @@ fun SearchBar(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Surface(
-        modifier = modifier
-            .border(1.dp, color = Color.LightGray)
-            .background(Color.LightGray.copy(alpha = 0.4f))
-    ) {
+    Surface {
         TextField(
             modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(6.dp))
                 .fillMaxWidth(),
-            colors = TextFieldDefaults.colors(
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = Color.LightGray.copy(alpha = 0.3f),
+                unfocusedBorderColor = Color.Transparent,
+                disabledBorderColor = Color.Transparent
             ),
             value = searchText,
             onValueChange = onSearch,
