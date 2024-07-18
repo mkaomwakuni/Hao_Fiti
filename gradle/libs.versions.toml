@@ -11,6 +11,7 @@ converterGson = "2.9.0"
 coreKtxVersion = "1.10.1"
 hiltAndroid = "<latest_version>"
 hiltAndroidVersion = "2.51"
+hiltCompiler = "1.2.0"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -41,6 +42,7 @@ firebaseAuth = "23.0.0"
 maps = "3.1.0-beta"
 playServicesMaps = "18.2.0"
 volley = "1.2.1"
+firebaseDatabaseKtx = "21.0.0"
 
 
 [libraries]
@@ -51,6 +53,7 @@ androidx-compose-bom-v20240500 = { module = "androidx.compose:compose-bom", vers
 androidx-compose-compose-bom-v20221000-x3 = { module = "androidx.compose:compose-bom", version.ref = "androidxComposeComposeBom2" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-ktx-v1101 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
 androidx-lifecycle-runtime-ktx-v261 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-navigation-compose-v270beta02 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
@@ -97,6 +100,7 @@ ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
