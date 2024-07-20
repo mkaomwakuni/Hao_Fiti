@@ -1,6 +1,9 @@
 package iz.housing.haofiti.ui.theme.presentation.common
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
@@ -9,12 +12,11 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -27,11 +29,14 @@ fun BottomNavComponent(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    NavigationBar {
+    NavigationBar(modifier = Modifier
+        .height(80.dp)
+        .clip(RoundedCornerShape(20.dp))
+        .fillMaxWidth()) {
         NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.Home, contentDescription = "Home") },
-            label = { Text(stringResource(R.string.dashboard)) },
-            selected = currentRoute == "article_screen",
+            label = {  },
+            selected = currentRoute == "home_screen",
             onClick = {
                 navController.navigate("home_screen") {
                     popUpTo(navController.graph.startDestinationId) { saveState = true }
@@ -42,10 +47,10 @@ fun BottomNavComponent(navController: NavController) {
         )
         NavigationBarItem(
             icon = { Icon(modifier = Modifier.size(20.dp), painter = painterResource(id = R.drawable.navigationicon), contentDescription = "Home") },
-            label = { Text(stringResource(R.string.Discovery)) },
-            selected = currentRoute == "Discovery_screen",
+            label = {  },
+            selected = currentRoute == "explore_screen",
             onClick = {
-                navController.navigate("Discover_screen") {
+                navController.navigate("explore_screen") {
                     popUpTo(navController.graph.startDestinationId) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
@@ -54,7 +59,7 @@ fun BottomNavComponent(navController: NavController) {
         )
         NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Bookmarks") },
-            label = { Text(stringResource(R.string.bookmarks)) },
+            label = {  },
             selected = currentRoute == "bookmarks_screen",
             onClick = {
                 navController.navigate("bookmarks_screen") {
@@ -66,7 +71,7 @@ fun BottomNavComponent(navController: NavController) {
         )
         NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Explore") },
-            label = { Text(stringResource(R.string.maps)) },
+            label = {  },
             selected = currentRoute == "maps_screen",
             onClick = {
                 navController.navigate("maps_screen") {
@@ -78,10 +83,10 @@ fun BottomNavComponent(navController: NavController) {
         )
         NavigationBarItem(
             icon = { Icon(imageVector =  Icons.Outlined.Person, contentDescription = "Profile")},
-            label = { Text(stringResource(R.string.Profile)) },
-            selected = currentRoute == "Profile_screen",
+            label = {  },
+            selected = currentRoute == "profile_screen",
             onClick = {
-                navController.navigate("settings_screen") {
+                navController.navigate("profile_screen") {
                     popUpTo(navController.graph.startDestinationId) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
