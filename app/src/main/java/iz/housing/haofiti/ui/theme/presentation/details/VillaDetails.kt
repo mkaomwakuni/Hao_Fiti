@@ -23,17 +23,9 @@ import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.MailOutline
@@ -51,7 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -222,25 +214,25 @@ fun HouseFacilities() {
             .padding(4.dp)) {
             // Left column
             Column(modifier = Modifier.weight(1f)) {
-                FacilityItem(Icons.Default.PlayArrow, "Wi-Fi available")
-                FacilityItem(Icons.Default.Star, "Hot water")
-                FacilityItem(Icons.Default.CheckCircle, "Netflix, Spotify and etc.")
-                FacilityItem(Icons.Default.Build, "AC - ductless split")
+                FacilityItem(painterResource(R.drawable.vwifi), "Wi-Fi available")
+                FacilityItem(painterResource(R.drawable.thermometer), "Hot water")
+                FacilityItem(painterResource(R.drawable.netflix), "Netflix, Spotify and etc.")
+                FacilityItem(painterResource(R.drawable.ac), "AC - ductless split")
             }
 
             // Right column
             Column(modifier = Modifier.weight(1f)) {
-                FacilityItem(Icons.Default.MoreVert, "Kitchen")
-                FacilityItem(Icons.Default.Email, "4 bedrooms")
-                FacilityItem(Icons.Default.Check, "Free parking lot")
-                FacilityItem(Icons.Default.Add, "Many more facilities")
+                FacilityItem(painterResource(R.drawable.kitchen), "Kitchen")
+                FacilityItem(painterResource(R.drawable.bedroom), "4 bedrooms")
+                FacilityItem(painterResource(R.drawable.parking), "Free parking lot")
+                FacilityItem(painterResource(R.drawable.bookmark), "Many more facilities")
             }
         }
     }
 }
 
 @Composable
-fun FacilityItem(icon: ImageVector, text: String) {
+fun FacilityItem(icon: Painter, text: String) {
     Row(
         modifier = Modifier
             .padding(vertical = 4.dp),

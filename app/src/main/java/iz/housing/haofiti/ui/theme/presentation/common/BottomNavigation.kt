@@ -41,7 +41,7 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(modifier = Modifier.size(25.dp), painter = painterResource(id = R.drawable.discovery), contentDescription = "Home") },
+            icon = { Icon(modifier = Modifier.size(20.dp), painter = painterResource(id = R.drawable.navigationicon), contentDescription = "Home") },
             label = { Text(stringResource(R.string.Discovery)) },
             selected = currentRoute == "Discovery_screen",
             onClick = {

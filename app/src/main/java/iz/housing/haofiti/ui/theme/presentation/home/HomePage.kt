@@ -196,7 +196,7 @@ fun PropertyCardVertical(property: Property2) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(160.dp),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.FillBounds
                 )
                 IconButton(
                     modifier = Modifier
