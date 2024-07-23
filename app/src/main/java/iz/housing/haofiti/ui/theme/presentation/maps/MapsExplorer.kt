@@ -1,4 +1,4 @@
-package iz.housing.haofiti.ui.theme.presentation.booked
+package iz.housing.haofiti.ui.theme.presentation.maps
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
 
 @Composable
-fun Bookmarks(navController: NavController) {
+fun MapExplorer(navController: NavController) {
     Scaffold(
         bottomBar = { BottomNavComponent(navController = navController) }
     ) { paddingValues ->

@@ -32,7 +32,7 @@ fun PropertyCard(property: Property) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(10.dp)
     ) {
         Column {
             Image(

@@ -1,23 +1,34 @@
 package iz.housing.haofiti.data.model
 
 data class Housing(
-    val properties: List<PropertyCategory>
+    val locations: Map<String, Location> = emptyMap()
 )
 
-data class PropertyCategory(
-    val category: String,
-    val properties: List<Property>
+data class Location(
+    val properties: Map<String, Property> = emptyMap()
 )
 
 data class Property(
-    val id: Int,
-    val name: String,
-    val location: String,
-    val rating: Double,
-    val description: String,
-    val longitude: Double,
-    val latitude: Double,
-    val images: List<String>,
-    val amenities: Amenities,
-    val agent: Agent
+    val apartments: Map<String, PropertyItem> = emptyMap(),
+    val villas: Map<String, PropertyItem> = emptyMap(),
+    val bungalows: Map<String, PropertyItem> = emptyMap(),
+    val rentals: Map<String, PropertyItem> = emptyMap()
 )
+
+data class PropertyItem(
+    val agent: Agent? = null,
+    val description: String = "",
+    val id: Int = 0,
+    val images: List<String> = emptyList(),
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val location: String = "",
+    val name: String = "",
+    val type: PropertyType = PropertyType.APARTMENT,
+    val amenities:Map<String, Any>? = null,
+    val rating: Double? = null
+)
+
+enum class PropertyType {
+    APARTMENT, VILLA, BUNGALOW, RENTAL
+}

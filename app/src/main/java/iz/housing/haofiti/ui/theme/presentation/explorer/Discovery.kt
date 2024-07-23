@@ -1,8 +1,9 @@
 package iz.housing.haofiti.ui.theme.presentation.explorer
 
+//noinspection UsingMaterialAndMaterial3Libraries
+//noinspection UsingMaterialAndMaterial3Libraries
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,14 +19,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Scaffold
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,41 +55,47 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
+import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
 import iz.housing.haofiti.ui.theme.presentation.common.HouseItem
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Discovery(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 14.dp, vertical = 40.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Scaffold(
+        bottomBar = {BottomNavComponent (navController = navController)}
     ) {
-        CustomHeaderTitle()
-        Spacer(modifier = Modifier.height(30.dp))
-        var searchText by remember { mutableStateOf("") }
-        SearchBar(
-            modifier = Modifier.fillMaxWidth(),
-            searchText = searchText,
-            onSearch = { searchText = it }
-        )
-        Spacer(modifier = Modifier.height(30.dp))
-        SectionTitle(
-            title = "Best Deals for the Month",
-            actionText = "See More",
-            actionColor = Color.Blue,
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(25.dp))
-        HouseList(houses = sampleHouses)
-        Spacer(modifier = Modifier.height(60.dp))
-        SectionTitle(
-            title = "Explore the City",
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        CityList(cities = sampleCities)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 14.dp, vertical = 40.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            CustomHeaderTitle()
+            Spacer(modifier = Modifier.height(30.dp))
+            var searchText by remember { mutableStateOf("") }
+            SearchBar(
+                modifier = Modifier.fillMaxWidth(),
+                searchText = searchText,
+                onSearch = { searchText = it }
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            SectionTitle(
+                title = "Best Deals",
+                actionText = "See More",
+                actionColor = Color.Blue,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(25.dp))
+            HouseList(houses = sampleHouses)
+            Spacer(modifier = Modifier.height(60.dp))
+            SectionTitle(
+                title = "Explore the City",
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            CityList(cities = sampleCities)
+        }
     }
 }
 
@@ -121,6 +130,7 @@ fun CustomHeaderTitle(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -129,19 +139,15 @@ fun SearchBar(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Surface(
-        modifier = modifier
-            .border(1.dp, color = Color.LightGray)
-            .background(Color.LightGray.copy(alpha = 0.4f))
-    ) {
+    Surface {
         TextField(
             modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(6.dp))
                 .fillMaxWidth(),
-            colors = TextFieldDefaults.colors(
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = Color.LightGray.copy(alpha = 0.3f),
+                unfocusedBorderColor = Color.Transparent,
+                disabledBorderColor = Color.Transparent
             ),
             value = searchText,
             onValueChange = onSearch,
@@ -267,7 +273,7 @@ fun CircleCityImage(city: Painter) {
     )
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+@Preview( showBackground = true)
 @Composable
 fun HomepagePreview() {
     Discovery(rememberNavController())

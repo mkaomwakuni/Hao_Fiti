@@ -1,11 +1,17 @@
 package iz.housing.haofiti.ui.theme.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import iz.housing.haofiti.ui.theme.presentation.details.HouseDetailsPage
+import iz.housing.haofiti.ui.theme.presentation.booked.Bookmarks
+import iz.housing.haofiti.ui.theme.presentation.explorer.Discovery
+import iz.housing.haofiti.ui.theme.presentation.home.HomePage
 import iz.housing.haofiti.ui.theme.presentation.home.RentalListingScreen
+import iz.housing.haofiti.ui.theme.presentation.maps.MapExplorer
+import iz.housing.haofiti.viewmodels.HouseViewModel
+
 
 @Composable
 fun HouseNavGraph(
@@ -13,13 +19,17 @@ fun HouseNavGraph(
 ) {
     NavHost(navController = navController, startDestination = Route.Home.route) {
         composable(route = Route.Home.route) {
-            HouseDetailsPage(navController)
-        }
-        composable(route = Route.Bookmarks.route) {
-
+            val viewModel: HouseViewModel = hiltViewModel()
+            HomePage(viewModel,navController)
         }
         composable(route = Route.Maps.route) {
-            //MapExplorer(navController)
+            MapExplorer(navController)
+        }
+        composable(route = Route.Bookmarks.route) {
+            Bookmarks(navController)
+        }
+        composable(route = Route.Explore.route) {
+            Discovery(navController)
         }
         composable(route = Route.Profile.route) {
             RentalListingScreen(navController)
