@@ -1,5 +1,7 @@
 package iz.housing.haofiti.data.model
 
+import androidx.room.Entity
+
 data class Housing(
     val locations: Map<String, Location> = emptyMap()
 )
@@ -15,6 +17,7 @@ data class Property(
     val rentals: Map<String, PropertyItem> = emptyMap()
 )
 
+@Entity(tableName = "Houses")
 data class PropertyItem(
     val agent: Agent? = null,
     val description: String = "",

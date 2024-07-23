@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class HouseRepositoryImpl  @Inject constructor(
+    private  val houseDao: HouseDao,
     private val firebaseDataProvider: FirebaseDataProvider
 ) : HouseRepository {
 
@@ -15,4 +16,10 @@ class HouseRepositoryImpl  @Inject constructor(
     override fun getPropertiesByLocation(location: String): Flow<List<PropertyItem>> = firebaseDataProvider.getPropertyByLocation(location)
 
     override fun getAvailableLocations(): Flow<List<String>> = firebaseDataProvider.getAllLocations()
+
+    suspend fun getSavedHouses(): List<PropertyItem> = houseDao.getSavedHouses()
+
+    suspend fun insertHome(house: PropertyItem) = houseDao.insertHome(house)
+
+    suspend fun deleteHouse(house: PropertyItem) = houseDao.deleteHouse(house)
 }
