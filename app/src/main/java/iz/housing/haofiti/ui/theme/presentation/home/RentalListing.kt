@@ -2,6 +2,7 @@ package iz.housing.haofiti.ui.theme.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -70,8 +72,8 @@ fun TopAppBar() {
     TopAppBar(modifier = Modifier.padding(top = 40.dp),
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.LocationOn, contentDescription = null, tint = Color.DarkGray)
-                Text("Naperville, Illinois", color = Color.Black)
+                Icon(Icons.Default.LocationOn, contentDescription = null, tint = if (isSystemInDarkTheme())Color.White else Color.Black)
+                Text("Naperville, Illinois", color = if (isSystemInDarkTheme())Color.White else Color.Gray)
                 Icon(Icons.Default.ArrowDropDown, contentDescription = "Change location")
             }
         },
@@ -109,7 +111,7 @@ fun SearchBar() {
                 .fillMaxHeight()
                 .background(
                     Brush.horizontalGradient(
-                        colors = listOf(Color.Transparent, Color.White),
+                        colors = listOf(Color.Transparent, MaterialTheme.colorScheme.background),
                         startX = Float.POSITIVE_INFINITY,
                         endX = 600f
                     )
