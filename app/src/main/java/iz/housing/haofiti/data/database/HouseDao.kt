@@ -14,8 +14,7 @@ interface HouseDao{
     suspend fun insertHome(house: PropertyItem)
 
     @Query("SELECT * FROM Houses")
-    suspend fun getHouses(): List<House>
-
+    suspend fun getHouses(): List<PropertyItem>
 
     @Delete
     suspend fun deleteHouse(house: PropertyItem)

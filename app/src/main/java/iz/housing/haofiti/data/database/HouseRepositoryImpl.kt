@@ -11,15 +11,24 @@ class HouseRepositoryImpl  @Inject constructor(
     private val firebaseDataProvider: FirebaseDataProvider
 ) : HouseRepository {
 
-    override fun getAllProperties(): Flow<List<PropertyItem>> = firebaseDataProvider.getAllProperties()
+    override suspend fun getAllProperties(): Flow<List<PropertyItem>> = firebaseDataProvider.getAllProperties()
 
-    override fun getPropertiesByLocation(location: String): Flow<List<PropertyItem>> = firebaseDataProvider.getPropertyByLocation(location)
+    override suspend fun getPropertiesByLocation(location: String): Flow<List<PropertyItem>> = firebaseDataProvider.getPropertyByLocation(location)
 
-    override fun getAvailableLocations(): Flow<List<String>> = firebaseDataProvider.getAllLocations()
+    override suspend fun getAvailableLocations(): Flow<List<String>> = firebaseDataProvider.getAllLocations()
 
-    suspend fun getSavedHouses(): List<PropertyItem> = houseDao.getSavedHouses()
+    override suspend fun searchQuery(query: String): Flow<List<PropertyItem>> {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun insertHome(house: PropertyItem) = houseDao.insertHome(house)
+    override suspend fun getSavedHomes(): List<PropertyItem> = houseDao.getSavedHouses()
 
-    suspend fun deleteHouse(house: PropertyItem) = houseDao.deleteHouse(house)
+    override suspend fun insertHomes(house: PropertyItem) {
+        houseDao.insertHome(house)
+    }
+
+    override suspend fun deleteHome(house: PropertyItem) {
+        houseDao.deleteHouse(house)
+    }
+
 }
