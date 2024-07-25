@@ -1,7 +1,5 @@
 package iz.housing.haofiti.ui.theme.presentation.explorer
 
-//noinspection UsingMaterialAndMaterial3Libraries
-//noinspection UsingMaterialAndMaterial3Libraries
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -14,21 +12,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,18 +58,20 @@ import iz.housing.haofiti.R
 import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
 import iz.housing.haofiti.ui.theme.presentation.common.HouseItem
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+
 @Composable
 fun Discovery(navController: NavController) {
+    val scrollState = rememberScrollState()
     Scaffold(
-        bottomBar = {BottomNavComponent (navController = navController)}
-    ) {
+        bottomBar = { BottomNavComponent(navController = navController) }
+    ) {contentPadding ->
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 40.dp),
+                .padding(contentPadding)
+                .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Top
         ) {
             CustomHeaderTitle()
             Spacer(modifier = Modifier.height(30.dp))
@@ -79,7 +81,7 @@ fun Discovery(navController: NavController) {
                 searchText = searchText,
                 onSearch = { searchText = it }
             )
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             SectionTitle(
                 title = "Best Deals",
                 actionText = "See More",
@@ -144,10 +146,9 @@ fun SearchBar(
             modifier = Modifier
                 .clip(RoundedCornerShape(6.dp))
                 .fillMaxWidth(),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = Color.LightGray.copy(alpha = 0.3f),
-                unfocusedBorderColor = Color.Transparent,
-                disabledBorderColor = Color.Transparent
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.LightGray.copy(alpha = 0.3f),
+
             ),
             value = searchText,
             onValueChange = onSearch,

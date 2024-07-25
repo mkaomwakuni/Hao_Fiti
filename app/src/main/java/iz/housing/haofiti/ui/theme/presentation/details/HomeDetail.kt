@@ -23,6 +23,7 @@ import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Share
@@ -33,50 +34,77 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import iz.housing.haofiti.R
+import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.ui.theme.presentation.common.BarEffect
+import iz.housing.haofiti.viewmodels.HouseViewModel
 
 @Composable
-fun HouseDetailsPage(navController: NavHostController) {
-    Scaffold { innerPadding ->
+fun HouseDetailsPage(
+    navController: NavController,
+    viewModel: HouseViewModel,
+    propertyId: Int
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    val property = uiState.selectedPropertyId
+
+    BarEffect()
+
+    property?.let {
         Column(
             modifier = Modifier
-                .padding(innerPadding)
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            ImageCarousel()
-            HouseDescription()
-            HouseFacilities()
-            LocationAddress()
-            AgentDetails()
+            ImageCarousel(property, onFavoriteClick = { viewModel.saveProperty(it) })
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        MaterialTheme.colorScheme.surface,
+                        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                    )
+            ) {
+                HouseDescription(property)
+                HouseFacilities(property)
+                LocationAddress(property)
+                AgentDetails(property)
+            }
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomepageTopBar() {
+fun HomepageTopBar(
+    isSaved:Boolean,
+    onFavoriteClick: () -> Unit) {
     TopAppBar(
         title = { },
         navigationIcon = {
@@ -88,8 +116,16 @@ fun HomepageTopBar() {
             IconButton(onClick = { /* TODO: Handle share */ }) {
                 Icon(Icons.Default.Share, contentDescription = "Share")
             }
-            IconButton(onClick = { /* TODO: Handle favorite */ }) {
-                Icon(Icons.Default.FavoriteBorder, contentDescription = "Favorite")
+            IconButton(onClick = {onFavoriteClick()}) {
+                if (isSaved) {
+                    Icon(
+                        Icons.Default.Favorite, contentDescription = "Favorite"
+                    )
+                }else{
+                    Icon(
+                        Icons.Default.FavoriteBorder, contentDescription = "Removed Favorite"
+                    )
+                }
             }
         }
         , colors = TopAppBarDefaults.topAppBarColors(
@@ -102,19 +138,40 @@ fun HomepageTopBar() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ImageCarousel() {
+fun ImageCarousel(propertyItem: PropertyItem,onFavoriteClick: (PropertyItem) -> Unit) {
     Box(
         modifier = Modifier
             .height(350.dp)
             .fillMaxWidth()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.lavington), // Replace with actual image resource
-            contentDescription = "Villa Image",
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(propertyItem.images.firstOrNull())
+                .build(),
+            contentDescription = "Image",
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.FillBounds
         )
-        HomepageTopBar()
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(160.dp)
+                .align(Alignment.BottomCenter)
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f)),
+                        startY = 0f,
+                        endY = 250f
+                    )
+                )
+        )
+
+        HomepageTopBar(
+            isSaved = propertyItem.isSaved,
+            onFavoriteClick = {
+                onFavoriteClick(propertyItem)
+            }
+        )
         Column (
             modifier = Modifier
             .fillMaxWidth()
@@ -132,7 +189,7 @@ fun ImageCarousel() {
                 ) {
                     Icon(Icons.Default.Home, contentDescription = null, tint = Color.White)
                     Spacer(Modifier.width(4.dp))
-                    Text("Villa", color = Color.White)
+                    Text(propertyItem.type.name.toSentenceCase(), color = Color.White)
                 }
                 Spacer(modifier = Modifier.width(20.dp))
                 Chip(
@@ -144,14 +201,14 @@ fun ImageCarousel() {
                     Text("Recommended")
                 }
             }
-            HouseInfo()
+            HouseInfo(propertyItem)
         }
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 16.dp)
         ) {
-            repeat(5) { index ->
+            repeat(propertyItem.images.size.coerceAtMost(5)) { index ->
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -164,18 +221,23 @@ fun ImageCarousel() {
     }
 }
 
+fun String.toSentenceCase(): String {
+    if (this.isEmpty()) return this
+    return this[0].uppercaseChar() + this.substring(1).lowercase()
+}
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HouseInfo() {
-    Column(modifier = Modifier.padding(16.dp)) {
-        Text("Park Residence Villa", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
-        Text("Malang, East Java, Indonesia", color = Color.White)
+fun HouseInfo(propertyItem: PropertyItem) {
+    Column(modifier = Modifier.padding(12.dp)) {
+        Text(text = propertyItem.name, fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
+        Text(text = propertyItem.location, color = Color.White)
     }
 }
 
 @Composable
-fun HouseDescription() {
-    val text = "Park Residence Villa offers an exceptional villa rental experience, where luxury and tranquility blend harmoniously. Nestled in a serene and picturesque location, each villa is meticulously designed to provide a perfect oasis for guests seeking relaxation and comfort. With spacious living areas..."
+fun HouseDescription(propertyItem: PropertyItem) {
+    val text = propertyItem.description
     val readMoreText = "Read more"
 
     val annotatedString = buildAnnotatedString {
@@ -202,7 +264,7 @@ fun HouseDescription() {
 }
 
 @Composable
-fun HouseFacilities() {
+fun HouseFacilities(propertyItem: PropertyItem) {
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(14.dp)) {
@@ -216,7 +278,7 @@ fun HouseFacilities() {
             Column(modifier = Modifier.weight(1f)) {
                 FacilityItem(painterResource(R.drawable.vwifi), "Wi-Fi available")
                 FacilityItem(painterResource(R.drawable.thermometer), "Hot water")
-                FacilityItem(painterResource(R.drawable.netflix), "Netflix, Spotify and etc.")
+                FacilityItem(painterResource(R.drawable.netflix), "Netflix, Spotify..")
                 FacilityItem(painterResource(R.drawable.ac), "AC - ductless split")
             }
 
@@ -245,10 +307,10 @@ fun FacilityItem(icon: Painter, text: String) {
 }
 
 @Composable
-fun LocationAddress() {
+fun LocationAddress(propertyItem: PropertyItem) {
     Column(modifier = Modifier.padding(10.dp)) {
-        Text("Location", fontWeight = FontWeight.Bold, fontSize = 22.sp,style = MaterialTheme.typography.bodyLarge)
-        // You would typically use a Map composable here
+        Text("Location", fontWeight = FontWeight.Bold, fontSize = 18.sp,style = MaterialTheme.typography.bodyLarge)
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -258,12 +320,12 @@ fun LocationAddress() {
     }
 }
 @Composable
-fun AgentDetails(){
+fun AgentDetails(propertyItem: PropertyItem){
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
-        Text("Advertiser", fontWeight = FontWeight.Bold, fontSize = 20.sp,style = MaterialTheme.typography.bodyMedium)
-        Column(modifier = Modifier.border(width = 4.dp, color = Color.LightGray)) {
+        Text(propertyItem.agent?.agentName ?: "", fontWeight = FontWeight.Bold, fontSize = 20.sp,style = MaterialTheme.typography.bodyMedium)
+        Column(modifier = Modifier.border(width = 1.dp, color = Color.LightGray)) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -271,7 +333,7 @@ fun AgentDetails(){
             ) {
                 Image(
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(id = R.drawable.lavington),
+                    painter = painterResource(id = R.drawable.realestate),
                     contentDescription = null,
                 )
             }
@@ -283,6 +345,7 @@ fun AgentDetails(){
                     .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(10.dp))
             ) {
                 Icon(Icons.Outlined.Call, contentDescription = null, tint = Color.White)
+                Spacer(Modifier.width(8.dp))
                 Text("Call Agent", fontSize = 16.sp, color = Color.White)
             }
             Spacer(Modifier.height(8.dp))
@@ -293,26 +356,9 @@ fun AgentDetails(){
                     .fillMaxWidth()
             ) {
                 Icon(Icons.Outlined.MailOutline, contentDescription = null, tint = Color.White)
+                Spacer(Modifier.width(8.dp))
                 Text("Message",fontSize = 16.sp, color = Color.White)
             }
         }
     }
-}
-@Preview(showBackground = true)
-@Composable
-fun VillaDetailPreview() {
-    val navController = rememberNavController()
-    HouseDetailsPage(navController = navController)
-}
-@Preview(showBackground = true)
-@Composable
-fun AgentDetailsPreview() {
-    AgentDetails()
-
-}
-@Preview(showBackground = true)
-@Composable
-fun AgentDetailsPreview1() {
-    LocationAddress()
-
 }

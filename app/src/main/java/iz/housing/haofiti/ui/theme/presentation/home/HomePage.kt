@@ -4,65 +4,73 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
+import iz.housing.haofiti.R
+import iz.housing.haofiti.data.model.HouseStates
 import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.data.service.HouseEvent
 import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
-import iz.housing.haofiti.viewmodels.HouseViewModel
-
+import iz.housing.haofiti.ui.theme.presentation.common.CardShimmerEffect
+import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCard
+import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCardHorizontal
+import iz.housing.haofiti.ui.theme.presentation.navigation.Route
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
-fun HomePage(viewModel: HouseViewModel,navController: NavController) {
-    val scroll = rememberScrollState()
+fun HomePage(
+    state: HouseStates,
+    navController: NavController,
+    onItemClick: (PropertyItem) -> Unit,
+    onEvent: (HouseEvent) -> Unit) {
+
+    var animationLoading  by remember { mutableStateOf(true)}
     var searchQuery by remember { mutableStateOf("") }
-    val properties by viewModel.properties.collectAsState()
-    val location by viewModel.locations.collectAsState()
+
     Scaffold(
         bottomBar = {BottomNavComponent(navController = navController)},
     ) { paddingValue ->
-        Column(modifier = Modifier.fillMaxSize().padding(paddingValue).verticalScroll(scroll)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValue)) {
             val annotedText = buildAnnotatedString {
                 pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
                 append("Let's find your\n")
@@ -70,6 +78,13 @@ fun HomePage(viewModel: HouseViewModel,navController: NavController) {
                 append("dream home.")
                 addStyle(SpanStyle(color = MaterialTheme.colorScheme.primary), 15, 26)
                 pop()
+            }
+
+            LaunchedEffect(Unit) {
+                launch {
+                    delay(1000)
+                    animationLoading = false
+                }
             }
 
             Column(
@@ -86,160 +101,98 @@ fun HomePage(viewModel: HouseViewModel,navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
                 BasicText(text = annotedText)
                 Spacer(modifier = Modifier.height(16.dp))
-                SearchBar1(searchQuery = searchQuery, onSearchQueryChange = { searchQuery = it })
+                SearchBarHome(searchQuery = searchQuery, onSearchQueryChange = { searchQuery = it })
                 Spacer(modifier = Modifier.height(16.dp))
-                PreviouslyViewedSection(properties)
-                Spacer(modifier = Modifier.height(16.dp))
-                RecommendationsSection(properties)
+                TextSection(stringResource(R.string.previously))
+                if (state.isLoading) {
+                    LoadingEffect()
+                } else {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 2.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(state.properties) { property ->
+                            PropertyCardHorizontal(
+                                property = property,
+                                onItemClick = {
+                                    onEvent(HouseEvent.OnCardClicked(property))
+                                    navController.navigate(Route.HouseDetails.createRoute(property.id))
+                                }
+                            )
+                        }
+                    }
+                }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    TextSection(stringResource(R.string.recommendations))
+                    Spacer(modifier = Modifier.height(16.dp))
+                if (state.isLoading) {
+                    LoadingEffect()
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentPadding = PaddingValues(2.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(state.properties) { property ->
+                            PropertyCard(
+                                property = property,
+                                onItemClick = {
+                                    onEvent(
+                                        HouseEvent.OnCardClicked(property)
+                                    )
+                                    navController.navigate(Route.HouseDetails.createRoute(property.id))
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+            LaunchedEffect(true) {
+                delay(1000)
+                animationLoading = false
             }
         }
     }
-}
+
+
 
 @Composable
-fun SearchBar1(searchQuery: String, onSearchQueryChange: (String) -> Unit) {
+fun SearchBarHome(searchQuery: String, onSearchQueryChange: (String) -> Unit) {
     TextField(
         value = searchQuery,
         onValueChange = onSearchQueryChange,
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text("Search any city, area, landmark...") },
+        placeholder = { Text(stringResource(R.string.label)) },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            backgroundColor = Color.LightGray.copy(alpha = 0.3f),
-            unfocusedBorderColor = Color.Transparent,
-            disabledBorderColor = Color.Transparent
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+            focusedIndicatorColor = Color.Transparent,
+            focusedLabelColor = Color.Gray,
+            unfocusedIndicatorColor = Color.Transparent
         ),
         shape = RoundedCornerShape(8.dp)
     )
 }
-
 @Composable
-fun PreviouslyViewedSection(properties: List<PropertyItem>) {
-    Column {
+fun TextSection(text: String) {
         Text(
-            text = "Previously Viewed",
+            text = text,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(properties.take(2)) { property ->
-                PropertyCardHorizontal(property)
-            }
-        }
-    }
 }
-
 @Composable
-fun RecommendationsSection(properties: List<PropertyItem>) {
-    Column {
-        Text(
-            text = "Our Recommendations",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            properties.forEach{ property ->
-                PropertyCardVertical(property)
-            }
-        }
-    }
-}
-
-
-@Composable
-fun PropertyCardHorizontal(property: PropertyItem) {
-    Card(
-        modifier = Modifier
-            .width(280.dp)
-            .clip(RoundedCornerShape(8.dp)),
-        elevation = 4.dp
-    ) {
-        Column {
-            Box {
-                AsyncImage(
-                    model = property.images.firstOrNull(),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(140.dp),
-                    contentScale = ContentScale.Crop
-                )
-                IconButton(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(top = 8.dp, end = 8.dp)
-                        .size(24.dp),
-                    onClick = {}) {
-                    Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Save")
-                }
-            }
-            Column(modifier = Modifier.padding(8.dp)) {
-                Text(text = property.name, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Location", tint = Color.Gray, modifier = Modifier.size(18.dp))
-                    Text(text = property.location, color = Color.Gray, fontSize = 14.sp)
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(text = "Ksh ${property.id}/month", color = MaterialTheme.colorScheme.primary)
-            }
-        }
-    }
-}
-
-@Composable
-fun PropertyCardVertical(property: PropertyItem) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.height(220.dp)
-        ) {
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(160.dp)) {
-                AsyncImage(
-                    model = property.images.firstOrNull(),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(160.dp),
-                    contentScale = ContentScale.FillBounds
-                )
-                IconButton(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(top = 8.dp, end = 8.dp)
-                        .size(24.dp),
-                    onClick = {}) {
-                    Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Save")
-                }
-            }
-            Column(
+fun LoadingEffect(modifier: Modifier = Modifier) {
+    Box(modifier = modifier
+        .fillMaxWidth()
+        .wrapContentHeight()) {
+        repeat(3) {
+            CardShimmerEffect(
                 modifier = Modifier
-                    .padding(bottom = 8.dp)
                     .fillMaxWidth()
-            ) {
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(text = property.name, fontWeight = FontWeight.Bold)
-                    Text(text = "Ksh ${property.id}/month",fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                }
-                Spacer(modifier = Modifier.height(6.dp))
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Location", tint = Color.Gray, modifier = Modifier.size(15.dp))
-                    Text(text = property.location, color = Color.Gray, fontSize = 12.sp)
-                }
-            }
+                    .padding(bottom = 8.dp)
+            )
         }
     }
 }
-

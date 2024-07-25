@@ -3,6 +3,8 @@ package iz.housing.haofiti
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import iz.housing.haofiti.ui.theme.HaoFitiTheme
@@ -12,10 +14,13 @@ import iz.housing.haofiti.ui.theme.presentation.navigation.HouseNavGraph
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            HaoFitiTheme {
-               val navController = rememberNavController()
-                HouseNavGraph(navController = navController)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val windowsInsets = WindowCompat.getInsetsController(window, window.decorView)
+        windowsInsets.isAppearanceLightStatusBars = false
+            setContent {
+                HaoFitiTheme {
+                    val navController = rememberNavController()
+                    HouseNavGraph(navController = navController)
                 }
             }
         }
