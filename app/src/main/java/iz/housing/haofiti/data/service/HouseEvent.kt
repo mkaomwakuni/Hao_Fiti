@@ -1,8 +1,10 @@
 package iz.housing.haofiti.data.service
 
-import iz.housing.haofiti.ui.theme.presentation.explorer.House
+import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.data.model.PropertyType
 
 sealed class HouseEvent {
-    data class OnCardClicked(val house: House):HouseEvent()
-    data class OnCategoryClicked(val house: House):HouseEvent()
+    data class SearchBarClicked(val searchQuery: String) : HouseEvent()
+    data class OnCardClicked(val property: PropertyItem) : HouseEvent()
+    data class OnCategoryClicked(val category: PropertyType) : HouseEvent()
 }
