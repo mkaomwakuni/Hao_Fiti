@@ -1,5 +1,6 @@
 package iz.housing.haofiti.ui.theme.presentation.navigation
 
+import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.DETAILS_SCREEN
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.EXPLORE_SCREEN
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.HOME_SCREEN
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.MAPS_SCREEN
@@ -12,13 +13,7 @@ sealed class Route (val route: String) {
     data object Maps : Route(MAPS_SCREEN)
     data object Profile : Route(PROFILE_SCREEN)
     data object Explore : Route(EXPLORE_SCREEN)
-
-    fun withArgs(vararg args: String): String {
-        return buildString {
-            append(route)
-            args.forEach { arg ->
-                append("/$arg")
-            }
-        }
+    object HouseDetails : Route("${ScreensConstants.DETAILS_SCREEN}/{propertyId}") {
+        fun createRoute(propertyId: Int) = "${ScreensConstants.DETAILS_SCREEN}/$propertyId"
     }
 }
