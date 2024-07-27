@@ -1,5 +1,6 @@
 [versions]
 accompanistPermissions = "0.30.1"
+activity = "1.9.1"
 activityComposeVersion = "1.7.2"
 agp = "8.4.0"
 androidxComposeComposeBom2 = "2022.10.00"
@@ -36,6 +37,7 @@ navigationCompose = "2.7.7"
 playServicesMapsVersion = "18.1.0"
 retrofit = "2.9.0"
 roomTesting = "2.4.0"
+roomVersion = "2.6.1"
 runtimeAndroid = "1.6.7"
 googleGmsGoogleServicesVersion = "4.4.2"
 firebaseAuth = "23.0.0"
@@ -47,6 +49,8 @@ firebaseDatabaseKtx = "21.0.0"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistPermissions" }
+androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
 androidx-activity-compose-v172 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-compose-bom-v20240500 = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
@@ -54,12 +58,16 @@ androidx-compose-compose-bom-v20221000-x3 = { module = "androidx.compose:compose
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-ktx-v1101 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompiler" }
 androidx-lifecycle-runtime-ktx-v261 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-navigation-compose-v270beta02 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomTesting" }
+androidx-room-ktx-v261 = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomTesting" }
+androidx-room-runtime-v261 = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomTesting" }
+androidx-room-testing-v261 = { module = "androidx.room:room-testing", version.ref = "roomVersion" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }

@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.shimmerEffect() = composed {
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "transition")
     val alpha = transition.animateFloat(
         initialValue = 0.2f, targetValue = 0.4f, animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 1000),
@@ -36,7 +36,7 @@ fun Modifier.shimmerEffect() = composed {
 }
 
 @Composable
-fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
+fun CardShimmerEffect(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -51,7 +51,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                 .shimmerEffect()
         )
 
-        // Spacer between Box and Row
+
         Spacer(modifier = Modifier.height(8.dp))
 
         // Row below the Box with shimmer effect
@@ -71,5 +71,5 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun ShimmerEffect() {
-    ArticleCardShimmerEffect()
+    CardShimmerEffect()
 }

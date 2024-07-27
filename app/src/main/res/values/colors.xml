@@ -12,4 +12,6 @@
     <!-- Neutral Colors -->
     <color name="black">#212121</color>      <!-- Dark Grey -->
     <color name="white">#FFFFFF</color>      <!-- White -->
+<!-- Add more colors as needed -->
+    <color name="bar">#00FFFFFF</color>
 </resources>

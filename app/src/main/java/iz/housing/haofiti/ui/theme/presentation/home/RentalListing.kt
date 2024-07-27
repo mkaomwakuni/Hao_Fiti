@@ -46,7 +46,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
 import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
-import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCard
+import iz.housing.haofiti.ui.theme.presentation.home.components.CardProperty
 
 @Composable
 fun RentalListingScreen(navController: NavController) {
@@ -150,7 +150,7 @@ fun PropertyList() {
 
     LazyColumn {
         items(properties) { property ->
-            PropertyCard(property)
+            CardProperty(property)
         }
     }
 }
