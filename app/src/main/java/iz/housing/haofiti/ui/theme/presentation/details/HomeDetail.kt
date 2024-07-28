@@ -324,7 +324,7 @@ fun AgentDetails(propertyItem: PropertyItem){
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
-        Text(propertyItem.agent?.agentName ?: "", fontWeight = FontWeight.Bold, fontSize = 20.sp,style = MaterialTheme.typography.bodyMedium)
+        Text(propertyItem.agent?.name ?: "", fontWeight = FontWeight.Bold, fontSize = 20.sp,style = MaterialTheme.typography.bodyMedium)
         Column(modifier = Modifier.border(width = 1.dp, color = Color.LightGray)) {
             Box(
                 modifier = Modifier

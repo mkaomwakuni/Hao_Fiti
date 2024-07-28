@@ -38,7 +38,7 @@ object FirebaseModule {
 }
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+object DatabaseModule{
 
     @Provides
     @Singleton
