@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,6 +44,7 @@ fun PropertyCardHorizontal(property: PropertyItem, onItemClick: () -> Unit) {
             .shadow(1.dp)
             .clip(RoundedCornerShape(8.dp)),
         elevation = 4.dp,
+        shape = RectangleShape
     ) {
         Column {
             Box {
