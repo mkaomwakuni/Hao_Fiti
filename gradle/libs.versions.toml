@@ -34,6 +34,7 @@ firebaseDatabase = "21.0.0"
 navigationComposeVersion = "2.7.0-beta02"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
+places = "3.5.0"
 playServicesMapsVersion = "18.1.0"
 retrofit = "2.9.0"
 roomTesting = "2.4.0"
@@ -98,6 +99,7 @@ maps = { group = "com.google.android.libraries.maps", name = "maps", version.ref
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
 material3 = { module = "androidx.compose.material3:material3" }
 navigation-compose-v240alpha10 = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
+places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 play-services-maps-v1810 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }

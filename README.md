@@ -1,4 +1,4 @@
-# 🏚️ The Haofy -PROJECT UNDER CONSTRUCTUON
+# 🏚️ The Haofy -PROJECT UNDER CONSTRUCTION
  Your Gateway to Effortless House Hunting and Renting in Nairobi!
 
 ## 📸 App Screenshots

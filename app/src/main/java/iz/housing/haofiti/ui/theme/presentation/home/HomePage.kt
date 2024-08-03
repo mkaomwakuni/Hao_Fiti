@@ -1,6 +1,7 @@
 package iz.housing.haofiti.ui.theme.presentation.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,7 +63,6 @@ fun HomePage(
     onEvent: (HouseEvent) -> Unit) {
 
     var animationLoading  by remember { mutableStateOf(true)}
-    var searchQuery by remember { mutableStateOf("") }
 
     Scaffold(
         bottomBar = {BottomNavComponent(navController = navController)},
@@ -71,7 +71,7 @@ fun HomePage(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValue)) {
-            val annotedText = buildAnnotatedString {
+                val annotedText = buildAnnotatedString {
                 pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
                 append("Let's find your\n")
                 pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
@@ -101,7 +101,11 @@ fun HomePage(
                 Spacer(modifier = Modifier.height(16.dp))
                 BasicText(text = annotedText)
                 Spacer(modifier = Modifier.height(16.dp))
-                SearchBarHome(searchQuery = searchQuery, onSearchQueryChange = { searchQuery = it })
+                SearchBarHome(
+                    navController = navController,
+                    searchQuery = "",
+                    onSearchQueryChange = {},
+                    )
                 Spacer(modifier = Modifier.height(16.dp))
                 TextSection(stringResource(R.string.previously))
                 if (state.isLoading) {
@@ -155,23 +159,27 @@ fun HomePage(
         }
     }
 
-
-
 @Composable
-fun SearchBarHome(searchQuery: String, onSearchQueryChange: (String) -> Unit) {
+fun SearchBarHome(
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
+    navController: NavController) {
     TextField(
         value = searchQuery,
         onValueChange = onSearchQueryChange,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { navController.navigate(Route.Search.route)
+            },
         placeholder = { Text(stringResource(R.string.label)) },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
             focusedIndicatorColor = Color.Transparent,
-            focusedLabelColor = Color.Gray,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        enabled = false
     )
 }
 @Composable

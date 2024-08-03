@@ -14,12 +14,20 @@ import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Provides data from Firebase Realtime Database for housing properties.
+ * This class is a singleton and uses dependency injection for Firebase Database instance.
+ */
 @Singleton
 class FirebaseDataProvider @Inject constructor(
     private val database: FirebaseDatabase
 ) {
     private val houseRef: DatabaseReference = database.getReference("housing")
 
+    /**
+     * Retrieves all properties from Firebase.
+     * @return A Flow emitting a List of PropertyItem objects.
+     */
     fun getAllProperties(): Flow<List<PropertyItem>> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -48,6 +56,11 @@ class FirebaseDataProvider @Inject constructor(
         }
     }
 
+    /**
+     * Retrieves properties for a specific location from Firebase.
+     * @param location The location to filter properties by.
+     * @return A Flow emitting a List of PropertyItem objects for the specified location.
+     */
     fun getPropertyByLocation(location: String): Flow<List<PropertyItem>> = callbackFlow {
         val houseListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -71,6 +84,14 @@ class FirebaseDataProvider @Inject constructor(
         }
     }
 
+    /**
+     * Helper function to add properties of a specific type to the list.
+     * @param propertySnapshot The DataSnapshot containing property data.
+     * @param childName The name of the child node in Firebase containing properties of this type.
+     * @param type The PropertyType of the properties being added.
+     * @param locationName The name of the location for these properties.
+     * @param properties The MutableList to add the properties to.
+     */
     fun addPropertiesOfType(propertySnapshot: DataSnapshot, childName: String, type: PropertyType, locationName: String, properties: MutableList<PropertyItem>) {
         propertySnapshot.child(childName).children.forEach { itemSnapshot ->
             try {
@@ -83,6 +104,10 @@ class FirebaseDataProvider @Inject constructor(
         }
     }
 
+    /**
+     * Retrieves all available locations from Firebase.
+     * @return A Flow emitting a List of Strings representing available locations.
+     */
     fun getAllLocations(): Flow<List<String>> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

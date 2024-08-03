@@ -4,34 +4,45 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import iz.housing.haofiti.data.model.*
+import iz.housing.haofiti.data.model.HouseStates
+import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.data.model.PropertyType
 import iz.housing.haofiti.data.repository.HouseRepository
 import iz.housing.haofiti.data.service.HouseEvent
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class HouseViewModel @Inject constructor(private val repository: HouseRepository) : ViewModel() {
 
     private var _uiState = MutableStateFlow(HouseStates())
-
     val uiState: StateFlow<HouseStates> = _uiState.asStateFlow()
 
+    private val _savedPropertyListings = MutableStateFlow<List<PropertyItem>>(emptyList())
+    val savedPropertyListings: StateFlow<List<PropertyItem>> = _savedPropertyListings.asStateFlow()
     private var searchJob: Job? = null
 
     init {
+        loadSavedProperties()
         loadInitialData()
     }
 
     private fun loadInitialData() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            when(val result = getProperties()){
+            when (val result = getProperties()) {
                 is ResponseUtil.Success -> {
                     result.data?.let { properties ->
-                        val  locations = properties.map { it.location }.distinct()
+                        val locations = properties.map { it.location }.distinct()
                         _uiState.update {
                             it.copy(
                                 properties = properties,
@@ -44,17 +55,18 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
                 }
                 is ResponseUtil.Error -> {
                     _uiState.update {
-                        it.copy(error = result.message?: "An error occurred while fetching data", isLoading = false)
+                        it.copy(error = result.message ?: "An error occurred while fetching data", isLoading = false)
                     }
                 }
             }
         }
     }
-    private suspend fun getProperties():ResponseUtil<List<PropertyItem>> {
+
+    private suspend fun getProperties(): ResponseUtil<List<PropertyItem>> {
         return try {
             val properties = repository.getAllProperties().first()
             ResponseUtil.Success(properties)
-            } catch (e: Exception) {
+        } catch (e: Exception) {
             ResponseUtil.Error(e.message ?: "An error occurred while fetching data")
         }
     }
@@ -77,16 +89,22 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
         }
     }
 
-    fun saveProperty(property: PropertyItem){
+    fun saveProperty(property: PropertyItem) {
         viewModelScope.launch {
             val saveProperty = property.copy(isSaved = true)
-            if (saveProperty.isSaved){
+            if (saveProperty.isSaved) {
                 repository.insertHomes(property)
                 Log.d("HouseViewModel", " bookmarked: ${saveProperty.name}")
-            }else{
+            } else {
                 repository.deleteHome(saveProperty)
                 Log.d("HouseViewModel", " removed: ${saveProperty.name}")
             }
+        }
+    }
+
+    private fun loadSavedProperties() {
+        viewModelScope.launch {
+            _savedPropertyListings.value = repository.getSavedHomes()
         }
     }
 
@@ -100,12 +118,9 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
 
     fun onEvent(event: HouseEvent) {
         when (event) {
-            is HouseEvent.SearchBarClicked ->
-                handleSearchBarClick(event.searchQuery)
-            is HouseEvent.OnCardClicked ->
-                handleCardClick(event.property)
-            is HouseEvent.OnCategoryClicked ->
-                handleCategoryClick(event.category)
+            is HouseEvent.SearchBarClicked -> handleSearchBarClick(event.searchQuery)
+            is HouseEvent.OnCardClicked -> handleCardClick(event.property)
+            is HouseEvent.OnCategoryClicked -> handleCategoryClick(event.category)
         }
     }
 
@@ -123,9 +138,9 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
     }
 
     private fun handleCardClick(property: PropertyItem) {
-            _uiState.update {
-                it.copy(selectedPropertyId = property)
-            }
+        _uiState.update {
+            it.copy(selectedPropertyId = property)
+        }
     }
 
     private fun handleCategoryClick(category: PropertyType) {
@@ -143,7 +158,7 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
         } else {
             viewModelScope.launch {
                 _uiState.update { it.copy(isLoading = true) }
-                val result = repository.searchQuery(query =query)
+                val result = repository.searchQuery(query = query)
                 try {
                     val searchResults = repository.searchQuery(query).first()
                     _uiState.update {

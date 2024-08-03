@@ -10,12 +10,12 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 fun BarEffect() {
     val systemUiController = rememberSystemUiController()
     val isDarkTheme = isSystemInDarkTheme()
-    val useDarkIcons = !isDarkTheme
+    val backgroundColor = Color.Transparent
 
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = Color.Transparent,
-            darkIcons = !useDarkIcons
+            color = backgroundColor,
+            darkIcons = !isDarkTheme
         )
     }
 }

@@ -1,6 +1,7 @@
 package iz.housing.haofiti.ui.theme.presentation.common
 
-import android.annotation.SuppressLint
+
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -20,21 +21,50 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.shimmerEffect() = composed {
-    val transition = rememberInfiniteTransition(label = "transition")
-    val alpha = transition.animateFloat(
-        initialValue = 0.2f, targetValue = 0.4f, animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1000),
-            repeatMode = RepeatMode.Reverse
-        ), label = ""
-    ).value
-    background(color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha))
+    // Define the colors for the shimmer effect
+    val shimmerColors = listOf(
+        Color.White.copy(alpha = 0.3f), // Start color
+        Color.White.copy(alpha = 0.5f), // Mid color
+        Color.White.copy(alpha = 0.3f)  // End color
+    )
+
+    // infinite transition for continuous animation
+    val transition = rememberInfiniteTransition(label = "shimmer")
+
+    // Animate a float from 0f to 1000f (which will be used as the end coordinate for the gradient)
+    val translateAnim = transition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1000f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "shimmer"
+    )
+
+    // a background with a moving linear gradient
+    background(
+        brush = Brush.linearGradient(
+            colors = shimmerColors,
+            start = Offset.Zero, // Start from top-left
+            end = Offset(x = translateAnim.value, y = translateAnim.value) // Move towards bottom-right
+        )
+    )
 }
 
+/**
+ * A composable function that creates a card with a shimmer effect.
+ * This can be used as a placeholder while loading actual content.
+ *
+ * @param modifier Modifier to be applied to the card
+ */
 @Composable
 fun CardShimmerEffect(modifier: Modifier = Modifier) {
     Column(
@@ -42,19 +72,19 @@ fun CardShimmerEffect(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(5.dp),
     ) {
-        // Box with shimmer effect and height 180 dp
+        // Main content area with shimmer effect
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(180.dp)
                 .clip(MaterialTheme.shapes.small)
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.1f)) // Pale background
                 .shimmerEffect()
         )
 
-
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Row below the Box with shimmer effect
+        // Secondary content area with shimmer effect
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -63,6 +93,7 @@ fun CardShimmerEffect(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .clip(MaterialTheme.shapes.small)
                     .height(50.dp)
+                    .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.1f))
                     .shimmerEffect()
             )
         }

@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.volley)
     implementation(libs.maps.compose)
     implementation(libs.play.services.maps.v1810)
+    implementation libs.places
     implementation(libs.accompanist.permissions)
 
     // Room
