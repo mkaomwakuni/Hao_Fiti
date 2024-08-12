@@ -1,6 +1,5 @@
 package iz.housing.haofiti.ui.theme.presentation.home.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,17 +16,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import iz.housing.haofiti.R
-import iz.housing.haofiti.ui.theme.presentation.home.Property
+import coil.compose.AsyncImage
+import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.viewmodels.HouseViewModel
 
 
 @Composable
-fun CardProperty(property: Property) {
+fun CardProperty(property: PropertyItem,houseViewModel: HouseViewModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,13 +33,12 @@ fun CardProperty(property: Property) {
         shape = RoundedCornerShape(10.dp)
     ) {
         Column {
-            Image(
-                painter = painterResource(id = R.drawable.kileleshwa), // Replace with actual image resource
+            AsyncImage(
+                model = property.images.firstOrNull(),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
+                    .height(140.dp),
                 contentScale = ContentScale.Crop
             )
             Column(modifier = Modifier.padding(16.dp)) {
@@ -57,11 +54,11 @@ fun CardProperty(property: Property) {
                     }
                     Row {
                         Icon(Icons.Default.LocationOn, contentDescription = null)
-                        Text("${property.distance} km")
+                        Text(property.location)
                     }
                     Row {
                         Icon(Icons.Default.DateRange, contentDescription = null)
-                        Text(property.dates)
+                        Text(property.name)
                     }
                 }
             }
