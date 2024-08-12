@@ -67,7 +67,6 @@ fun SettingsScreen(navController: NavController) {
             item { SectionHeader("General") }
             item { SettingsItem("Language") }
             item { SettingsItem("Notification Settings") }
-            item { SettingsItemWithToggle("Dark Mode") }
             item { SectionHeader("Property") }
             item { SettingsItem("Request Property Listing") }
             item { SectionHeader("Other ") }
