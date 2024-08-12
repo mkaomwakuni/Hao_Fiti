@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import iz.housing.haofiti.ui.theme.HaoFitiTheme
+import iz.housing.haofiti.ui.theme.presentation.common.HaoFitiTheme
 import iz.housing.haofiti.ui.theme.presentation.navigation.HouseNavGraph
 
 @AndroidEntryPoint
