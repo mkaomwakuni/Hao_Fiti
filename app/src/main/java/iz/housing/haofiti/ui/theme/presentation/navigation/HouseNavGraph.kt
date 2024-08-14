@@ -17,8 +17,8 @@ import iz.housing.haofiti.ui.theme.presentation.common.SearchScreen
 import iz.housing.haofiti.ui.theme.presentation.details.HouseDetailsPage
 import iz.housing.haofiti.ui.theme.presentation.explorer.Discovery
 import iz.housing.haofiti.ui.theme.presentation.home.HomePage
-import iz.housing.haofiti.ui.theme.presentation.home.RentalListingScreen
 import iz.housing.haofiti.ui.theme.presentation.maps.MapFocused
+import iz.housing.haofiti.ui.theme.presentation.profile.SettingsScreen
 import iz.housing.haofiti.viewmodels.HouseViewModel
 
 @Composable
@@ -55,10 +55,14 @@ fun HouseNavGraph(navController: NavHostController) {
                 houseViewModel = houseViewModel)
         }
         composable(route = Route.Explore.route) {
-            Discovery(navController)
+            Discovery(
+                navController = navController,
+                houseViewModel = houseViewModel,
+                onEvent = houseViewModel::onEvent
+            )
         }
         composable(route = Route.Profile.route) {
-            RentalListingScreen(navController)
+            SettingsScreen(navController)
         }
         composable(
             route = Route.HouseDetails.route,
