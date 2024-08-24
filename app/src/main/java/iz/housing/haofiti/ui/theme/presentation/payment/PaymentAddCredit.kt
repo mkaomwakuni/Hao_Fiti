@@ -1,13 +1,28 @@
 package iz.housing.haofiti.ui.theme.presentation.payment
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,8 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import iz.housing.haofiti.R
 import androidx.compose.ui.unit.sp
+import iz.housing.haofiti.R
 
 @Composable
 fun AddCreditCardScreen() {
@@ -29,7 +44,7 @@ fun AddCreditCardScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 50.dp)
     ) {
         // Top bar
         Row(
@@ -80,10 +95,11 @@ fun AddCreditCardScreen() {
         // Scan card button
         Button(
             onClick = { /* TODO: Implement card scanning */ },
-            modifier = Modifier.align(Alignment.End),
+            modifier = Modifier.align(Alignment.Start),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFFF9800))
         ) {
             Icon(
+                modifier = Modifier.size(40.dp),
                 painter = painterResource(id = R.drawable.scan),
                 contentDescription = "Scan card",
                 tint = Color.White
@@ -131,19 +147,6 @@ fun AddCreditCardScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Card type icons
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            listOf("visa", "mastercard", "discover", "amex", "dinersclub", "jcb").forEach { card ->
-                Image(
-                    painter = painterResource(id = getCardDrawableId(card)),
-                    contentDescription = "$card logo",
-                    modifier = Modifier.size(40.dp)
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.weight(1f))
-
         // Save button
         Button(
             onClick = { /* TODO: Implement save functionality */ },
@@ -155,7 +158,7 @@ fun AddCreditCardScreen() {
     }
 }
 
-// Helper function to get drawable resource ID for card logos
+// Helper function for drawable resource ID & card logos
 fun getCardDrawableId(cardType: String): Int {
     return when (cardType) {
         "visa" -> R.drawable.visa
