@@ -1,5 +1,5 @@
 package iz.housing.haofiti.ui.theme.presentation.payment
-
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,14 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -88,18 +88,17 @@ fun PaymentMethodsScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-
         Text("CURRENT SELECTED METHOD", fontSize = 12.sp, color = Color.Gray)
         Spacer(modifier = Modifier.height(8.dp))
         CurrentMethodItem()
 
         Spacer(modifier = Modifier.weight(1f))
 
-
+        // Add payment method button
         Button(
             onClick = { /* TODO: Navigate to Add Payment Method screen */ },
             modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFFF9800))
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF9800))
         ) {
             Text("ADD PAYMENT METHOD", color = Color.White)
         }
@@ -152,7 +151,7 @@ fun CurrentMethodItem() {
         Icon(
             imageVector = Icons.Filled.CheckCircle,
             contentDescription = "Select",
-            tint = MaterialTheme.colors.primary,
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(24.dp)
         )
     }
