@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.dp
 fun Modifier.shimmerEffect() = composed {
     // Define the colors for the shimmer effect
     val shimmerColors = listOf(
-        Color.LightGray.copy(alpha = 0.1f), // Start color
-        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), // Mid color
-        Color.LightGray.copy(alpha = 0.1f)  // End color
+        Color.White.copy(alpha = 0.3f), // Start color
+        Color.White.copy(alpha = 0.5f), // Mid color
+        Color.White.copy(alpha = 0.3f)  // End color
     )
 
     // infinite transition for continuous animation

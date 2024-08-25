@@ -47,6 +47,7 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
                             it.copy(
                                 properties = properties,
                                 filteredProperties = properties,  // Initially, all properties are shown
+                                allLocations = locations,
                                 isLoading = false
                             )
                         }
@@ -90,14 +91,12 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
 
     fun saveProperty(property: PropertyItem) {
         viewModelScope.launch {
-            val saveProperty = property.copy(isSaved = !property.isSaved)
+            val saveProperty = property.copy(isSaved = true)
             if (saveProperty.isSaved) {
-                repository.insertHomes(saveProperty)
-                loadSavedProperties()  // Ensure the saved properties are reloaded
+                repository.insertHomes(property)
                 Log.d("HouseViewModel", " bookmarked: ${saveProperty.name}")
             } else {
                 repository.deleteHome(saveProperty)
-                loadSavedProperties()  // Ensure the saved properties are reloaded
                 Log.d("HouseViewModel", " removed: ${saveProperty.name}")
             }
         }
@@ -105,16 +104,7 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
 
     private fun loadSavedProperties() {
         viewModelScope.launch {
-            when(val result = repository.getSavedHomes()){
-                is ResponseUtil.Success -> {
-                    result.data?.let {
-                        _savedPropertyListings.value = it
-                    }
-                }
-                is ResponseUtil.Error -> {
-                    _savedPropertyListings.value = emptyList()
-                }
-            }
+            _savedPropertyListings.value = repository.getSavedHomes()
         }
     }
 

@@ -27,30 +27,6 @@
 - **Agent Contact**: Get in touch with property agents.
 - **Amenities Grouping**: Group amenities within each property object, with randomization for certain amenities.
 
-## Tech Stack.
-- **[Kotlin](https://kotlinlang.org/)**: Primary language for Android development.
-- **[Android Studio](https://developer.android.com/studio)**: Integrated Development Environment (IDE) for Android development.
-- **[Jetpack Compose](https://developer.android.com/jetpack/compose)**: Modern toolkit for building native UI in a declarative way.
-- **[Android KTX](https://developer.android.com/kotlin/ktx.html)**: Provides concise, idiomatic Kotlin extensions to Jetpack and Android platform APIs.
-- **[AndroidX](https://developer.android.com/jetpack/androidx)**: Major improvement to the original Android Support Library, providing backward compatibility and other features.
-- **[Material Library](https://material.io/develop/android)**: Modular and customizable Material Design UI components for Android.
-- **[Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)**: Lifecycle-aware components that help manage UI-related data and respond to changes in lifecycle status.
-- **[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)**: Manages UI-related data in a lifecycle-conscious way.
-- **[LiveData](https://developer.android.com/topic/libraries/architecture/livedata)**: Lifecycle-aware data holder with an observer pattern.
-- **[Room Database](https://developer.android.com/training/data-storage/room)**: Abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
-- **[Navigation Components](https://developer.android.com/guide/navigation/navigation-getting-started)**: Helps implement navigation within your app, from simple button clicks to more complex patterns.
-- **[Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)**: Concurrency design pattern that simplifies asynchronous code execution.
-- **[Kotlin Flows](https://developer.android.com/kotlin/flow)**: A reactive streams API in Kotlin, used to handle streams of data asynchronously.
-- **[WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)**: API for deferrable background work that needs guaranteed execution.
-- **[Hilt](https://dagger.dev/hilt/)**: Dependency injection library that simplifies the process of manual dependency injection.
-- **[Gson](https://github.com/google/gson)**: Library for converting Java Objects into JSON and vice versa.
-- **[Coil](https://coil-kt.github.io/coil/)**: Fast and lightweight image loading library for Android.
-- **[Firebase](https://firebase.google.com/)**: Backend platform offering services such as real-time database, authentication, and cloud storage.
-- **[Timber](https://github.com/JakeWharton/timber)**: Extensible logging library for Android.
-- **[Notifications](https://developer.android.com/develop/ui/views/notifications)**: Components for creating and managing notifications in Android apps.
-- **[Google Maps SDK](https://developers.google.com/maps/documentation/android-sdk/overview)**: SDK for integrating maps and location services into Android apps.
-- **[GitHub Actions](https://github.com/features/actions)**: Automation platform for CI/CD, enabling you to build, test, and deploy code directly from GitHub.
-
 ## 🚀Skills
 - Android Development
 - Kotlin Programming
@@ -61,6 +37,17 @@
 - JSON Parsing
 - MVVM Architecture
 - Dependency Injection
+
+## 🗺 Tools and Libraries
+- **[Android Studio](https://developer.android.com/studio)**: Primary IDE for development.
+- **[Kotlin](https://kotlinlang.org/)**: Programming language for Android development.
+- **[Jetpack Compose](https://developer.android.com/jetpack/compose)**: Modern toolkit for building native UI.
+- **[Firebase](https://firebase.google.com/)**: Backend platform for real-time database and authentication.
+- **[Gson](https://github.com/google/gson)**: Library for JSON parsing.
+- **[Hilt](https://dagger.dev/hilt/)**: Dependency injection library.
+- **[Google Maps SDK](https://developers.google.com/maps/documentation/android-sdk/overview)**: For displaying maps and geofencing.
+- **[Room](https://developer.android.com/training/data-storage/room)**: Persistence library for local storage.
+- **[Coil](https://coil-kt.github.io/coil/)**: Image loading library.
 
 ## 🎨Technologies
 - **MVVM Architecture**: For a clean separation of concerns and easier testing.

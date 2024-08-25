@@ -33,8 +33,6 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.MailOutline
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -54,12 +52,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -87,58 +85,36 @@ fun HouseDetailsPage(
     propertyId: Int
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
     val context = LocalContext.current
+
     val property = uiState.selectedPropertyId
 
     BarEffect()
 
-    property?.let { propertyItem ->
+    property?.let {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.LightGray.copy(alpha = 0.3f))
                 .verticalScroll(rememberScrollState())
         ) {
-            Column(modifier = Modifier.background(Color.White)) {
-                ImageCarousel(propertyItem, onFavoriteClick = { viewModel.saveProperty(it) })
-                HouseDescription(propertyItem)
+            ImageCarousel(property, onFavoriteClick = { viewModel.saveProperty(it) })
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        MaterialTheme.colorScheme.surface,
+                        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                    )
+            ) {
+                HouseDescription(property)
+                Spacer(modifier = Modifier.height(8.dp))
+                HouseFacilities(property)
+                Spacer(modifier = Modifier.height(8.dp))
+                LocationAddress(property)
+                Spacer(modifier = Modifier.height(4.dp))
+                AgentDetails(property, context = context,navController)
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            DetailSection(
-                content = { HouseFacilities(propertyItem) }
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            DetailSection(
-                content = { LocationAddress(propertyItem) }
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            DetailSection(
-                content = { AgentDetails(propertyItem, context, navController) }
-            )
-        }
-    }
-}
-
-@Composable
-fun DetailSection(
-    content: @Composable () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        shape = RectangleShape,
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-            contentColor = Color.Black
-        )
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-        ) {
-            content()
         }
     }
 }
@@ -159,13 +135,13 @@ fun HomepageTopBar(
             }
         },
         actions = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = { /* TODO: Handle share */ }) {
                 Icon(Icons.Default.Share, contentDescription = "Share")
             }
             IconButton(onClick = {onFavoriteClick()}) {
                 if (isSaved) {
                     Icon(
-                        Icons.Default.Favorite, contentDescription = "Favorite", tint = Color.Yellow
+                        Icons.Default.Favorite, contentDescription = "Favorite"
                     )
                 }else{
                     Icon(
@@ -295,59 +271,46 @@ fun HouseDescription(propertyItem: PropertyItem) {
     var expanded by remember { mutableStateOf(false) }
     val text = propertyItem.description
     val maxLines = 4
-    val readMoreText = "Read more \uD83D\uDC40"
-    val readLessText = "Read less \uD83D\uDC40"
+    val readMoreText = " Read more"
+    val readLessText = " Read less"
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-        ) {
+        if (expanded) {
             Text(
                 text = text,
                 textAlign = TextAlign.Justify,
+                style = MaterialTheme.typography.bodyMedium.copy(color = Color.Gray),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Text(
+                text = readLessText,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .clickable { expanded = !expanded }
+                    .padding(top = 4.dp)
+            )
+        } else {
+            val previewText = text.takeWhile { it != '\n' }.take(150) + "..."
+            Text(
+                text = buildAnnotatedString {
+                    append(previewText)
+                    pushStyle(SpanStyle(
+                        color = MaterialTheme.colorScheme.primary)
+                    )
+                    append(readMoreText)
+                    pop()
+                },
+                textAlign = TextAlign.Left,
                 style = MaterialTheme.typography.bodyMedium.copy(color = Color.Black),
-                maxLines = if (expanded) Int.MAX_VALUE else maxLines,
-                overflow = TextOverflow.Clip,
+                maxLines = maxLines,
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = if (expanded) 10.dp else 0.dp)
+                    .clickable {
+                        expanded = !expanded
+                    }
             )
-
-            if (!expanded) {
-                Box(
-                    modifier = Modifier
-                        .matchParentSize()
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, Color.White),
-                                startY = with(LocalDensity.current) { (maxLines * 2).dp.toPx() * 0.8f },
-                                endY = with(LocalDensity.current) { (maxLines * 20).dp.toPx() }
-                            )
-                        )
-                )
-
-                Text(
-                    text = readMoreText,
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier
-                        .clickable { expanded = true }
-                        .align(Alignment.BottomCenter)
-                        .padding(top = 30.dp)
-                )
-            } else {
-                Text(
-                    text = readLessText,
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier
-                        .clickable { expanded = false }
-                        .align(Alignment.BottomCenter)
-                        .padding(top = 2.dp)
-                )
-            }
         }
     }
 }

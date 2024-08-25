@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Houses")
 data class PropertyItem(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey val id: Int = 0,
     val price: Int = 0,
     val isSaved: Boolean = false,
     val agent: Agent? = null,
@@ -18,6 +18,7 @@ data class PropertyItem(
     val type: PropertyType = PropertyType.APARTMENT,
     val amenities: Amenities? = null,
     val rating: Double? = null,
+    val imageRes: Int? = null
 )
 
 data class Housing(
@@ -26,13 +27,9 @@ data class Housing(
 
 data class Location(
     val locationName: String = "",
-    val properties: List<PropertyItem> = emptyList(),
-    val imageRes:LocalityImage = LocalityImage.CITY,
+    val properties: List<PropertyItem> = emptyList()
 )
 
 enum class PropertyType {
     APARTMENT, VILLA, BUNGALOW, RENTAL
-}
-enum class LocalityImage{
-    CITY
 }

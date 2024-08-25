@@ -1,306 +1,375 @@
 package iz.housing.haofiti.ui.theme.presentation.explorer
-
-import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import iz.housing.haofiti.R
+import iz.housing.haofiti.data.model.HouseStates
+import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.data.service.HouseEvent
 import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
-import iz.housing.haofiti.ui.theme.presentation.common.HouseItem
-
+import iz.housing.haofiti.ui.theme.presentation.home.LoadingEffect
+import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCard
+import iz.housing.haofiti.ui.theme.presentation.navigation.Route
+import kotlinx.coroutines.delay
 
 @Composable
-fun Discovery(navController: NavController) {
-    val scrollState = rememberScrollState()
+fun Discovery(
+    state: HouseStates,
+    navController: NavController,
+    onItemClick: (PropertyItem) -> Unit,
+    onEvent: (HouseEvent) -> Unit
+) {
+    var animationLoading by remember { mutableStateOf(true) }
+
     Scaffold(
         bottomBar = { BottomNavComponent(navController = navController) }
-    ) {contentPadding ->
-        Column(
+    ) { padding ->
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(padding)){
+            ImageBackground()
+        }
+        LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(contentPadding)
-                .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+                .fillMaxSize()
+                .padding(padding)
+                .background(Color.White),
+            contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
         ) {
-            CustomHeaderTitle()
-            Spacer(modifier = Modifier.height(30.dp))
-            var searchText by remember { mutableStateOf("") }
-            SearchBar(
-                modifier = Modifier.fillMaxWidth(),
-                searchText = searchText,
-                onSearch = { searchText = it }
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            SectionTitle(
-                title = "Best Deals",
-                actionText = "See More",
-                actionColor = Color.Blue,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(25.dp))
-            HouseList(houses = sampleHouses)
-            Spacer(modifier = Modifier.height(60.dp))
-            SectionTitle(
-                title = "Explore the City",
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            CityList(cities = sampleCities)
-        }
-    }
-}
+            item { PropertyTypes() }
+            item { Spacer(modifier = Modifier.height(20.dp)) }
+            item {
+                SectionHeader(
+                    title = "Property nearby",
+                    onSeeMoreClick = { /* Handle See More */ }
+                )
+            }
 
-@Composable
-fun CustomHeaderTitle(
-    modifier: Modifier = Modifier,
-    fontSize: Int = 27
-) {
-    val annotatedString = buildAnnotatedString {
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, fontSize = fontSize.sp)) {
-            append("Find the ")
-        }
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, fontSize = fontSize.sp)) {
-            append("best ")
-        }
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, fontSize = fontSize.sp)) {
-            append("place to stay")
-        }
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, fontSize = fontSize.sp)) {
-            append(" and ")
-        }
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, fontSize = fontSize.sp)) {
-            append("live with family")
-        }
-    }
-
-    ClickableText(
-        modifier = modifier.padding(top = 25.dp),
-        text = annotatedString,
-        onClick = {},
-        style = TextStyle(color = Color.Black)
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchBar(
-    modifier: Modifier = Modifier,
-    searchText: String,
-    onSearch: (String) -> Unit
-) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-
-    Surface {
-        TextField(
-            modifier = Modifier
-                .clip(RoundedCornerShape(6.dp))
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color.LightGray.copy(alpha = 0.3f),
-
-            ),
-            value = searchText,
-            onValueChange = onSearch,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = {
-                onSearch(searchText)
-                keyboardController?.hide()
-            }),
-            trailingIcon = {
-                IconButton(onClick = { onSearch(searchText) }) {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
+            item {
+                LaunchedEffect(true) {
+                    delay(1000)
+                    animationLoading = false
                 }
-            },
-            placeholder = { Text(text = "Find \"Ball\"") }
-        )
+
+                if (animationLoading) {
+                    LoadingEffect()
+                } else {
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp)
+                    ) {
+                        items(state.properties) { property ->
+                            PropertyCardDiscover(
+                                property = property,
+                                onItemClick = {
+                                    onEvent(HouseEvent.OnCardClicked(property))
+                                    navController.navigate(Route.HouseDetails.createRoute(property.id))
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
+            item { Spacer(modifier = Modifier.height(24.dp)) }
+
+            item {
+                SectionHeader(
+                    title = "Recently Booked",
+                    onSeeMoreClick = { /* Handle See More */ }
+                )
+            }
+
+            items(state.properties) { property ->
+                Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                    PropertyCard(
+                        property = property,
+                        onItemClick = {
+                            onEvent(HouseEvent.OnCardClicked(property))
+                            navController.navigate(Route.HouseDetails.createRoute(property.id))
+                        }
+                    )
+                }
+            }
+        }
     }
 }
 
 @Composable
-fun SectionTitle(
-    title: String,
-    actionText: String? = null,
-    actionColor: Color = Color.Black,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceBetween
+fun ImageBackground() {
+    Image(painter = painterResource(R.drawable.banner), contentDescription = null)}
+
+@Composable
+fun PropertyTypes() {
+    Text(
+        text = " Your\n Gateway to \n Affordable\n Housing",
+        color = Color.Black,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp),
+        textAlign = TextAlign.Start
+    )
+    val types = listOf("Bungalow", "Apartment", "Villa", "Rentals")
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 14.dp)
     ) {
-        Text(
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            text = title
-        )
-        if (actionText != null) {
-            Text(
-                modifier = Modifier.padding(top = 4.dp),
-                color = actionColor,
-                fontWeight = FontWeight.Normal,
-                fontSize = 15.sp,
-                text = actionText
+        items(types.size) { index ->
+            PropertyTypeChip(type = types[index])
+        }
+    }
+}
+
+@Composable
+fun PropertyTypeChip(type: String) {
+    Box(
+        modifier = Modifier
+            .height(70.dp)
+            .width(85.dp)
+            .border(
+                color = MaterialTheme.colorScheme.primary,
+                width = 1.dp,
+                shape = RoundedCornerShape(12.dp)
             )
-        }
-    }
-}
-
-@Composable
-fun HouseList(houses: List<House>) {
-    LazyRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .background(
+                color = Transparent,
+                shape = RoundedCornerShape(12.dp)
+            )
     ) {
-        items(houses.size) { index ->
-            HouseItem(house = houses[index])
-        }
-    }
-}
-
-
-
-@Composable
-fun CityList(cities: List<City>) {
-    LazyRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        items(cities.size) { index ->
-            CityItem(city = cities[index])
-        }
-    }
-}
-
-@Composable
-fun CityItem(city: City) {
-    Box(modifier = Modifier.width(100.dp)) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(
-                modifier = Modifier
-                    .width(220.dp)
-                    .height(100.dp)
-                    .padding(5.dp)
-                    .clip(CircleShape),
-                contentAlignment = Alignment.BottomStart
-            ) {
-                CircleCityImage(city = painterResource(id = city.imageRes))
-            }
-            Text(
-                modifier = Modifier.padding(5.dp),
-                text = city.name,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(color = Color.Black)
+            Icon(
+                painter = getIconForType(type),
+                contentDescription = null,
+                modifier = Modifier.size(30.dp)
             )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(type, fontSize = 12.sp)
         }
     }
 }
 
 @Composable
-fun ImageFetcher(image: Painter) {
-    Image(
-        modifier = Modifier
-            .height(180.dp)
-            .width(220.dp)
-            .clip(RoundedCornerShape(5.dp)),
-        painter = image,
-        contentScale = ContentScale.FillBounds,
-        contentDescription = "Image"
-    )
+fun getIconForType(type: String): Painter {
+    return when (type) {
+        "Bungalow" -> painterResource(id = R.drawable.bungalow)
+        "Apartment" -> painterResource(id = R.drawable.apartments)
+        "Villa" -> painterResource(id = R.drawable.rental)
+        else -> painterResource(id = R.drawable.home)
+    }
 }
 
 @Composable
-fun CircleCityImage(city: Painter) {
-    Image(
+fun SectionHeader(title: String, onSeeMoreClick: () -> Unit) {
+    Row(
         modifier = Modifier
-            .height(120.dp)
-            .width(120.dp),
-        painter = city,
-        contentScale = ContentScale.FillBounds,
-        contentDescription = "Image"
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = title, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+        Text(
+            text = "See More",
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 14.sp,
+            modifier = Modifier.clickable { onSeeMoreClick() }
+        )
+    }
+}
+
+@Composable
+fun PropertyCardDiscover(property: PropertyItem, onItemClick: () -> Unit) {
+    var isPressed by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.95f else 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        ), label = ""
+    )
+
+    val alpha by animateFloatAsState(
+        targetValue = 1f,
+        animationSpec = tween(durationMillis = 500), label = ""
+    )
+
+    Box(
+        modifier = Modifier
+            .width(300.dp)
+            .height(350.dp)
+            .scale(scale)
+            .alpha(alpha)
+            .background(color = Color.White, shape = RoundedCornerShape(12.dp))
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = {
+                        isPressed = true
+                        tryAwaitRelease()
+                        isPressed = false
+                    },
+                    onTap = { onItemClick() }
+                )
+            }
+    ) {
+        Column {
+            Box(
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(250.dp)
+            ) {
+                AsyncImage(
+                    model = property.images.firstOrNull(),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
+                    contentScale = ContentScale.Crop
+                )
+                PropertyFeaturesRow(
+                    property = property,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 6.dp)
+                )
+            }
+            PropertyInfoSection(property = property)
+        }
+    }
+}
+
+@Composable
+fun PropertyFeaturesRow(modifier: Modifier = Modifier, property: PropertyItem) {
+        var visible by remember { mutableStateOf(false) }
+
+        LaunchedEffect(Unit) {
+            visible = true
+        }
+
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            listOf(
+                Triple(R.drawable.bedroom, property.amenities?.bedrooms.toString(), "Bedrooms"),
+                Triple(R.drawable.bath, property.amenities?.bathrooms.toString(), "Bathrooms"),
+                Triple(R.drawable.vwifi, if (property.amenities?.wifi == true) "Yes" else "No", "WiFi"),
+                Triple(R.drawable.half_star, property.rating.toString(), "Rating")
+            ).forEachIndexed { index, (icon, text, contentDescription) ->
+                AnimatedVisibility(
+                    visible = visible,
+                    enter = fadeIn() + expandHorizontally()
+                ) {
+                    PropertyFeatureChip(
+                        icon = painterResource(id = icon),
+                        text = text,
+                        contentDescription = contentDescription
+                    )
+                }
+            }
+        }
+    }
+
+
+    @Composable
+fun PropertyInfoSection(property: PropertyItem) {
+    Column(modifier = Modifier.padding(12.dp)) {
+        Text(property.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+        Spacer(modifier = Modifier.height(4.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Default.LocationOn,
+                contentDescription = null,
+                modifier = Modifier.size(14.dp),
+                tint = Color.Gray
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text("${property.location}, Kenya", color = Color.Gray, fontSize = 12.sp)
+        }
+        Spacer(modifier = Modifier.height(4.dp))
+        Text("${property.price / 1000}Ksh/month", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+fun PropertyFeatureChip(icon: Painter, text: String, contentDescription: String) {
+    AssistChip(
+        onClick = { /* Add action if necessary */ },
+        label = { Text(text, fontSize = 12.sp) },
+        border = null,
+        leadingIcon = {
+            Icon(
+                painter = icon,
+                contentDescription = contentDescription,
+                modifier = Modifier.size(12.dp)
+            )
+        },
+        colors = AssistChipDefaults.assistChipColors(
+            containerColor = Color.White.copy(alpha = 0.7f)
+        )
     )
 }
-
-@Preview( showBackground = true)
-@Composable
-fun HomepagePreview() {
-    Discovery(rememberNavController())
-}
-
-data class House(
-    val name: String,
-    val location: String,
-    val rating: Double,
-    val imageRes: Int
-)
-
-data class City(
-    val name: String,
-    val imageRes: Int
-)
-
-val sampleHouses = listOf(
-    House("Green Wood Apartments", "London", 4.9, R.drawable.kino),
-    House("Blue Stone Villa", "Paris", 4.8, R.drawable.kiambu),
-    House("Sunset Bungalow", "New York", 4.7, R.drawable.lavington)
-)
-
-val sampleCities = listOf(
-    City("Northern Ridge", R.drawable.ngara),
-    City("Kasarani", R.drawable.westlands),
-    City("Westlands", R.drawable.kileleshwa),
-    City("Ngara", R.drawable.lavington)
-)
