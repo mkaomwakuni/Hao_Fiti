@@ -2,7 +2,6 @@ package iz.housing.haofiti.ui.theme.presentation.navigation
 
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,10 +15,9 @@ import iz.housing.haofiti.ui.theme.presentation.Chat.ContactForm
 import iz.housing.haofiti.ui.theme.presentation.booked.BookmarkScreen
 import iz.housing.haofiti.ui.theme.presentation.common.SearchScreen
 import iz.housing.haofiti.ui.theme.presentation.details.HouseDetailsPage
-import iz.housing.haofiti.ui.theme.presentation.explorer.Discovery
 import iz.housing.haofiti.ui.theme.presentation.home.HomePage
-import iz.housing.haofiti.ui.theme.presentation.home.RentalListingScreen
 import iz.housing.haofiti.ui.theme.presentation.maps.MapFocused
+import iz.housing.haofiti.ui.theme.presentation.profile.SettingsScreen
 import iz.housing.haofiti.viewmodels.HouseViewModel
 
 @Composable
@@ -55,22 +53,11 @@ fun HouseNavGraph(navController: NavHostController) {
                 navController = navController,
                 houseViewModel = houseViewModel)
         }
-        composable(
-            route = Route.Explore.route,
-            enterTransition = { slideInHorizontally(animationSpec = tween(1000)) },
-            exitTransition = { slideOutHorizontally (animationSpec = tween(1000)) }) {
-            Discovery(
-                navController = navController,
-                state = houseViewModel.uiState.collectAsState().value,
-                onEvent = houseViewModel::onEvent,
-                onItemClick = { propertyId ->
-                    houseViewModel.getPropertyById(propertyId.id)
-                    navController.navigate(Route.HouseDetails.route)
-                }
-            )
+        composable(route = Route.Explore.route) {
+//            Discovery( navController = navController)
         }
         composable(route = Route.Profile.route) {
-            RentalListingScreen(navController)
+            SettingsScreen(navController)
         }
         composable(
             route = Route.HouseDetails.route,
