@@ -1,6 +1,7 @@
 package iz.housing.haofiti.ui.theme.presentation.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,19 +16,15 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -60,104 +57,116 @@ fun HomePage(
     state: HouseStates,
     navController: NavController,
     onItemClick: (PropertyItem) -> Unit,
-    onEvent: (HouseEvent) -> Unit) {
+    onEvent: (HouseEvent) -> Unit
+) {
+    var animationLoading by remember { mutableStateOf(true) }
 
-    var animationLoading  by remember { mutableStateOf(true)}
+    LaunchedEffect(Unit) {
+        launch {
+            delay(1000)
+            animationLoading = false
+        }
+    }
 
     Scaffold(
-        bottomBar = {BottomNavComponent(navController = navController)},
-    ) { paddingValue ->
-        Column(
+        bottomBar = { BottomNavComponent(navController = navController) },
+    ) { paddingValues ->
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValue)) {
-                val annotedText = buildAnnotatedString {
-                pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
-                append("Let's find your\n")
-                pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
-                append("dream home.")
-                addStyle(SpanStyle(color = MaterialTheme.colorScheme.primary), 15, 26)
-                pop()
-            }
-
-            LaunchedEffect(Unit) {
-                launch {
-                    delay(1000)
-                    animationLoading = false
+                .padding(paddingValues)
+                .background(Color.White)
+        ) {
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, top = 30.dp)
+                ) {
+                    Text(
+                        text = "urban.",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = buildAnnotatedString {
+                            pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
+                            append("Let's find your\n")
+                            pushStyle(SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary))
+                            append("dream home.")
+                            pop()
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    SearchBarHome(
+                        navController = navController,
+                        searchQuery = "",
+                        onSearchQueryChange = {}
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    TextSection(stringResource(R.string.previously))
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White)
-                    .padding(start = 16.dp, end = 16.dp, top = 30.dp)
-            ) {
-                Text(
-                    text = "urban.",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                BasicText(text = annotedText)
-                Spacer(modifier = Modifier.height(16.dp))
-                SearchBarHome(
-                    navController = navController,
-                    searchQuery = "",
-                    onSearchQueryChange = {},
-                    )
-                Spacer(modifier = Modifier.height(16.dp))
-                TextSection(stringResource(R.string.previously))
+            item {
                 if (state.isLoading) {
                     LoadingEffect()
                 } else {
-                    Spacer(modifier = Modifier.height(16.dp))
                     LazyRow(
-                        contentPadding = PaddingValues(horizontal = 2.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp,),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(state.properties) { property ->
-                            PropertyCardHorizontal(
-                                property = property,
-                                onItemClick = {
-                                    onEvent(HouseEvent.OnCardClicked(property))
-                                    navController.navigate(Route.HouseDetails.createRoute(property.id))
-                                }
-                            )
-                        }
-                    }
-                }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    TextSection(stringResource(R.string.recommendations))
-                    Spacer(modifier = Modifier.height(16.dp))
-                if (state.isLoading) {
-                    LoadingEffect()
-                } else {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentPadding = PaddingValues(2.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        items(state.properties) { property ->
-                            PropertyCard(
-                                property = property,
-                                onItemClick = {
-                                    onEvent(
-                                        HouseEvent.OnCardClicked(property)
-                                    )
-                                    navController.navigate(Route.HouseDetails.createRoute(property.id))
-                                })
+                            Box(modifier = Modifier.padding(start = 8.dp, end = 8.dp)) {
+                                PropertyCardHorizontal(
+                                    property = property,
+                                    onItemClick = {
+                                        onEvent(HouseEvent.OnCardClicked(property))
+                                        navController.navigate(
+                                            Route.HouseDetails.createRoute(
+                                                property.id
+                                            )
+                                        )
+                                    }
+                                )
                             }
                         }
                     }
                 }
             }
-            LaunchedEffect(true) {
-                delay(1000)
-                animationLoading = false
+
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    TextSection(stringResource(R.string.recommendations))
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
+
+            if (state.isLoading) {
+                item { LoadingEffect() }
+            } else {
+                items(state.properties) { property ->
+                    Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                        PropertyCard(
+                            property = property,
+                            onItemClick = {
+                                onEvent(HouseEvent.OnCardClicked(property))
+                                navController.navigate(Route.HouseDetails.createRoute(property.id))
+                            }
+                        )
+                    }
+                }
             }
         }
     }
+}
 
 @Composable
 fun SearchBarHome(
@@ -169,6 +178,8 @@ fun SearchBarHome(
         onValueChange = onSearchQueryChange,
         modifier = Modifier
             .fillMaxWidth()
+            .background(Color.White)
+            .border(1.dp, color = Color.Black, RoundedCornerShape(8.dp))
             .clickable { navController.navigate(Route.Search.route)
             },
         placeholder = { Text(stringResource(R.string.label)) },
