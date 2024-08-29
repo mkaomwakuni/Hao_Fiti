@@ -1,4 +1,4 @@
-# 🏡 The Hao Fiti -PROJECT UNDER CONSTRUCTUON
+# 🏡 The Hao Fiti -PROJECT UNDER CONSTRUCTION
 Welcome to The Hao Fiti App – Your Gateway to Effortless House Hunting and Renting in Nairobi!
 
 ## 🚀 Features

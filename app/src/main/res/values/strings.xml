@@ -9,7 +9,15 @@
     <string name="bookmarks">Favorites</string>
     <string name="maps">Maps</string>
     <string name="Profile">Profile</string>
-    <string name="label">Search any city, area, landmark...</string>
+    <string name="label">Search any city, area, landmark…</string>
     <string name="recommendations">Our Recommendations</string>
     <string name="previously">Previously Viewed</string>
+    <string name="locality">Enter Town, area or county</string>
+    <string name="Favourites">Listings Saved</string>
+    <string name="Delete">Delete\n</string>
+    <string name="search_options">Search Options</string>
+    <string name="draw_on_map">Draw on map</string>
+    <string name="search_by_county">Search by County</string>
+    <string name="clear">Clear</string>
+    <string name="your_recent_searches">Your recent searches</string>
 </resources>
