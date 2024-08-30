@@ -1,4 +1,4 @@
-package iz.housing.haofiti.ui.theme
+package iz.housing.haofiti.ui.theme.presentation.common
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -12,6 +12,13 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import iz.housing.haofiti.ui.theme.Pink40
+import iz.housing.haofiti.ui.theme.Pink80
+import iz.housing.haofiti.ui.theme.Purple40
+import iz.housing.haofiti.ui.theme.Purple80
+import iz.housing.haofiti.ui.theme.PurpleGrey40
+import iz.housing.haofiti.ui.theme.PurpleGrey80
+import iz.housing.haofiti.ui.theme.Typography
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -43,7 +50,7 @@ fun HaoFitiTheme(
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = Color.White,
+            color = colorScheme.surface,
             darkIcons = !darkTheme
         )
     }
