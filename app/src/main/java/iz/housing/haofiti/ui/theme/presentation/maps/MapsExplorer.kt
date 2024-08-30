@@ -12,8 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import iz.housing.haofiti.data.model.HouseStates
 import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.data.service.HouseEvent
 import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCardHorizontal
+import iz.housing.haofiti.ui.theme.presentation.navigation.Route
 
 /**
  * A composable function that displays a map explorer screen with property markers and details.
@@ -22,7 +25,10 @@ import iz.housing.haofiti.ui.theme.presentation.home.components.PropertyCardHori
  * @param properties List of PropertyItems to display on the map.
  */
 @Composable
-fun MapExplorer(navController: NavController, properties: List<PropertyItem>) {
+fun MapExplorer(
+    navController: NavController,
+    properties: List<PropertyItem>,
+    onEvent: (HouseEvent) -> Unit){
     // State to keep track of the currently selected property
     var selectedProperty by remember { mutableStateOf<PropertyItem?>(null) }
 
@@ -36,13 +42,13 @@ fun MapExplorer(navController: NavController, properties: List<PropertyItem>) {
         selectedProperty?.let { property ->
             Box(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 16.dp)
+                    .padding(top = 550.dp, start = 20.dp, end = 20.dp)
             ) {
                 PropertyCardHorizontal(
                     property = property,
                     onItemClick = {
-                        // Handle property card click if needed
+                        onEvent(HouseEvent.OnCardClicked(property))
+                        navController.navigate(Route.HouseDetails.createRoute(property.id))
                     }
                 )
             }

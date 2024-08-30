@@ -36,10 +36,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactForm() {
+fun ContactForm(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
@@ -50,7 +51,7 @@ fun ContactForm() {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Contact the Agent") },
+                title = { Text("Contact the Agency") },
                 navigationIcon = {
                     IconButton(
                         onClick = { /*TODO*/ }) {
@@ -108,7 +109,7 @@ fun ContactForm() {
                 value = message,
                 onValueChange = {message = it},
                 label = "Message",
-                placeholder = "Leave Your Enquaries"
+                placeholder = "Leave Your Enquiries"
             )
             Spacer(modifier = Modifier.height(20.dp))
             CustomCheckBox(
@@ -233,8 +234,8 @@ fun CustomTextButton(
         )
     }
 }
-@Preview
-@Composable
-fun ContactFormPreview() {
-    ContactForm()
-}
+//@Preview
+//@Composable
+//fun ContactFormPreview() {
+//    ContactForm()
+//}

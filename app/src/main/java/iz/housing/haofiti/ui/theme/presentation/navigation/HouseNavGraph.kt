@@ -1,5 +1,8 @@
 package iz.housing.haofiti.ui.theme.presentation.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -8,7 +11,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import iz.housing.haofiti.ui.theme.presentation.booked.Bookmarks
+import iz.housing.haofiti.ui.theme.presentation.Chat.ContactForm
+import iz.housing.haofiti.ui.theme.presentation.booked.BookmarkScreen
+import iz.housing.haofiti.ui.theme.presentation.common.SearchScreen
 import iz.housing.haofiti.ui.theme.presentation.details.HouseDetailsPage
 import iz.housing.haofiti.ui.theme.presentation.explorer.Discovery
 import iz.housing.haofiti.ui.theme.presentation.home.HomePage
@@ -31,11 +36,23 @@ fun HouseNavGraph(navController: NavHostController) {
                 }
             )
         }
+        composable(
+            route = Route.Search.route,
+            enterTransition = { fadeIn(animationSpec = tween(3000)) },
+            exitTransition = { slideOutHorizontally (animationSpec = tween(30)) }
+        ) {
+            SearchScreen(navController = navController)
+        }
         composable(route = Route.Maps.route) {
-            MapFocused(navController)
+            MapFocused(
+                navController = navController,
+                onEvent = houseViewModel::onEvent
+            )
         }
         composable(route = Route.Bookmarks.route) {
-            Bookmarks(navController)
+            BookmarkScreen(
+                navController = navController,
+                houseViewModel = houseViewModel)
         }
         composable(route = Route.Explore.route) {
             Discovery(navController)
@@ -53,6 +70,9 @@ fun HouseNavGraph(navController: NavHostController) {
                 propertyId = propertyId,
                 navController = navController
             )
+        }
+        composable(ScreensConstants.CHAT_SCREEN) {
+            ContactForm(navController)
         }
     }
 }
