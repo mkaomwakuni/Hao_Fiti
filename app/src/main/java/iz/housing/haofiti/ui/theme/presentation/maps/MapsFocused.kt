@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import iz.housing.haofiti.data.service.HouseEvent
 import iz.housing.haofiti.ui.theme.presentation.common.BarEffect
 import iz.housing.haofiti.ui.theme.presentation.common.BottomNavComponent
 import iz.housing.haofiti.viewmodels.HouseViewModel
@@ -17,7 +18,8 @@ import iz.housing.haofiti.viewmodels.HouseViewModel
 @Composable
 fun MapFocused(
     navController: NavController,
-    houseViewModel: HouseViewModel = hiltViewModel()
+    houseViewModel: HouseViewModel = hiltViewModel(),
+    onEvent: (HouseEvent) -> Unit
 ) {
     val uiState by houseViewModel.uiState.collectAsState()
 
@@ -27,10 +29,12 @@ fun MapFocused(
 
             MapExplorer(
                 navController = navController,
-                properties = uiState.properties
+                properties = uiState.properties,
+                onEvent = onEvent
             )
         }
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
+        Box(modifier = Modifier
+            .fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
             BottomNavComponent(navController)
         }
     }
