@@ -32,7 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import iz.housing.haofiti.R
 
 
-// SplashScreen.kt
+
 @Composable
 fun SplashScreen( navController: NavController) {
     Box(

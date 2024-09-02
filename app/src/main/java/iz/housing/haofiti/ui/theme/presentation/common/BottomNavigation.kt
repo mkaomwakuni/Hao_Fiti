@@ -35,15 +35,17 @@ fun BottomNavComponent(navController: NavController) {
 
     NavigationBar(
         modifier = Modifier
-            .height(100.dp)
-            .background(Color.Transparent)
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .fillMaxWidth()
+            .padding(bottom = 16.dp, start = 16.dp, end = 16.dp)
+            .height(64.dp)
             .clip(RoundedCornerShape(20.dp))
-            .shadow(8.dp)
-            .fillMaxWidth()) {
+            .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
+            .background(Color.White.copy(alpha = 0.95f)),
+        containerColor = Color.Transparent,
+        tonalElevation = 0.dp
+    ) {
         NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.Home, contentDescription = "Home") },
-            label = {  },
             selected = currentRoute == "home_screen",
             onClick = {
                 navController.navigate("home_screen") {
@@ -54,8 +56,7 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(modifier = Modifier.size(20.dp), painter = painterResource(id = R.drawable.navigationicon), contentDescription = "Home") },
-            label = {  },
+            icon = { Icon(modifier = Modifier.size(20.dp), painter = painterResource(id = R.drawable.navigationicon), contentDescription = "Explore") },
             selected = currentRoute == "explore_screen",
             onClick = {
                 navController.navigate("explore_screen") {
@@ -67,7 +68,6 @@ fun BottomNavComponent(navController: NavController) {
         )
         NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Bookmarks") },
-            label = {  },
             selected = currentRoute == "bookmarks_screen",
             onClick = {
                 navController.navigate("bookmarks_screen") {
@@ -78,8 +78,7 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Explore") },
-            label = {  },
+            icon = { Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Maps") },
             selected = currentRoute == "maps_screen",
             onClick = {
                 navController.navigate("maps_screen") {
@@ -90,8 +89,7 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(imageVector =  Icons.Outlined.Person, contentDescription = "Profile")},
-            label = {  },
+            icon = { Icon(imageVector = Icons.Outlined.Person, contentDescription = "Profile")},
             selected = currentRoute == "profile_screen",
             onClick = {
                 navController.navigate("profile_screen") {

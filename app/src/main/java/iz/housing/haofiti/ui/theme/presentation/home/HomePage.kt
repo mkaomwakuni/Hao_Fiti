@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -40,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.android.gms.location.LocationServices
 import iz.housing.haofiti.R
 import iz.housing.haofiti.data.model.HouseStates
 import iz.housing.haofiti.data.model.PropertyItem
@@ -60,6 +62,10 @@ fun HomePage(
     onEvent: (HouseEvent) -> Unit
 ) {
     var animationLoading by remember { mutableStateOf(true) }
+    var locationCurrent by remember { mutableStateOf("urban") }
+
+    val context = LocalContext.current
+    val fusedLocationProviderClient =  remember{ LocationServices.getFusedLocationProviderClient(context) }
 
     LaunchedEffect(Unit) {
         launch {

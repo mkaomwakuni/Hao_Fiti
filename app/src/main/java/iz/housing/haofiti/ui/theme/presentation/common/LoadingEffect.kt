@@ -1,6 +1,5 @@
 package iz.housing.haofiti.ui.theme.presentation.common
 
-
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -15,6 +14,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,9 +31,9 @@ import androidx.compose.ui.unit.dp
 fun Modifier.shimmerEffect() = composed {
     // Define the colors for the shimmer effect
     val shimmerColors = listOf(
-        Color.White.copy(alpha = 0.3f), // Start color
-        Color.White.copy(alpha = 0.5f), // Mid color
-        Color.White.copy(alpha = 0.3f)  // End color
+        Color.LightGray.copy(alpha = 0.1f), // Start color
+        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), // Mid color
+        Color.LightGray.copy(alpha = 0.1f)  // End color
     )
 
     // infinite transition for continuous animation
@@ -98,6 +99,16 @@ fun CardShimmerEffect(modifier: Modifier = Modifier) {
             )
         }
     }
+}
+@Composable
+fun CircularShimmerEffect(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .size(100.dp) // Size of the circular shimmer
+            .clip(CircleShape) // Clip to a circle
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.1f)) // Pale background
+            .shimmerEffect() // Apply the shimmer effect
+    )
 }
 @Preview
 @Composable

@@ -1,6 +1,7 @@
 package iz.housing.haofiti.data.repository
 
 import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.viewmodels.ResponseUtil
 import kotlinx.coroutines.flow.Flow
 
 
@@ -45,7 +46,7 @@ interface HouseRepository {
      *
      * @return A List of PropertyItem objects representing saved homes.
      */
-    suspend fun getSavedHomes(): List<PropertyItem>
+    suspend fun getSavedHomes(): ResponseUtil<List<PropertyItem>>
 
     /**
      * Inserts a new home into the saved homes list.
