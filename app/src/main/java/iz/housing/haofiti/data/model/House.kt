@@ -20,9 +20,7 @@ data class PropertyItem(
     val rating: Double? = null,
 )
 
-data class Housing(
-    val locations: List<Location> = emptyList()
-)
+data class Housing(   val locations: List<Location> = emptyList())
 
 data class Location(
     val locationName: String = "",

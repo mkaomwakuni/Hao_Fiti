@@ -10,11 +10,11 @@ import iz.housing.haofiti.data.model.PropertyItem
  * This class defines the database configuration and serves as the main access point for the underlying connection.
  */
 @Database(
-    entities = [PropertyItem::class], // Defines the entities (tables) in the database
-    version = 1, // The version of the database schema
-    exportSchema = false // Disables schema version control for simplicity
+    entities = [PropertyItem::class],
+    version = 1,
+    exportSchema = false
 )
-@TypeConverters(HouseTypeConvertors::class) // Specifies custom type converters for complex data types
+@TypeConverters(HouseTypeConvertors::class)
 abstract class HouseDatabase : RoomDatabase() {
     /**
      * Provides access to the HouseDao for database operations.

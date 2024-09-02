@@ -23,7 +23,6 @@ class HouseRepositoryImpl  @Inject constructor(
         TODO("Not yet implemented")
     }
 
-
     override suspend fun getSavedHomes(): ResponseUtil<List<PropertyItem>>{
         return try {
         val savedHomes = houseDao.getSavedHouses()

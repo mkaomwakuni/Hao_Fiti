@@ -88,7 +88,6 @@ fun PropertyCardHorizontal(property: PropertyItem, onItemClick: () -> Unit) {
 @Composable
 fun PropertyCardHorizontalPreview() {
     val property = PropertyItem(
-        id = 1,
         name = "Beautiful Apartment",
         location = "Nairobi",
         price = 50000,
