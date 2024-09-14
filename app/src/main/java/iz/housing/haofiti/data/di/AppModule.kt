@@ -12,6 +12,7 @@ import iz.housing.haofiti.data.database.HouseDao
 import iz.housing.haofiti.data.database.HouseDatabase
 import iz.housing.haofiti.data.database.HouseRepositoryImpl
 import iz.housing.haofiti.data.database.HouseTypeConvertors
+import iz.housing.haofiti.data.repository.AuthRepository
 import iz.housing.haofiti.data.repository.HouseRepository
 import javax.inject.Singleton
 
@@ -92,4 +93,20 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun providesDao(houseDatabase: HouseDatabase): HouseDao = houseDatabase.houseDao()
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AuthModule {
+
+    /**
+     * Provides a singleton instance of AuthRepository.
+     *
+     * @return The AuthRepository instance.
+     */
+    @Provides
+    @Singleton
+    fun provideAuthRepository(): AuthRepository {
+        return AuthRepository()
+    }
 }
