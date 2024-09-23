@@ -1,3 +1,6 @@
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -5,41 +8,51 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import iz.housing.haofiti.R
 import iz.housing.haofiti.viewmodels.AuthViewModel
+import com.facebook.login.LoginManager
+
+
 
 @Composable
-fun NoRippleClickable(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-): Modifier {
-    return modifier
-        .clickable(
-            onClick = onClick,
-            indication = null, // Disable ripple effect
-            interactionSource = remember { MutableInteractionSource() }
-        )
-}
+fun AuthScreen(viewModel: AuthViewModel,navController: NavController) {
+    val context = LocalContext.current as Activity
 
-@Composable
-fun AuthScreen(viewModel: AuthViewModel) {
-    var isSignUpMode by remember { mutableStateOf(false) } // Toggle state for sign in/sign up
+    val activityResultLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        viewModel.handleGoogleSignInResult(result.resultCode, result.data)
+    }
+
+
+    var isSignUpMode by remember { mutableStateOf(false) }
 
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+
+    val authError by viewModel.authError
+
+    val isAuthenticated by viewModel.isAuthenticated
+
+    // Check if the user is authenticated, and navigate to the Home screen
+    LaunchedEffect(isAuthenticated) {
+        if (isAuthenticated) {
+            navController.navigate("home_screen") {
+                popUpTo("auth_screen") { inclusive = true }
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -63,7 +76,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
             modifier = Modifier
                 .background(Color.LightGray, CircleShape)
                 .padding(4.dp)
-                .fillMaxWidth(0.6f),
+                .fillMaxWidth(),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -72,7 +85,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
             ) {
                 // Sign In Box
                 Box(
-                    modifier = NoRippleClickable(
+                    modifier = noRippleClickable(
                         onClick = { isSignUpMode = false },
                         modifier = Modifier
                             .weight(1f)
@@ -83,7 +96,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
                             )
                             .padding(8.dp)
                     ),
-                    contentAlignment = Alignment.Center // Fixed alignment inside the Box
+                    contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = "Sign In",
@@ -95,7 +108,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
 
                 // Sign Up Box
                 Box(
-                    modifier = NoRippleClickable(
+                    modifier = noRippleClickable(
                         onClick = { isSignUpMode = true },
                         modifier = Modifier
                             .weight(1f)
@@ -106,7 +119,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
                             )
                             .padding(8.dp)
                     ),
-                    contentAlignment = Alignment.Center // Fixed alignment inside the Box
+                    contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = "Sign Up",
@@ -192,12 +205,20 @@ fun AuthScreen(viewModel: AuthViewModel) {
             )
         }
 
+        if (authError != null) {
+            Text(
+                text = authError ?: "",
+                color = Color.Red,
+                style = MaterialTheme.typography.body2
+            )
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
                 if (isSignUpMode) {
-                    viewModel.signUp(name, email, password, confirmPassword)
+                   viewModel.signUp(name, email, password, confirmPassword)
                 } else {
                     viewModel.signIn(email, password)
                 }
@@ -242,7 +263,11 @@ fun AuthScreen(viewModel: AuthViewModel) {
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.padding(8.dp)
                 ) {
-                    IconButton(onClick = { /* Handle Google login */ }) {
+                    IconButton(onClick = {
+                        val googleSignInClient = viewModel.getGoogleSignInClient(context)
+                        val signInIntent = googleSignInClient.signInIntent
+                        activityResultLauncher.launch(signInIntent)
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.google),
                             contentDescription = "Google",
@@ -263,7 +288,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
                     style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
-                Spacer(modifier = Modifier.width(16.dp)) // Space after "Or" text
+                Spacer(modifier = Modifier.width(16.dp))
 
                 // Facebook Icon Button with Text
                 Row(
@@ -271,7 +296,10 @@ fun AuthScreen(viewModel: AuthViewModel) {
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.padding(8.dp)
                 ) {
-                    IconButton(onClick = { /* Handle Facebook login */ }) {
+                    IconButton(onClick = {
+                        viewModel.setupFacebookLogin(context)
+                        LoginManager.getInstance().logInWithReadPermissions(context, listOf("email", "public_profile"))
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.facebook),
                             contentDescription = "Facebook",
@@ -279,7 +307,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
                             modifier = Modifier.size(35.dp)
                         )
                     }
-                    Spacer(modifier = Modifier.width(4.dp)) // Space between icon and text
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = "Facebook",
                         style = MaterialTheme.typography.button
@@ -309,9 +337,18 @@ fun AuthScreen(viewModel: AuthViewModel) {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun AuthScreenPreview() {
-//    val viewModel = AuthViewModel()
-//    AuthScreen(viewModel = viewModel)
-//}
+
+@Composable
+fun noRippleClickable(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+): Modifier {
+    return modifier
+        .clickable(
+            onClick = onClick,
+            indication = null, // Disable ripple effect
+            interactionSource = remember { MutableInteractionSource() }
+        )
+}
+
+

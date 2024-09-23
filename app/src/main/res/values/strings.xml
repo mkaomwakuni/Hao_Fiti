@@ -20,4 +20,6 @@
     <string name="search_by_county">Search by County</string>
     <string name="clear">Clear</string>
     <string name="your_recent_searches">Your recent searches</string>
+    <string name="default_web_client_id">1057921618533-bqhq01qor97bvcdo511sokrp83ivn12t.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">2995840183904762</string>
 </resources>

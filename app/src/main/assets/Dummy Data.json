@@ -1,0 +1,1122 @@
+{
+  "housing": {
+        "Nairobi": [
+      {
+        "apartments": [
+          {
+            "agent": {
+              "name": "Alice Johnson",
+              "phone": "+254700000101"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 3-bedroom apartments in Kiambu with modern finishes and stunning views. Enjoy a comfortable living experience with easy access to local amenities and parks.",
+            "images": [
+              "https://philippinehousedesigns.com/wp-content/uploads/2020/03/PR-view-1-scaled.jpg"
+            ],
+            "latitude": -1.1466,
+            "location": "Kiambu, Nairobi",
+            "longitude": 36.9173,
+            "name": "Kiambu Luxury Apartments",
+            "price": 22000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Michael Smith",
+              "phone": "+254700000102"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Contemporary 2-bedroom apartments in Kiambu featuring modern amenities and a convenient location close to shopping and dining options.",
+            "images": [
+              "https://philippinehousedesigns.com/wp-content/uploads/2020/03/PR-view-1-scaled.jpg"
+            ],
+            "latitude": -1.147,
+            "location": "Kiambu, Nairobi",
+            "longitude": 36.915,
+            "name": "Kiambu Contemporary Apartments",
+            "price": 18000,
+            "rating": 4.4
+          },
+          {
+            "agent": {
+              "name": "James Brooks",
+              "phone": "+254700000120"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 3-bedroom apartments with modern finishes and convenient access to main roads. Ideal for families seeking a comfortable home.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3684,
+            "location": "Mlolongo, Nairobi",
+            "longitude": 37.2513,
+            "name": "Mlolongo Family Residences",
+            "price": 24000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Emma Davis",
+              "phone": "+254700000121"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 2-bedroom apartments in Mlolongo with stylish interiors and excellent amenities. Perfect for young professionals or small families.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.369,
+            "location": "Mlolongo, Nairobi",
+            "longitude": 37.2505,
+            "name": "Modern Mlolongo Apartments",
+            "price": 22000,
+            "rating": 4.5
+          },
+          {
+            "agent": {
+              "name": "Oliver Johnson",
+              "phone": "+254700000122"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Luxurious 4-bedroom apartments with high-end features and spacious living areas. Ideal for large families or those seeking more space.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3675,
+            "location": "Mlolongo, Nairobi",
+            "longitude": 37.252,
+            "name": "Lux Mlolongo Apartments",
+            "price": 30000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Sophia Lewis",
+              "phone": "+254700000123"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Charming 3-bedroom apartments with excellent security and access to amenities. A great choice for a modern lifestyle.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3692,
+            "location": "Mlolongo, Nairobi",
+            "longitude": 37.251,
+            "name": "Charming Mlolongo Apartments",
+            "price": 23000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Liam Walker",
+              "phone": "+254700000124"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 1,
+              "bedrooms": 1,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Compact 1-bedroom apartments with essential amenities. Suitable for individuals or couples seeking a comfortable, low-maintenance home.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.368,
+            "location": "Mlolongo, Nairobi",
+            "longitude": 37.25,
+            "name": "Compact Mlolongo Units",
+            "price": 18000,
+            "rating": 4.4
+          }
+        ]
+      },
+      {
+        "apartments": [
+          {
+            "agent": {
+              "name": "Chloe Miller",
+              "phone": "+254700000130"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Stylish 2-bedroom apartments in South C with a modern design and convenient location. Ideal for young professionals or small families.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.308,
+            "location": "South C, Nairobi",
+            "longitude": 36.8555,
+            "name": "South C Stylish Units",
+            "price": 22000,
+            "rating": 4.5
+          },
+          {
+            "agent": {
+              "name": "Mason Scott",
+              "phone": "+254700000131"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Comfortable 3-bedroom apartments in South C with modern amenities and ample space. Perfect for families seeking a convenient location.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.309,
+            "location": "South C, Nairobi",
+            "longitude": 36.856,
+            "name": "Comfort South C Residences",
+            "price": 24000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Ava Martinez",
+              "phone": "+254700000132"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 2-bedroom apartments in South C with sleek design and good connectivity. Ideal for city dwellers seeking convenience and style.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.31,
+            "location": "South C, Nairobi",
+            "longitude": 36.857,
+            "name": "Modern South C Living",
+            "price": 21000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Ethan Young",
+              "phone": "+254700000133"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 4-bedroom apartments with premium amenities and generous living space. Perfect for larger families or those needing extra room.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3075,
+            "location": "South C, Nairobi",
+            "longitude": 36.8545,
+            "name": "Spacious South C Apartments",
+            "price": 28000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Mia Thompson",
+              "phone": "+254700000134"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 1,
+              "bedrooms": 1,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Compact 1-bedroom apartments in South C, perfect for singles or couples. Offers essential amenities in a convenient location.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3085,
+            "location": "South C, Nairobi",
+            "longitude": 36.8565,
+            "name": "Compact South C Units",
+            "price": 20000,
+            "rating": 4.4
+          }
+        ],
+        "name": "South C"
+      },
+      {
+        "apartments": [
+          {
+            "agent": {
+              "name": "Noah Adams",
+              "phone": "+254700000140"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Elegant 3-bedroom apartments in Kileleshwa with contemporary design and excellent security. Ideal for families or professionals.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.292,
+            "location": "Kileleshwa, Nairobi",
+            "longitude": 36.799,
+            "name": "Kileleshwa Elegant Living",
+            "price": 25000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Zoe Harris",
+              "phone": "+254700000141"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 2-bedroom apartments in Kileleshwa with stylish interiors and a prime location. Great for those looking for urban convenience.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.293,
+            "location": "Kileleshwa, Nairobi",
+            "longitude": 36.8,
+            "name": "Modern Kileleshwa Apartments",
+            "price": 23000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Lucas Martinez",
+              "phone": "+254700000142"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 4-bedroom apartments with luxurious features and ample living space. Perfect for larger families or those needing extra room.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.2915,
+            "location": "Kileleshwa, Nairobi",
+            "longitude": 36.801,
+            "name": "Spacious Kileleshwa Homes",
+            "price": 29000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Emily Thompson",
+              "phone": "+254700000143"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 1,
+              "bedrooms": 1,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Compact 1-bedroom apartments with essential amenities and a great location. Ideal for singles or couples looking for convenience.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.2925,
+            "location": "Kileleshwa, Nairobi",
+            "longitude": 36.8005,
+            "name": "Compact Kileleshwa Units",
+            "price": 20000,
+            "rating": 4.4
+          },
+          {
+            "agent": {
+              "name": "Mason Green",
+              "phone": "+254700000144"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Charming 3-bedroom apartments in Kileleshwa with modern design and good security. Perfect for families seeking a comfortable home.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.2928,
+            "location": "Kileleshwa, Nairobi",
+            "longitude": 36.8015,
+            "name": "Charming Kileleshwa Apartments",
+            "price": 24000,
+            "rating": 4.6
+          }
+        ],
+        "name": "Kileleshwa"
+      },
+      {
+        "apartments": [
+          {
+            "agent": {
+              "name": "Lily Anderson",
+              "phone": "+254700000150"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Contemporary 2-bedroom apartments in Syokimau with sleek interiors and good security. Great for small families or professionals.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.365,
+            "location": "Syokimau, Nairobi",
+            "longitude": 36.8915,
+            "name": "Contemporary Syokimau Units",
+            "price": 23000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Ryan King",
+              "phone": "+254700000151"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 3-bedroom apartments in Syokimau with modern amenities and ample space. Ideal for families seeking a comfortable living environment.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3645,
+            "location": "Syokimau, Nairobi",
+            "longitude": 36.8905,
+            "name": "Spacious Syokimau Apartments",
+            "price": 25000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Olivia Clark",
+              "phone": "+254700000152"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 1,
+              "bedrooms": 1,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Compact 1-bedroom apartments in Syokimau offering essential amenities and a great location. Ideal for singles or couples.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.366,
+            "location": "Syokimau, Nairobi",
+            "longitude": 36.892,
+            "name": "Compact Syokimau Units",
+            "price": 20000,
+            "rating": 4.5
+          },
+          {
+            "agent": {
+              "name": "Ethan Adams",
+              "phone": "+254700000153"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Charming 2-bedroom apartments in Syokimau with a modern touch and excellent security. Suitable for small families or individuals.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3655,
+            "location": "Syokimau, Nairobi",
+            "longitude": 36.891,
+            "name": "Charming Syokimau Homes",
+            "price": 22000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Emma Carter",
+              "phone": "+254700000154"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Luxurious 4-bedroom apartments in Syokimau with high-end finishes and spacious interiors. Perfect for large families or those seeking upscale living.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.3665,
+            "location": "Syokimau, Nairobi",
+            "longitude": 36.8925,
+            "name": "Lux Syokimau Residences",
+            "price": 28000,
+            "rating": 4.8
+          }
+        ],
+        "name": "Syokimau"
+      },
+      {
+        "apartments": [
+          {
+            "agent": {
+              "name": "Grace Walker",
+              "phone": "+254700000160"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Beautiful 3-bedroom apartments in Lower Kabete with modern amenities and a serene environment. Perfect for families seeking tranquility.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.293,
+            "location": "Lower Kabete, Nairobi",
+            "longitude": 36.778,
+            "name": "Lower Kabete Serenity Apartments",
+            "price": 26000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Liam Smith",
+              "phone": "+254700000161"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 2-bedroom apartments in Lower Kabete with a stylish design and excellent amenities. Great for small families or young professionals.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.294,
+            "location": "Lower Kabete, Nairobi",
+            "longitude": 36.7775,
+            "name": "Modern Lower Kabete Units",
+            "price": 24000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Sophia Brown",
+              "phone": "+254700000162"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 1,
+              "bedrooms": 1,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Compact 1-bedroom apartments in Lower Kabete with essential amenities and a great location. Ideal for singles or couples.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.2925,
+            "location": "Lower Kabete, Nairobi",
+            "longitude": 36.776,
+            "name": "Compact Lower Kabete Units",
+            "price": 21000,
+            "rating": 4.5
+          },
+          {
+            "agent": {
+              "name": "Alexander Davis",
+              "phone": "+254700000163"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 4-bedroom apartments in Lower Kabete with upscale finishes and a serene environment. Ideal for large families seeking luxury and tranquility.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.2945,
+            "location": "Lower Kabete, Nairobi",
+            "longitude": 36.7785,
+            "name": "Lux Lower Kabete Homes",
+            "price": 29000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Sarah Lee",
+              "phone": "+254700000103"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Elegant 3-bedroom apartments in Kiambu offering a blend of comfort and luxury. Ideal for families with amenities that cater to modern living.",
+            "images": [
+              "https://philippinehousedesigns.com/wp-content/uploads/2020/03/PR-view-1-scaled.jpg"
+            ],
+            "latitude": -1.149,
+            "location": "Kiambu, Nairobi",
+            "longitude": 36.912,
+            "name": "Elegant Kiambu Residences",
+            "price": 21000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "James Brown",
+              "phone": "+254700000104"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 2-bedroom apartments in Kiambu with stylish interiors and convenient access to essential services. Perfect for young professionals.",
+            "images": [
+              "https://philippinehousedesigns.com/wp-content/uploads/2020/03/PR-view-1-scaled.jpg"
+            ],
+            "latitude": -1.145,
+            "location": "Kiambu, Nairobi",
+            "longitude": 36.918,
+            "name": "Modern Kiambu Apartments",
+            "price": 19000,
+            "rating": 4.5
+          },
+          {
+            "agent": {
+              "name": "Linda Taylor",
+              "phone": "+254700000105"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 4-bedroom family apartments in Kiambu with ample living space and high-end amenities. Perfect for larger families looking for comfort and convenience.",
+            "images": [
+              "https://philippinehousedesigns.com/wp-content/uploads/2020/03/PR-view-1-scaled.jpg"
+            ],
+            "latitude": -1.148,
+            "location": "Kiambu, Nairobi",
+            "longitude": 36.919,
+            "name": "Family-Friendly Kiambu Apartments",
+            "price": 24000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Robert Green",
+              "phone": "+254700000106"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Well-appointed 3-bedroom apartments in Kiambu with modern features and a relaxing environment. Enjoy a peaceful stay in a well-connected location.",
+            "images": [
+              "https://philippinehousedesigns.com/wp-content/uploads/2020/03/PR-view-1-scaled.jpg"
+            ],
+            "latitude": -1.1465,
+            "location": "Kiambu, Nairobi",
+            "longitude": 36.914,
+            "name": "Modern Kiambu Residences",
+            "price": 20000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Nina Moore",
+              "phone": "+254700000107"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 1,
+              "bedrooms": 1,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Comfortable 1-bedroom apartments in Mathare, offering easy access to public transport and local amenities. Ideal for individuals seeking a convenient living space.",
+            "images": [
+              "https://exclusive-venue.com/wp-content/uploads/2021/11/The-Paradise-Website-Gallery-6.jpeg"
+            ],
+            "latitude": -1.2966,
+            "location": "Mathare, Nairobi",
+            "longitude": 36.837,
+            "name": "Cozy Mathare Apartments",
+            "price": 12000,
+            "rating": 4.2
+          },
+          {
+            "agent": {
+              "name": "Tom Wilson",
+              "phone": "+254700000108"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Stylish 2-bedroom apartments in Mathare with modern amenities and a vibrant community atmosphere. Great for those who appreciate urban living.",
+            "images": [
+              "https://exclusive-venue.com/wp-content/uploads/2021/11/The-Paradise-Website-Gallery-6.jpeg"
+            ],
+            "latitude": -1.297,
+            "location": "Mathare, Nairobi",
+            "longitude": 36.835,
+            "name": "Stylish Mathare Residences",
+            "price": 15000,
+            "rating": 4.4
+          },
+          {
+            "agent": {
+              "name": "Emma Roberts",
+              "phone": "+254700000109"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Luxurious 3-bedroom apartments in Lavington with top-notch facilities and a serene environment. Ideal for families or individuals looking for high-quality living.",
+            "images": [
+              "https://www.hiranandaniparks.com/blog/wp-content/uploads/2023/11/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHg1OTk4MzAtaW1hZ2Uta3d5cDN0MmwuanBn.webp"
+            ],
+            "latitude": -1.2933,
+            "location": "Lavington, Nairobi",
+            "longitude": 36.795,
+            "name": "Lavington Luxury Apartments",
+            "price": 28000,
+            "rating": 4.9
+          },
+          {
+            "agent": {
+              "name": "Daniel Carter",
+              "phone": "+254700000110"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Elegant 2-bedroom apartments in Lavington with premium finishes and convenient access to shopping and dining. Perfect for urban professionals.",
+            "images": [
+              "https://www.hiranandaniparks.com/blog/wp-content/uploads/2023/11/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHg1OTk4MzAtaW1hZ2Uta3d5cDN0MmwuanBn.webp"
+            ],
+            "latitude": -1.295,
+            "location": "Lavington, Nairobi",
+            "longitude": 36.796,
+            "name": "Elegant Lavington Apartments",
+            "price": 25000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Sophia Turner",
+              "phone": "+254700000111"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Stylish 3-bedroom apartments in Lavington offering modern amenities and a peaceful environment. Ideal for families seeking comfort and convenience.",
+            "images": [
+              "https://www.hiranandaniparks.com/blog/wp-content/uploads/2023/11/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHg1OTk4MzAtaW1hZ2Uta3d5cDN0MmwuanBn.webp"
+            ],
+            "latitude": -1.294,
+            "location": "Lavington, Nairobi",
+            "longitude": 36.794,
+            "name": "Stylish Lavington Residences",
+            "price": 26000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Liam Scott",
+              "phone": "+254700000112"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 4-bedroom apartments in Lavington with luxurious features and a prime location. Perfect for those looking for ample space and high-quality living.",
+            "images": [
+              "https://www.hiranandaniparks.com/blog/wp-content/uploads/2023/11/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHg1OTk4MzAtaW1hZ2Uta3d5cDN0MmwuanBn.webp"
+            ],
+            "latitude": -1.296,
+            "location": "Lavington, Nairobi",
+            "longitude": 36.797,
+            "name": "Lavington Family Apartments",
+            "price": 29000,
+            "rating": 4.9
+          },
+          {
+            "agent": {
+              "name": "Olivia White",
+              "phone": "+254700000113"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 3-bedroom apartments in Lavington with sleek designs and all the necessary amenities. Ideal for those who appreciate contemporary living.",
+            "images": [
+              "https://www.hiranandaniparks.com/blog/wp-content/uploads/2023/11/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHg1OTk4MzAtaW1hZ2Uta3d5cDN0MmwuanBn.webp"
+            ],
+            "latitude": -1.292,
+            "location": "Lavington, Nairobi",
+            "longitude": 36.798,
+            "name": "Contemporary Lavington Apartments",
+            "price": 27000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Ethan Harris",
+              "phone": "+254700000114"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Elegant 3-bedroom apartments in Westlands with high-end features and a convenient location. Perfect for those who enjoy city living with a touch of luxury.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.28,
+            "location": "Westlands, Nairobi",
+            "longitude": 36.806,
+            "name": "Westlands Elegant Apartments",
+            "price": 26000,
+            "rating": 4.7
+          },
+          {
+            "agent": {
+              "name": "Ava King",
+              "phone": "+254700000115"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 3,
+              "bedrooms": 4,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Spacious 4-bedroom apartments in Westlands offering modern amenities and a vibrant neighborhood. Ideal for families or groups looking for a comfortable and stylish home.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.281,
+            "location": "Westlands, Nairobi",
+            "longitude": 36.807,
+            "name": "Spacious Westlands Residences",
+            "price": 28000,
+            "rating": 4.8
+          },
+          {
+            "agent": {
+              "name": "Mia Adams",
+              "phone": "+254700000116"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Chic 3-bedroom apartments in Westlands with modern decor and prime location. Enjoy the convenience of nearby amenities and a lively neighborhood.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.279,
+            "location": "Westlands, Nairobi",
+            "longitude": 36.808,
+            "name": "Chic Westlands Apartments",
+            "price": 25000,
+            "rating": 4.6
+          },
+          {
+            "agent": {
+              "name": "Noah Wright",
+              "phone": "+254700000117"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 2,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Modern 2-bedroom apartments in Westlands with elegant interiors and great city views. Ideal for professionals or small families seeking a stylish residence.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.278,
+            "location": "Westlands, Nairobi",
+            "longitude": 36.805,
+            "name": "Modern Westlands Residences",
+            "price": 23000,
+            "rating": 4.5
+          },
+          {
+            "agent": {
+              "name": "Isabella Miller",
+              "phone": "+254700000118"
+            },
+            "amenities": {
+              "ac": true,
+              "bathrooms": 2,
+              "bedrooms": 3,
+              "hotshowers": true,
+              "netflix": true,
+              "parking": true,
+              "security": true,
+              "wifi": true
+            },
+            "description": "Luxury 3-bedroom apartments in Westlands with high-end features and a convenient location. Enjoy upscale living with easy access to the best of Nairobi.",
+            "images": [
+              "https://i0.wp.com/samhouseplans.com/wp-content/uploads/2023/02/26x36-Feet-House-Plans-8x11-Meter-2-Beds-2-Baths-Terrace-Roof-PDF-Full-Plan-1.jpg?fit=1920%2C1080&ssl=1"
+            ],
+            "latitude": -1.282,
+            "location": "Westlands, Nairobi",
+            "longitude": 36.809,
+            "name": "Westlands Luxury Apartments",
+            "price": 29000,
+            "rating": 4.9
+          }
+        ],
+        "name": "Lower Kabete"
+      }
+    ]
+  }
+}

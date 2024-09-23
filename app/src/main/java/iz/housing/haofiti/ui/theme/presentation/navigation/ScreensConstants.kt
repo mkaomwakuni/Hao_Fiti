@@ -1,6 +1,7 @@
 package iz.housing.haofiti.ui.theme.presentation.navigation
 
 object ScreensConstants {
+    const val AUTH_SCREEN = "auth_screen"
     const val CHAT_SCREEN = "contactform"
     const val SAVED_SCREEN = "bookmarks_screen"
     const val HOME_SCREEN = "home_screen"

@@ -53,6 +53,8 @@ android {
 
 dependencies {
     implementation(libs.firebase.database.ktx)
+    implementation libs.firebase.auth.ktx
+    implementation libs.firebase.firestore.ktx
     def roomVersion = "2.6.1"
 
     implementation(libs.kotlin.stdlib.jdk8)
@@ -101,6 +103,14 @@ dependencies {
     implementation(libs.hilt.android.v244)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    //google
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.auth
+    implementation libs.play.services.auth
+
+    // Facebook SDK
+    implementation libs.facebook.login
 }
 kapt {
     correctErrorTypes = true

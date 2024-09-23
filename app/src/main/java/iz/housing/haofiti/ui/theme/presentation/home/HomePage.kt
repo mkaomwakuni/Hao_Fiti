@@ -201,11 +201,11 @@ fun SearchBarHome(
 }
 @Composable
 fun TextSection(text: String) {
-        Text(
-            text = text,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
-        )
+    Text(
+        text = text,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold
+    )
 }
 @Composable
 fun LoadingEffect(modifier: Modifier = Modifier) {

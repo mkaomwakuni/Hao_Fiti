@@ -1,5 +1,6 @@
 package iz.housing.haofiti.ui.theme.presentation.navigation
 
+import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.AUTH_SCREEN
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.EXPLORE_SCREEN
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.HOME_SCREEN
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.MAPS_SCREEN
@@ -8,6 +9,7 @@ import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.SAVE
 import iz.housing.haofiti.ui.theme.presentation.navigation.ScreensConstants.SEARCH_SCREEN
 
 sealed class Route (val route: String) {
+    data object Auth: Route(AUTH_SCREEN)
     data object Bookmarks : Route(SAVED_SCREEN)
     data object Home : Route(HOME_SCREEN)
     data object Maps : Route(MAPS_SCREEN)
