@@ -23,16 +23,29 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="API KEY" />
+
+        <!-- facebook api id -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.HaoFy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--Facebook-->
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            tools:replace="android:configChanges" />
+
+
     </application>
 
 </manifest>

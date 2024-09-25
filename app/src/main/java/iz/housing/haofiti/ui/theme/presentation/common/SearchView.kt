@@ -102,14 +102,14 @@ fun SearchScreen(navController: NavController) {
                             title = stringResource(R.string.draw_on_map),
                             icon = painterResource(id = R.drawable.bed),
                             modifier = Modifier.weight(1f),
-                          //  onCardClicked = {}
+                            //  onCardClicked = {}
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         SearchOptionCard(
                             title = stringResource(R.string.search_by_county),
                             icon = painterResource(id = R.drawable.bedroom),
                             modifier = Modifier.weight(1f),
-                           // onCardClicked = {}
+                            // onCardClicked = {}
                         )
                     }
                 }

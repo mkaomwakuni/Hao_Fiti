@@ -1,11 +1,14 @@
 package iz.housing.haofiti.ui.theme.presentation.navigation
 
+import AuthScreen
+import android.app.Activity
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -20,12 +23,24 @@ import iz.housing.haofiti.ui.theme.presentation.explorer.Discovery
 import iz.housing.haofiti.ui.theme.presentation.home.HomePage
 import iz.housing.haofiti.ui.theme.presentation.maps.MapFocused
 import iz.housing.haofiti.ui.theme.presentation.profile.SettingsScreen
+import iz.housing.haofiti.viewmodels.AuthViewModel
 import iz.housing.haofiti.viewmodels.HouseViewModel
 
 @Composable
 fun HouseNavGraph(navController: NavHostController) {
     val houseViewModel: HouseViewModel = hiltViewModel()
-    NavHost(navController = navController, startDestination = Route.Home.route) {
+    val authViewModel: AuthViewModel = hiltViewModel()
+
+    NavHost(navController = navController, startDestination = Route.Auth.route) {
+        composable(
+            enterTransition = { fadeIn(animationSpec = tween(1000)) },
+            exitTransition = { fadeOut(animationSpec = tween(1000)) },
+            route = Route.Auth.route) {
+            AuthScreen(
+                navController = navController,
+                viewModel = authViewModel
+            )
+        }
         composable(
             enterTransition = { fadeIn(animationSpec = tween(1000)) },
             exitTransition = { fadeOut(animationSpec = tween(1000)) },

@@ -219,8 +219,8 @@ fun ImageCarousel(propertyItem: PropertyItem,onFavoriteClick: (PropertyItem) -> 
         )
         Column (
             modifier = Modifier
-            .fillMaxWidth()
-            .padding(end = 16.dp, top = 180.dp),
+                .fillMaxWidth()
+                .padding(end = 16.dp, top = 180.dp),
             verticalArrangement = Arrangement.Bottom){
             Row(
                 modifier = Modifier
@@ -470,8 +470,8 @@ fun AgentDetails(propertyItem: PropertyItem,context: Context,navController: NavC
                     context.startActivity(intent)
                 },
                 modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.primary,
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primary,
                         shape = RoundedCornerShape(10.dp))
             ) {
                 Icon(
@@ -490,7 +490,7 @@ fun AgentDetails(propertyItem: PropertyItem,context: Context,navController: NavC
             Spacer(Modifier.height(8.dp))
             TextButton(
                 onClick = {
-                navController.navigate(Route.Message.route)
+                    navController.navigate(Route.Message.route)
                 },
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(10.dp))
