@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.firebase.database.ktx)
     implementation libs.firebase.auth.ktx
     implementation libs.firebase.firestore.ktx
+    implementation libs.firebase.database
     def roomVersion = "2.6.1"
 
     implementation(libs.kotlin.stdlib.jdk8)

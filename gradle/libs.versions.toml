@@ -33,6 +33,7 @@ volley = "1.2.1"
 firebaseDatabaseKtx = "21.0.0"
 firebaseAuthKtx = "23.0.0"
 firebaseFirestoreKtx = "25.1.0"
+firebaseDatabase = "21.0.0"
 
 
 [libraries]
@@ -79,6 +80,7 @@ volley = { module = "com.android.volley:volley", version.ref = "volley" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
