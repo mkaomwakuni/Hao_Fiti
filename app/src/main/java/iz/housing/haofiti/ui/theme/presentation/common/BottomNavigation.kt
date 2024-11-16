@@ -56,17 +56,6 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(modifier = Modifier.size(20.dp), painter = painterResource(id = R.drawable.navigationicon), contentDescription = "Explore") },
-            selected = currentRoute == "explore_screen",
-            onClick = {
-                navController.navigate("explore_screen") {
-                    popUpTo(navController.graph.startDestinationId) { saveState = true }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-            }
-        )
-        NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Bookmarks") },
             selected = currentRoute == "bookmarks_screen",
             onClick = {
