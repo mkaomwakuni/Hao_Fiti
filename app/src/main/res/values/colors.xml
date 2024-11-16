@@ -14,4 +14,6 @@
     <color name="white">#FFFFFF</color>      <!-- White -->
 <!-- Add more colors as needed -->
     <color name="bar">#00FFFFFF</color>
+    <color name="ocean_blue">#0077BE</color>
+    <color name="verified">#FF4CAF50</color>
 </resources>

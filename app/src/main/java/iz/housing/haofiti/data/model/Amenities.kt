@@ -8,5 +8,11 @@ data class Amenities(
     val parking: Boolean? = null,
     val netflix: Boolean? = null,
     val security: Boolean? = null,
-    val hotshowers: Boolean? = null
+    val coveredArea: Int? = 0,
+    val condition: String? = "",
+    val floor: Int? = 0,
+    val yoc:Int? = 0,
+    val plotArea:Int? = 0,
+    val furnished: String ="",
+    val verandaCovered: Int? = 0
 )
