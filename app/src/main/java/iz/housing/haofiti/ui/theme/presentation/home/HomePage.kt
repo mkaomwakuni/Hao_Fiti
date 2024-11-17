@@ -119,8 +119,9 @@ fun HomePage(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
                         text = "$currentLocation",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                            color = Color.Gray
                         )
                     }
                     Spacer(modifier = Modifier.height(16.dp))
@@ -202,7 +203,11 @@ fun SearchBarHome(navController: NavController) {
             .clickable { navController.navigate(Route.Search.route) },
         placeholder = { Text(stringResource(R.string.label)) },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-        colors = TextFieldDefaults.colors(focusedIndicatorColor = Color.Transparent),
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
         shape = RoundedCornerShape(8.dp),
         enabled = false
     )

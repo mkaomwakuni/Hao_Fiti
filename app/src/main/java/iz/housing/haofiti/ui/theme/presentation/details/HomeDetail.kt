@@ -2,7 +2,6 @@ package iz.housing.haofiti.ui.theme.presentation.details
 
 import android.content.Context
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -18,12 +17,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
@@ -33,10 +33,8 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.TextButton
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -59,7 +57,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.input.key.Key.Companion.I
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -318,7 +315,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                 overflow = TextOverflow.Clip,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = if (expanded) 10.dp else 0.dp)
+                    .padding(bottom = if (expanded) 30.dp else 0.dp)
             )
 
             if (!expanded) {
@@ -341,7 +338,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                     modifier = Modifier
                         .clickable { expanded = true }
                         .align(Alignment.BottomCenter)
-                        .padding(top = 30.dp)
+                        .padding(top = 80.dp)
                 )
             } else {
                 Text(
@@ -351,7 +348,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                     modifier = Modifier
                         .clickable { expanded = false }
                         .align(Alignment.BottomCenter)
-                        .padding(top = 2.dp)
+                        .padding(top = 10.dp)
                 )
             }
         }
@@ -544,16 +541,6 @@ fun AgentDetails(propertyItem: PropertyItem,context: Context,navController: NavC
                         contentDescription = "Image",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.FillBounds
-                    )
-                }
-
-                // Agent Name
-                propertyItem.agent?.name?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.labelLarge,
-                        color = Color.LightGray,
-                        modifier = Modifier.padding(top = 16.dp)
                     )
                 }
 

@@ -63,26 +63,30 @@ fun PropertyCardHorizontal(property: PropertyItem, onItemClick: () -> Unit) {
             }
             Column(modifier = Modifier.padding(8.dp)) {
                 Text(text = property.type.toString().toSentenceCase())
-                Text(
-                    text = "Ksh ${property.price}"
+                Text(text = "Ksh ${property.price}",
+                    color = Color.Gray
                     )
 
                 // Display amenities (bedrooms, bathrooms, etc.)
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = "${property.amenities?.bedrooms} beds ",
+                        color = Color.DarkGray
                     )
                     VerticalDivider(modifier = Modifier.height(16.dp))
                     Text(
-                        text = " ${property.amenities?.bathrooms} baths "
+                        text = " ${property.amenities?.bathrooms} baths ",
+                        color = Color.DarkGray
                     )
                     VerticalDivider(modifier = Modifier.height(16.dp))
                     Text(
-                        text = " ${property.amenities?.bathrooms} baths "
+                        text = " ${property.amenities?.bathrooms} baths ",
+                        color = Color.DarkGray
                     )
                 }
                 Text(
                     text = "${property.location},Kenya",
+                    color = Color.Gray
                 )
             }
         }
