@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import iz.housing.haofiti.data.ThemePreferencesManager
 import iz.housing.haofiti.data.model.HouseStates
 import iz.housing.haofiti.data.model.PropertyItem
 import iz.housing.haofiti.data.model.PropertyType
@@ -12,17 +13,25 @@ import iz.housing.haofiti.data.service.HouseEvent
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HouseViewModel @Inject constructor(private val repository: HouseRepository) : ViewModel() {
+class HouseViewModel @Inject constructor(
+    private val repository: HouseRepository,
+    private val themePreferencesManager: ThemePreferencesManager
+) : ViewModel() {
+
+    val isDarkMode = themePreferencesManager.isDarkMode
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     private var _uiState = MutableStateFlow(HouseStates())
     val uiState: StateFlow<HouseStates> = _uiState.asStateFlow()
@@ -38,6 +47,12 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
     init {
         loadSavedProperties()
         loadInitialData()
+    }
+
+    fun toggleDarkMode(enabled: Boolean) {
+        viewModelScope.launch {
+            themePreferencesManager.setDarkMode(enabled)
+        }
     }
 
     fun fetchCurrentLocation(context: Context) {
@@ -119,11 +134,9 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
             if (saveProperty.isSaved) {
                 repository.insertHomes(saveProperty)
                 loadSavedProperties()
-                Log.d("HouseViewModel", " bookmarked: ${saveProperty.name}")
             } else {
                 repository.deleteHome(saveProperty)
                 loadSavedProperties()
-                Log.d("HouseViewModel", " removed: ${saveProperty.name}")
             }
         }
     }

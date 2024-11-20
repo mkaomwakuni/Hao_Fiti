@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "iz.housing.haofiti"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -94,6 +94,9 @@ dependencies {
     implementation(libs.androidx.room.ktx.v261)
     kapt("androidx.room:room-compiler:$roomVersion")
     testImplementation(libs.androidx.room.testing.v261)
+
+    //preference store
+    implementation (libs.androidx.datastore.preferences)
 
     // Retrofit
     implementation(libs.retrofit)

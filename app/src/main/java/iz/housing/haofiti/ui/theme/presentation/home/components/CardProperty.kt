@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import iz.housing.haofiti.data.model.PropertyItem
+import kotlin.random.Random
 
 @Composable
-fun CardProperty(propertyItem: PropertyItem,onItemClick: () -> Unit) {
-
+fun CardProperty(propertyItem: PropertyItem, onItemClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -48,7 +47,7 @@ fun CardProperty(propertyItem: PropertyItem,onItemClick: () -> Unit) {
                 )
         ) {
             AsyncImage(
-                model =  propertyItem.images.firstOrNull(),
+                model = propertyItem.images.firstOrNull(),
                 contentDescription = propertyItem.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -61,8 +60,8 @@ fun CardProperty(propertyItem: PropertyItem,onItemClick: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ChipSource(
-                    text = "${propertyItem.price/1000}K",
-                    backgroundColor = MaterialTheme.colorScheme.inverseOnSurface,
+                    text = "${propertyItem.price / 1000}K",
+                    backgroundColor = Color.White,
                     textColor = Color.Black
                 )
 
@@ -70,7 +69,7 @@ fun CardProperty(propertyItem: PropertyItem,onItemClick: () -> Unit) {
 
                 ChipSource(
                     text = propertyItem.type.name,
-                    backgroundColor = MaterialTheme.colorScheme.primary,
+                    backgroundColor = randomColor(),
                     textColor = Color.White
                 )
             }
@@ -119,4 +118,16 @@ fun ChipSource(
             textAlign = TextAlign.Center
         )
     }
+}
+
+// Helper function to generate random colors
+@Composable
+fun randomColor(): Color {
+    val random = Random(System.currentTimeMillis())
+    return Color(
+        red = random.nextFloat(),
+        green = random.nextFloat(),
+        blue = random.nextFloat(),
+        alpha = 1f
+    )
 }

@@ -26,17 +26,26 @@ import iz.housing.haofiti.ui.theme.presentation.navigation.Route
 fun MapExplorer(
     navController: NavController,
     properties: List<PropertyItem>,
-    onEvent: (HouseEvent) -> Unit){
-    // State to keep track of the currently selected property
+    onEvent: (HouseEvent) -> Unit
+) {
     var selectedProperty by remember { mutableStateOf<PropertyItem?>(null) }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Display the Google Map with property markers
-        GoogleMapView(properties) { property ->
-            selectedProperty = property
-        }
+        // Pass selected property to GoogleMapView to handle marker states
+        GoogleMapView(
+            properties = properties,
+            selectedProperty = selectedProperty,
+            onMarkerClick = { property ->
+                // Toggle selection: if clicking same property, deselect it
+                selectedProperty = if (selectedProperty?.id == property.id) {
+                    null
+                } else {
+                    property
+                }
+            }
+        )
 
-        // Display a property card for the selected property
+        // Display property card for selected property
         selectedProperty?.let { property ->
             Box(
                 modifier = Modifier

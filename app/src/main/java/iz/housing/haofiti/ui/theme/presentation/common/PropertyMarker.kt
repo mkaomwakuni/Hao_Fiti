@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat
 
 
 fun createChipBitmap(context: Context, amount: Int): Bitmap {
-    // Create a DrawableEuroChip (a custom drawable that mimics the EuroChip composable)
     val drawable = DrawableEuroChip(context, amount)
     val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
     val canvas = android.graphics.Canvas(bitmap)
@@ -15,7 +14,6 @@ fun createChipBitmap(context: Context, amount: Int): Bitmap {
     return bitmap
 }
 
-// Implement DrawableEuroChip as a custom Drawable
 class DrawableEuroChip(context: Context, amount: Int) : android.graphics.drawable.Drawable() {
     private val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG)
     private val textPaint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG)
@@ -23,6 +21,7 @@ class DrawableEuroChip(context: Context, amount: Int) : android.graphics.drawabl
     private val text = "Ksh ${amount}K"
     private val blueColor = ContextCompat.getColor(context, android.R.color.holo_blue_light)
     private val whiteColor = android.graphics.Color.WHITE
+    private val blackColor = android.graphics.Color.BLACK
     private var isClicked = false
 
     init {
@@ -36,7 +35,7 @@ class DrawableEuroChip(context: Context, amount: Int) : android.graphics.drawabl
     private fun updateColors() {
         if (isClicked) {
             paint.color = whiteColor
-            textPaint.color = blueColor
+            textPaint.color = blackColor
             borderPaint.color = blueColor
         } else {
             paint.color = blueColor
@@ -88,7 +87,9 @@ class DrawableEuroChip(context: Context, amount: Int) : android.graphics.drawabl
         borderPaint.colorFilter = colorFilter
     }
 
-    @Deprecated("Deprecated in Java")
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("android.graphics.PixelFormat.TRANSLUCENT", "android")
+    )
     override fun getOpacity(): Int = android.graphics.PixelFormat.TRANSLUCENT
     override fun getIntrinsicWidth(): Int = 140
     override fun getIntrinsicHeight(): Int = 80

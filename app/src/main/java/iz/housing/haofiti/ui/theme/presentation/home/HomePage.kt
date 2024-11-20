@@ -33,6 +33,8 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -48,6 +50,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -92,6 +95,7 @@ fun HomePage(
     val uiState by viewModel.uiState.collectAsState()
     val currentLocation = uiState.currentLocation
     val locationPermissionState = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
+    val isDarkMode by viewModel.isDarkMode.collectAsState(initial = false)
 
     LaunchedEffect(Unit) {
         if (locationPermissionState.status.isGranted) {
@@ -106,7 +110,6 @@ fun HomePage(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(Color.White)
         ) {
             item {
                 Column(
@@ -173,9 +176,46 @@ fun HomePage(
                     TownsAndCities()
                 }
             }
+            item {
+                // Switch Toggle at the Bottom
+                    ThemeToggle(
+                        isDarkMode = isDarkMode,
+                        onToggle = { enabled ->
+                            viewModel.toggleDarkMode(enabled)
+                        }
+                    )
+                }
         }
     }
 }
+
+@Composable
+fun ThemeToggle(isDarkMode: Boolean, onToggle: (Boolean) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Switch(
+            checked = isDarkMode,
+            onCheckedChange = onToggle,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color.White,
+                uncheckedThumbColor = Color.White,
+                checkedTrackColor = Color.Gray,
+                uncheckedTrackColor = Color.LightGray
+            ),
+            modifier = Modifier
+                .size(width = 20.dp, height = 10.dp)
+                .clip(RoundedCornerShape(0.dp))
+                .background(color = Color.Transparent, shape = RectangleShape)
+        )
+    }
+}
+
+
 
 @Composable
 fun GreetingText() {
@@ -198,7 +238,6 @@ fun SearchBarHome(navController: NavController) {
         onValueChange = {},
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
             .border(1.dp, Color.LightGray, RoundedCornerShape(8.dp))
             .clickable { navController.navigate(Route.Search.route) },
         placeholder = { Text(stringResource(R.string.label)) },
@@ -234,7 +273,7 @@ fun SectionSubTitle(text: String) {
 @Composable
 fun LoadingEffect(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxWidth().wrapContentHeight()) {
-        repeat(3) {
+        repeat(5) {
             CardShimmerEffect(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp))
         }
     }
@@ -341,7 +380,8 @@ fun LocationItem(
             animationTriggered -> 1.1f
             else -> 1f
         },
-        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow)
+        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow),
+        label = ""
     )
 
     Column(

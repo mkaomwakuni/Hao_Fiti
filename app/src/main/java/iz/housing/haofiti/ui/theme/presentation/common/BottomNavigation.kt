@@ -1,6 +1,5 @@
 package iz.housing.haofiti.ui.theme.presentation.common
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,6 +10,7 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
@@ -18,7 +18,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -36,10 +35,10 @@ fun BottomNavComponent(navController: NavController) {
             .padding(bottom = 16.dp, start = 16.dp, end = 16.dp)
             .height(64.dp)
             .clip(RoundedCornerShape(20.dp))
-            .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
-            .background(Color.White.copy(alpha = 0.95f)),
-        containerColor = Color.Transparent,
-        tonalElevation = 0.dp
+            .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp)),
+        tonalElevation = 5.dp,
+        containerColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
         NavigationBarItem(
             icon = { Icon(imageVector = Icons.Outlined.Home, contentDescription = "Home") },
@@ -53,10 +52,10 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Bookmarks") },
-            selected = currentRoute == "bookmarks_screen",
+            icon = { Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Maps") },
+            selected = currentRoute == "maps_screen",
             onClick = {
-                navController.navigate("bookmarks_screen") {
+                navController.navigate("maps_screen") {
                     popUpTo(navController.graph.startDestinationId) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
@@ -64,10 +63,10 @@ fun BottomNavComponent(navController: NavController) {
             }
         )
         NavigationBarItem(
-            icon = { Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Maps") },
-            selected = currentRoute == "maps_screen",
+            icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Bookmarks") },
+            selected = currentRoute == "bookmarks_screen",
             onClick = {
-                navController.navigate("maps_screen") {
+                navController.navigate("bookmarks_screen") {
                     popUpTo(navController.graph.startDestinationId) { saveState = true }
                     launchSingleTop = true
                     restoreState = true

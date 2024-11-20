@@ -8,8 +8,7 @@ coilCompose = "2.6.0"
 composeBomVersion = "2024.05.00"
 converterGson = "2.9.0"
 coreKtxVersion = "1.10.1"
-facebookLogin = "12.3.0"
-firebaseBom = "33.3.0"
+datastorePreferences = "1.1.1"
 hiltAndroidVersion = "2.51"
 hiltCompiler = "1.2.0"
 kotlin = "1.9.0"
@@ -24,16 +23,12 @@ mapsCompose = "2.11.4"
 material = "1.6.7"
 navigationComposeVersion = "2.7.0-beta02"
 places = "3.5.0"
-playServicesAuth = "21.2.0"
 playServicesMapsVersion = "18.1.0"
 retrofit = "2.9.0"
 roomVersion = "2.6.1"
 googleGmsGoogleServicesVersion = "4.4.2"
 volley = "1.2.1"
 firebaseDatabaseKtx = "21.0.0"
-firebaseAuthKtx = "23.0.0"
-firebaseFirestoreKtx = "25.1.0"
-firebaseDatabase = "21.0.0"
 
 
 [libraries]
@@ -44,6 +39,7 @@ androidx-activity-compose-v172 = { module = "androidx.activity:activity-compose"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-compose-bom-v20240500 = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
 androidx-core-ktx-v1101 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompiler" }
 androidx-lifecycle-runtime-ktx-v261 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
@@ -53,9 +49,6 @@ androidx-room-runtime-v261 = { module = "androidx.room:room-runtime", version.re
 androidx-room-testing-v261 = { module = "androidx.room:room-testing", version.ref = "roomVersion" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
-facebook-login = { module = "com.facebook.android:facebook-login", version.ref = "facebookLogin" }
-firebase-auth = { module = "com.google.firebase:firebase-auth" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidVersion" }
 hilt-android-v244 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -67,7 +60,6 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
 material3 = { module = "androidx.compose.material3:material3" }
 places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-maps-v1810 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 ui = { module = "androidx.compose.ui:ui" }
@@ -78,9 +70,6 @@ ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
-firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
-firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
-firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
