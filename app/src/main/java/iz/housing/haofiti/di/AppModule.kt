@@ -1,13 +1,16 @@
-package iz.housing.haofiti.data.di
+package iz.housing.haofiti.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import iz.housing.haofiti.data.ThemePreferencesManager
 import iz.housing.haofiti.data.database.HouseDao
 import iz.housing.haofiti.data.database.HouseDatabase
 import iz.housing.haofiti.data.database.HouseRepositoryImpl
@@ -92,4 +95,16 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun providesDao(houseDatabase: HouseDatabase): HouseDao = houseDatabase.houseDao()
+
+    //Settings Module
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object AppSettings {
+
+        @Provides
+        @Singleton
+        fun provideThemePreferencesManager(@ApplicationContext context: Context): ThemePreferencesManager {
+            return ThemePreferencesManager(context)
+        }
+    }
 }
