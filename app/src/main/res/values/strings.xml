@@ -10,8 +10,10 @@
     <string name="maps">Maps</string>
     <string name="Profile">Profile</string>
     <string name="label">Search any city, area, landmark…</string>
-    <string name="recommendations">Our Recommendations</string>
-    <string name="previously">Previously Viewed</string>
+    <string name="recommendations">Latest real estates for sale</string>
+    <string name="Trends">Trending Locations</string>
+    <string name="previously">Latest real estates to rent</string>
+    <string name="subCity">Discover More</string>
     <string name="locality">Enter Town, area or county</string>
     <string name="Favourites">Listings Saved</string>
     <string name="Delete">Delete\n</string>

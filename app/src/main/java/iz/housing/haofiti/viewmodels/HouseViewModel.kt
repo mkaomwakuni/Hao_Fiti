@@ -1,5 +1,5 @@
 package iz.housing.haofiti.viewmodels
-
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,14 +27,39 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
     private var _uiState = MutableStateFlow(HouseStates())
     val uiState: StateFlow<HouseStates> = _uiState.asStateFlow()
 
+    private val _locationName = MutableStateFlow("Urban")
+    val locationName: StateFlow<String> = _locationName.asStateFlow()
+
     private val _savedPropertyListings = MutableStateFlow<List<PropertyItem>>(emptyList())
     val savedPropertyListings: StateFlow<List<PropertyItem>> = _savedPropertyListings.asStateFlow()
+
     private var searchJob: Job? = null
 
     init {
         loadSavedProperties()
         loadInitialData()
     }
+
+    fun fetchCurrentLocation(context: Context) {
+        viewModelScope.launch {
+            val locationResult = repository.getCurrentLocation(context)
+            Log.d("HouseViewModel", "Location Result: $locationResult")
+
+            if (locationResult is ResponseUtil.Success) {
+                _locationName.value = locationResult.data.toString()
+                _uiState.update {
+                    it.copy(currentLocation = _locationName.value)
+                }
+                Log.d("HouseViewModel", "Updated Location Name: ${_locationName.value}")
+            } else {
+                _locationName.value = "Urban"
+                _uiState.update { it.copy(currentLocation = "Urban") }
+                Log.e("HouseViewModel", "Error fetching location: ${locationResult.message}")
+            }
+        }
+    }
+
+
 
     private fun loadInitialData() {
         viewModelScope.launch {
@@ -46,7 +71,7 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
                         _uiState.update {
                             it.copy(
                                 properties = properties,
-                                filteredProperties = properties,  // Initially, all properties are shown
+                                filteredProperties = properties,
                                 isLoading = false
                             )
                         }
@@ -93,11 +118,11 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
             val saveProperty = property.copy(isSaved = !property.isSaved)
             if (saveProperty.isSaved) {
                 repository.insertHomes(saveProperty)
-                loadSavedProperties()  // Ensure the saved properties are reloaded
+                loadSavedProperties()
                 Log.d("HouseViewModel", " bookmarked: ${saveProperty.name}")
             } else {
                 repository.deleteHome(saveProperty)
-                loadSavedProperties()  // Ensure the saved properties are reloaded
+                loadSavedProperties()
                 Log.d("HouseViewModel", " removed: ${saveProperty.name}")
             }
         }
@@ -105,7 +130,7 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
 
     private fun loadSavedProperties() {
         viewModelScope.launch {
-            when(val result = repository.getSavedHomes()){
+            when (val result = repository.getSavedHomes()) {
                 is ResponseUtil.Success -> {
                     result.data?.let {
                         _savedPropertyListings.value = it
@@ -122,8 +147,8 @@ class HouseViewModel @Inject constructor(private val repository: HouseRepository
         return uiState.value.properties.filter { it.type == type }
     }
 
-    fun getPropertyById(id: Int): PropertyItem? {
-        return uiState.value.properties.find { it.id == id }
+    fun getPropertyById(id: String): PropertyItem? {
+        return uiState.value.properties.find { it.name == id }
     }
 
     fun onEvent(event: HouseEvent) {

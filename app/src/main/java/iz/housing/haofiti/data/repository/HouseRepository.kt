@@ -1,5 +1,6 @@
 package iz.housing.haofiti.data.repository
 
+import android.content.Context
 import iz.housing.haofiti.data.model.PropertyItem
 import iz.housing.haofiti.viewmodels.ResponseUtil
 import kotlinx.coroutines.flow.Flow
@@ -61,4 +62,8 @@ interface HouseRepository {
      * @param house The PropertyItem object to be removed.
      */
     suspend fun deleteHome(house: PropertyItem)
+
+    suspend fun getCurrentLocation(context: Context): ResponseUtil<String>
+
+    suspend fun checkLocationPermission(context: Context): Boolean
 }

@@ -1,10 +1,9 @@
 package iz.housing.haofiti.ui.theme.presentation.details
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,18 +19,22 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material.icons.outlined.Call
-import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,7 +42,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -58,6 +60,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -75,9 +78,10 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import iz.housing.haofiti.R
 import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.ui.theme.BarColors
 import iz.housing.haofiti.ui.theme.presentation.common.BarEffect
-import iz.housing.haofiti.ui.theme.presentation.navigation.Route
 import iz.housing.haofiti.viewmodels.HouseViewModel
+import kotlin.math.floor
 
 @Composable
 fun HouseDetailsPage(
@@ -102,15 +106,15 @@ fun HouseDetailsPage(
                 ImageCarousel(propertyItem, onFavoriteClick = { viewModel.saveProperty(it) })
                 HouseDescription(propertyItem)
             }
-            Spacer(modifier = Modifier.height(4.dp))
             DetailSection(
-                content = { HouseFacilities(propertyItem) }
+                content = { EnergyEfficiency(propertyItem) }
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            DetailSection(
+                content = { PropertyDetailsSection(propertyItem) }
+            )
             DetailSection(
                 content = { LocationAddress(propertyItem) }
             )
-            Spacer(modifier = Modifier.height(4.dp))
             DetailSection(
                 content = { AgentDetails(propertyItem, context, navController) }
             )
@@ -219,8 +223,8 @@ fun ImageCarousel(propertyItem: PropertyItem,onFavoriteClick: (PropertyItem) -> 
         )
         Column (
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = 16.dp, top = 180.dp),
+            .fillMaxWidth()
+            .padding(end = 16.dp, top = 180.dp),
             verticalArrangement = Arrangement.Bottom){
             Row(
                 modifier = Modifier
@@ -311,7 +315,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                 overflow = TextOverflow.Clip,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = if (expanded) 10.dp else 0.dp)
+                    .padding(bottom = if (expanded) 30.dp else 0.dp)
             )
 
             if (!expanded) {
@@ -334,7 +338,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                     modifier = Modifier
                         .clickable { expanded = true }
                         .align(Alignment.BottomCenter)
-                        .padding(top = 30.dp)
+                        .padding(top = 80.dp)
                 )
             } else {
                 Text(
@@ -344,7 +348,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                     modifier = Modifier
                         .clickable { expanded = false }
                         .align(Alignment.BottomCenter)
-                        .padding(top = 2.dp)
+                        .padding(top = 10.dp)
                 )
             }
         }
@@ -353,32 +357,115 @@ fun HouseDescription(propertyItem: PropertyItem) {
 
 
 @Composable
-fun HouseFacilities(propertyItem: PropertyItem) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(14.dp)) {
-        Text("Our Facilities", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-        Spacer(Modifier.height(4.dp))
-
-        Row(modifier = Modifier
+fun PropertyDetailsSection(propertyItem: PropertyItem) {
+    androidx.compose.material.Card(
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)) {
-            // Left column
-            Column(modifier = Modifier.weight(1f)) {
-                FacilityItem(painterResource(R.drawable.vwifi), "Wi-Fi available")
-                FacilityItem(painterResource(R.drawable.thermometer), "${propertyItem.amenities?.bathrooms} Bathrooms")
-                FacilityItem(painterResource(R.drawable.netflix), "Netflix, Spotify..")
-                FacilityItem(painterResource(R.drawable.ac), "AC - ductless")
-            }
+            .padding(16.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 1.dp,
+        backgroundColor = Color(0xFFF5F5F5)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            PropertyDetailRow(painterResource(id = R.drawable.bedroom), "Bedrooms",
+                propertyItem.amenities?.bedrooms.toString()
+            )
+            PropertyDetailRow(painterResource(id = R.drawable.bath), "Bathrooms", propertyItem.amenities?.bathrooms.toString())
+            PropertyDetailRow(painterResource(id = R.drawable.homeicon), "Covered area", "180 m²")
+            PropertyDetailRow(painterResource(id = R.drawable.bookmark), "Plot area", "320 m²")
+            PropertyDetailRow(
+                painterResource(id = R.drawable.netflix),
+                "Veranda (uncovered)",
+                propertyItem.amenities?.verandaCovered.toString()
+            )
+            PropertyDetailRow(painterResource(id = R.drawable.bookmark), "Furnished", "Fully")
+            PropertyDetailRow(painterResource(id = R.drawable.parking), "Parking", propertyItem.amenities?.parking.toString())
+            PropertyDetailRow(painterResource(id = R.drawable.ac), "Air-Condition", propertyItem.amenities?.ac.toString())
+        }
+    }
+}
 
-            // Right column
-            Column(modifier = Modifier.weight(1f)) {
-                FacilityItem(painterResource(R.drawable.kitchen), "Kitchen")
-                FacilityItem(painterResource(R.drawable.bedroom), "${propertyItem.amenities?.bedrooms.toString()} bedrooms")
-                FacilityItem(painterResource(R.drawable.parking), "Free parking lot")
-                FacilityItem(painterResource(R.drawable.bookmark), "Many more facilities")
+@Composable
+fun PropertyDetailRow(icon: Painter, label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        androidx.compose.material.Icon(
+            painter = icon,
+            contentDescription = null,
+            modifier = Modifier
+                .size(30.dp)
+                .padding(start = 8.dp)
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Gray
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
+@Composable
+fun EnergyEfficiencyBar(propertyItem: PropertyItem) {
+    androidx.compose.material.Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(24.dp)
+            .padding(vertical = 8.dp),
+        elevation = 2.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            BarColors.forEach { color ->
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(16.dp)
+                        .background(color)
+                )
+                Spacer(modifier = Modifier.width(2.dp)) // Gap between colors
             }
         }
+    }
+}
+
+@Composable
+fun EnergyEfficiency(propertyItem: PropertyItem) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Energy efficiency",
+            style = MaterialTheme.typography.labelMedium,
+            modifier = Modifier.padding(bottom = 4.dp)
+        )
+
+        Text(
+            text = "Certification in progress.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        EnergyEfficiencyBar(propertyItem)
     }
 }
 
@@ -400,31 +487,27 @@ fun FacilityItem(icon: Painter, text: String) {
 
 @Composable
 fun LocationAddress(propertyItem: PropertyItem) {
-    Column(modifier = Modifier.padding(10.dp)) {
+    Box(modifier = Modifier
+        .padding(16.dp)
+        .border(1.dp, Color.LightGray)){
+    Column(modifier = Modifier.padding(5.dp)) {
         // PropertyItem has latitude and longitude properties
         val propertyLocation = LatLng(propertyItem.latitude, propertyItem.longitude)
-        val cameraPositionState = rememberCameraPositionState{
+        val cameraPositionState = rememberCameraPositionState {
             position = CameraPosition.Builder()
                 .target(propertyLocation)
-                .zoom(5f)
+                .zoom(8f)
                 .build()
         }
-        Text(
-            "Location",
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.height(4.dp))
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-        ){
+                .height(250.dp)
+        ) {
             GoogleMap(
-                modifier =Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 cameraPositionState = cameraPositionState
-            ){
+            ) {
                 Marker(
                     state = MarkerState(position = propertyLocation),
                     title = propertyItem.name,
@@ -432,80 +515,177 @@ fun LocationAddress(propertyItem: PropertyItem) {
                 )
             }
         }
+      }
     }
 }
 
 @Composable
 fun AgentDetails(propertyItem: PropertyItem,context: Context,navController: NavController){
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp)) {
-        Text(
-            "Agency Information",
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            style = MaterialTheme.typography.bodyMedium
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Column(
-            modifier = Modifier.fillMaxWidth()
+        androidx.compose.material.Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            shape = RoundedCornerShape(8.dp)
         ) {
-            Box(
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(180.dp)
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(id = R.drawable.realestate),
-                    contentDescription = null,
-                )
-            }
-            Spacer(Modifier.height(8.dp))
-            TextButton(
-                onClick = {
-                    val intent = Intent(Intent.ACTION_DIAL).apply {
-                        data = Uri.parse("tel:${propertyItem.agent?.phone}")
-                    }
-                    context.startActivity(intent)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.primary,
-                        shape = RoundedCornerShape(10.dp))
-            ) {
-                Icon(
-                    Icons.Outlined.Call,
-                    contentDescription = null,
-                    tint = Color.White
-                )
-                Spacer(Modifier.width(8.dp))
-                Text(
+                // Profile Image
+                Box(modifier = Modifier.size(80.dp) ) {
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(propertyItem.agent?.corporateImg?.firstOrNull())
+                            .build(),
+                        contentDescription = "Image",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.FillBounds
+                    )
+                }
 
-                    "Telephone",
-                    fontSize = 16.sp,
-                    color = Color.White
+                // Agent Role
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = propertyItem.agent?.name.toString(),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = Color.LightGray
+                    )
+                    androidx.compose.material.Icon(
+                        imageVector = Icons.Default.CheckCircle,
+                        contentDescription = "Verified",
+                        tint = colorResource(id = R.color.verified),
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .size(20.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Row {
+                    propertyItem.agent?.rating?.let { Ratings(propertyItem = propertyItem,rating = it) }
+                }
+                Text(
+                    text = propertyItem.agent?.basedLocation.toString(),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = Color.LightGray
+                )
+
+                // Email Button
+                TextButton(
+                    onClick = { },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 24.dp),
+                    border = BorderStroke(1.dp, Color.LightGray),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = colorResource(id = R.color.ocean_blue),
+                        contentColor = Color.White
+                    )
+                ) {
+                    androidx.compose.material.Icon(
+                        imageVector = Icons.Default.Email,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                    Text(
+                        text = "Send email",
+                        color = Color.White
+                    )
+                }
+
+                // Phone Button
+                TextButton(
+                    onClick = { },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = colorResource(id = R.color.ocean_blue),
+                        contentColor = Color.White
+                    )
+                ) {
+                    androidx.compose.material.Icon(
+                        imageVector = Icons.Default.Phone,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                    Text(
+                        text = "Show phone",
+                        color = Color.White
+                    )
+                }
+
+                // Agency Details
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // More from agency link
+                    TextButton(
+                        onClick = { },
+                        modifier = Modifier.padding(top = 16.dp)
+                    ) {
+                        Text(
+                            text = "More from this agency",
+                            color = Color(0xFF2196F3),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun Ratings(propertyItem: PropertyItem, rating: Double,maxStars: Int = 5) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Text(
+            text = propertyItem.agent?.rating.toString(),
+            style = MaterialTheme.typography.bodyLarge,
+            color = Color.LightGray,
+            modifier = Modifier.padding(top = 4.dp)
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+
+        Row {
+            val fullStats = floor(rating).toInt()
+            val halfStats = (rating - fullStats) >= 0.5
+
+            repeat(fullStats) {
+                androidx.compose.material.Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = null,
+                    tint = Color(0xFFFFC107),
+                    modifier = Modifier.size(18.dp)
                 )
             }
-            Spacer(Modifier.height(8.dp))
-            TextButton(
-                onClick = {
-                    navController.navigate(Route.Message.route)
-                },
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(10.dp))
-                    .fillMaxWidth()
-            ) {
+
+            if (halfStats) {
                 Icon(
-                    Icons.Outlined.MailOutline,
+                    painter = painterResource(R.drawable.half_star),
                     contentDescription = null,
-                    tint = Color.White
+                    tint = Color(0xFFFFC107),
+                    modifier = Modifier.size(18.dp)
                 )
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    "Message",
-                    fontSize = 16.sp,
-                    color = Color.White)
+            }
+
+            val borderStars = maxStars - fullStats - (if (halfStats) 1 else 0)
+            repeat(borderStars) {
+                androidx.compose.material.Icon(
+                    painter = painterResource(R.drawable.starborder),
+                    contentDescription = null,
+                    tint = Color(0xFFFFC107),
+                    modifier = Modifier.size(18.dp)
+                )
             }
         }
     }

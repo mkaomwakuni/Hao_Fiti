@@ -39,12 +39,13 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import iz.housing.haofiti.data.model.Amenities
 import iz.housing.haofiti.data.model.PropertyItem
+import iz.housing.haofiti.ui.theme.presentation.navigation.Route
 
 @Composable
 fun PropertyCard(property: PropertyItem,onItemClick: () -> Unit) {
     androidx.compose.material.Card(
         modifier = Modifier
-            .fillMaxWidth()
+            .width(340.dp)
             .clickable { onItemClick() }
             .shadow(1.dp),
         shape = RectangleShape,
@@ -80,7 +81,7 @@ fun PropertyCard(property: PropertyItem,onItemClick: () -> Unit) {
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     androidx.compose.material.Text(
-                        text = "Ksh ${property.price}/month",
+                        text = "Ksh ${property.price/1000}K /month",
                         color = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -102,17 +103,16 @@ fun PropertyCard(property: PropertyItem,onItemClick: () -> Unit) {
         }
     }
 }
-@Preview(showBackground = true)
-@Composable
-fun PropertyCardHorizontalPreview1() {
-    val property = PropertyItem(
-        id = 1,
-        name = "Beautiful Apartment",
-        location = "Nairobi",
-        price = 50000,
-        images = listOf("https://via.placeholder.com/350x140"),
-        description = "A beautiful apartment in Nairobi",
-        amenities = Amenities(4, 2, true, true, true, false, true, true)
-    )
-    PropertyCard(property = property, onItemClick = {})
-}
+//                @Preview(showBackground = true)
+//                @Composable
+//                fun PropertyCardHorizontalPreview1() {
+//                    val property = PropertyItem(
+//                        name = "Beautiful Apartment",
+//                        location = "Nairobi",
+//                        price = 50000,
+//                        images = listOf("https://via.placeholder.com/350x140"),
+//                        description = "A beautiful apartment in Nairobi",
+//                        amenities = Amenities(4, 2, true, true, true, false, true)
+//                    )
+//                    PropertyCard(property = property, onItemClick = {})
+//                }

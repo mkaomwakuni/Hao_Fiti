@@ -17,10 +17,8 @@ data class PropertyItem(
     val name: String = "",
     val type: PropertyType = PropertyType.APARTMENT,
     val amenities: Amenities? = null,
-    val rating: Double? = null,
+    val energyEfficiencyIndex: Int = 0
 )
-
-data class Housing(   val locations: List<Location> = emptyList())
 
 data class Location(
     val locationName: String = "",

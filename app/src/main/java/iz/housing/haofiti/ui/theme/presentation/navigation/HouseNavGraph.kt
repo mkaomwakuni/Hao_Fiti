@@ -19,7 +19,6 @@ import iz.housing.haofiti.ui.theme.presentation.Chat.ContactForm
 import iz.housing.haofiti.ui.theme.presentation.booked.BookmarkScreen
 import iz.housing.haofiti.ui.theme.presentation.common.SearchScreen
 import iz.housing.haofiti.ui.theme.presentation.details.HouseDetailsPage
-import iz.housing.haofiti.ui.theme.presentation.explorer.Discovery
 import iz.housing.haofiti.ui.theme.presentation.home.HomePage
 import iz.housing.haofiti.ui.theme.presentation.maps.MapFocused
 import iz.housing.haofiti.ui.theme.presentation.profile.SettingsScreen
@@ -50,7 +49,7 @@ fun HouseNavGraph(navController: NavHostController) {
                 state = houseViewModel.uiState.collectAsState().value,
                 onEvent = houseViewModel::onEvent,
                 onItemClick = { propertyId ->
-                    houseViewModel.getPropertyById(propertyId.id)
+                    houseViewModel.getPropertyById(propertyId.name)
                     navController.navigate(Route.HouseDetails.route)
                 }
             )
@@ -72,20 +71,6 @@ fun HouseNavGraph(navController: NavHostController) {
             BookmarkScreen(
                 navController = navController,
                 houseViewModel = houseViewModel)
-        }
-        composable(
-            route = Route.Explore.route,
-            enterTransition = { fadeIn(animationSpec = tween(1000)) },
-            exitTransition = { fadeOut(animationSpec = tween(1000)) }) {
-            Discovery(
-                navController = navController,
-                state = houseViewModel.uiState.collectAsState().value,
-                onEvent = houseViewModel::onEvent,
-                onItemClick = { propertyId ->
-                    houseViewModel.getPropertyById(propertyId.id)
-                    navController.navigate(Route.HouseDetails.route)
-                }
-            )
         }
         composable(route = Route.Profile.route) {
             SettingsScreen(navController)
