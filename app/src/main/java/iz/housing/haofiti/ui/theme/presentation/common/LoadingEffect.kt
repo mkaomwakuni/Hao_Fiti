@@ -71,7 +71,7 @@ fun CardShimmerEffect(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(5.dp),
+            .padding(16.dp),
     ) {
         // Main content area with shimmer effect
         Box(

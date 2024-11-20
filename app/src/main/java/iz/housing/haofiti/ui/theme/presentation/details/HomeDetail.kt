@@ -19,10 +19,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.ButtonDefaults
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Chip
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -99,10 +103,10 @@ fun HouseDetailsPage(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.LightGray.copy(alpha = 0.3f))
                 .verticalScroll(rememberScrollState())
+                .background(MaterialTheme.colorScheme.background)
         ) {
-            Column(modifier = Modifier.background(Color.White)) {
+            Column() {
                 ImageCarousel(propertyItem, onFavoriteClick = { viewModel.saveProperty(it) })
                 HouseDescription(propertyItem)
             }
@@ -132,8 +136,8 @@ fun DetailSection(
         shape = RectangleShape,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-            contentColor = Color.Black
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
         )
     ) {
         Column(
@@ -298,19 +302,28 @@ fun HouseDescription(propertyItem: PropertyItem) {
     var expanded by remember { mutableStateOf(false) }
     val text = propertyItem.description
     val maxLines = 4
-    val readMoreText = "Read more \uD83D\uDC40"
-    val readLessText = "Read less \uD83D\uDC40"
+    val readMoreText = "Read less \uD83D\uDC40"
+    val readLessText = "Read more \uD83D\uDC40"
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    // Retrieve colors based on the current theme
+    val gradientEndColor = MaterialTheme.colorScheme.background
+    val gradientStartColor = Color.Transparent
+    val textColor = MaterialTheme.colorScheme.onBackground
+    val columnBackgroundColor = MaterialTheme.colorScheme.surface
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .background(columnBackgroundColor) // Background for the column
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
         ) {
             Text(
                 text = text,
                 textAlign = TextAlign.Justify,
-                style = MaterialTheme.typography.bodyMedium.copy(color = Color.Black),
+                style = MaterialTheme.typography.bodyMedium.copy(color = textColor),
                 maxLines = if (expanded) Int.MAX_VALUE else maxLines,
                 overflow = TextOverflow.Clip,
                 modifier = Modifier
@@ -324,7 +337,7 @@ fun HouseDescription(propertyItem: PropertyItem) {
                         .matchParentSize()
                         .background(
                             Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, Color.White),
+                                colors = listOf(gradientStartColor, gradientEndColor),
                                 startY = with(LocalDensity.current) { (maxLines * 2).dp.toPx() * 0.8f },
                                 endY = with(LocalDensity.current) { (maxLines * 20).dp.toPx() }
                             )
@@ -356,6 +369,8 @@ fun HouseDescription(propertyItem: PropertyItem) {
 }
 
 
+
+
 @Composable
 fun PropertyDetailsSection(propertyItem: PropertyItem) {
     androidx.compose.material.Card(
@@ -364,7 +379,8 @@ fun PropertyDetailsSection(propertyItem: PropertyItem) {
             .padding(16.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 1.dp,
-        backgroundColor = Color(0xFFF5F5F5)
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        backgroundColor = MaterialTheme.colorScheme.surface
     ) {
         Column(
             modifier = Modifier
@@ -515,7 +531,7 @@ fun LocationAddress(propertyItem: PropertyItem) {
                 )
             }
         }
-      }
+        }
     }
 }
 
@@ -525,7 +541,9 @@ fun AgentDetails(propertyItem: PropertyItem,context: Context,navController: NavC
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            shape = RoundedCornerShape(8.dp)
+            shape = RoundedCornerShape(8.dp),
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            backgroundColor = MaterialTheme.colorScheme.surface
         ) {
             Column(
                 modifier = Modifier
