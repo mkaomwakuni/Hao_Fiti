@@ -3,10 +3,10 @@
 
 ## 📸 App Screenshots
 
-| Coolum 1       | Coolum 2      | Coolum 3     |  Coolum 4      |
-| -------------- | -------------- | -------------- | -------------- |
-| ![Screen 1](url1) | ![Screen 2](url2) | ![Screen 3](url3) | ![Screen 4](url4) |
-| ![Screen 5](url5) | ![Screen 6](url6) | ![Screen 7](url7) | ![Screen 8](url8) |
+| **Column 1**            | **Column 2**            | **Column 3**            | **Column 4**            |
+|--------------------------|-------------------------|--------------------------|--------------------------|
+| ![Screen 1](https://github.com/user-attachments/assets/45b514f6-9fda-4aa2-b44a-8d0ae72e3a4d) | ![Screen 2](https://github.com/user-attachments/assets/ab808695-4790-4579-ac12-6ff9997d5202) | ![Screen 3](https://github.com/user-attachments/assets/a7e44edd-7f66-4f2a-91e7-fc58a2fd2a2a) | ![Screen 4](https://github.com/user-attachments/assets/f98a1794-f496-4635-baa5-7e1b3ff4fd0c) |
+| ![Screen 5](https://github.com/user-attachments/assets/9b712e94-0a7a-44d6-8f3d-72a1ccd19b18) | ![Screen 6](https://github.com/user-attachments/assets/aa030253-823f-49f1-a6ab-635cafb76702) | ![Screen 7](https://github.com/user-attachments/assets/cbe28025-106a-4ab2-93d1-0ba98e11cea6) | ![Screen 8](url8) |
 
 ## 🔄Features
 - **Property Listings**: View properties available for rent or sale with detailed information.
