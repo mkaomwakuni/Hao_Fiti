@@ -3,6 +3,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.DatabaseException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import iz.housing.haofiti.data.ThemePreferencesManager
 import iz.housing.haofiti.data.model.HouseStates
@@ -29,6 +30,10 @@ class HouseViewModel @Inject constructor(
     private val repository: HouseRepository,
     private val themePreferencesManager: ThemePreferencesManager
 ) : ViewModel() {
+
+    companion object {
+        private const val TAG = "HouseViewModel"
+    }
 
     val isDarkMode = themePreferencesManager.isDarkMode
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
@@ -76,13 +81,14 @@ class HouseViewModel @Inject constructor(
 
 
 
-    private fun loadInitialData() {
+    fun loadInitialData() {
+        Log.d(TAG, "Loading initial data")
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             when (val result = getProperties()) {
                 is ResponseUtil.Success -> {
+                    Log.d(TAG, "Fetched properties successfully")
                     result.data?.let { properties ->
-                        val locations = properties.map { it.location }.distinct()
                         _uiState.update {
                             it.copy(
                                 properties = properties,
@@ -93,6 +99,7 @@ class HouseViewModel @Inject constructor(
                     }
                 }
                 is ResponseUtil.Error -> {
+                    Log.e(TAG, "Error loading data: ${result.message}")
                     _uiState.update {
                         it.copy(error = result.message ?: "An error occurred while fetching data", isLoading = false)
                     }
@@ -105,6 +112,9 @@ class HouseViewModel @Inject constructor(
         return try {
             val properties = repository.getAllProperties().first()
             ResponseUtil.Success(properties)
+        } catch (e: DatabaseException) {
+            Log.e("HouseViewModel", "Firebase error: ${e.message}")
+            ResponseUtil.Error("Permission denied. Check Firebase rules and user authentication.")
         } catch (e: Exception) {
             ResponseUtil.Error(e.message ?: "An error occurred while fetching data")
         }

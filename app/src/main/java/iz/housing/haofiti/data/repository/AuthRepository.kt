@@ -18,6 +18,7 @@ import javax.inject.Inject
 
 class AuthRepository @Inject constructor(private val context: Context) {
 
+
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 

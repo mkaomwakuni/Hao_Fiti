@@ -22,16 +22,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import iz.housing.haofiti.R
 import iz.housing.haofiti.ui.theme.presentation.common.BarEffect
 import iz.housing.haofiti.viewmodels.AuthViewModel
+import iz.housing.haofiti.viewmodels.HouseViewModel
 
 @Composable
-fun AuthScreen(viewModel: AuthViewModel, navController: NavController) {
+fun AuthScreen(
+    houseViewModel: HouseViewModel = hiltViewModel(),
+    viewModel: AuthViewModel,
+    navController: NavController) {
     val context = LocalContext.current as Activity
     BarEffect()
+
     val activityResultLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             viewModel.handleGoogleSignInResult(result.resultCode, result.data)
@@ -51,6 +57,9 @@ fun AuthScreen(viewModel: AuthViewModel, navController: NavController) {
         if (isAuthenticated) {
             navController.navigate("home_screen") {
                 popUpTo("auth_screen") { inclusive = true }
+                viewModel.setOnAuthenticationSuccess {
+                    houseViewModel.loadInitialData()  // Trigger data loading on auth success
+                }
             }
         }
     }
@@ -68,7 +77,7 @@ fun AuthScreen(viewModel: AuthViewModel, navController: NavController) {
                 contentDescription = "Background Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp), // Adjust the height as needed
+                    .height(250.dp),
                 contentScale = ContentScale.FillBounds
             )
 
@@ -77,7 +86,7 @@ fun AuthScreen(viewModel: AuthViewModel, navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
-                    .height(150.dp) // Adjust the height of the gradient as needed
+                    .height(150.dp)
                     .background(
                         Brush.verticalGradient(
                             colors = listOf(

@@ -37,7 +37,8 @@ fun HouseNavGraph(navController: NavHostController) {
             route = Route.Auth.route) {
             AuthScreen(
                 navController = navController,
-                viewModel = authViewModel
+                viewModel = authViewModel,
+                houseViewModel = houseViewModel
             )
         }
         composable(
