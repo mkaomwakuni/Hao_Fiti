@@ -14,8 +14,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import iz.housing.haofiti.R
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class AuthRepository(private val context: Context) {
+class AuthRepository @Inject constructor(private val context: Context) {
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()

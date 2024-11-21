@@ -15,6 +15,7 @@ import iz.housing.haofiti.data.database.HouseDao
 import iz.housing.haofiti.data.database.HouseDatabase
 import iz.housing.haofiti.data.database.HouseRepositoryImpl
 import iz.housing.haofiti.data.database.HouseTypeConvertors
+import iz.housing.haofiti.data.repository.AuthRepository
 import iz.housing.haofiti.data.repository.HouseRepository
 import javax.inject.Singleton
 
@@ -105,6 +106,22 @@ object DatabaseModule {
         @Singleton
         fun provideThemePreferencesManager(@ApplicationContext context: Context): ThemePreferencesManager {
             return ThemePreferencesManager(context)
+        }
+    }
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object AuthModule {
+
+        /**
+         * Provides a singleton instance of AuthRepository.
+         *
+         * @return The AuthRepository instance.
+         */
+        @Provides
+        @Singleton
+        fun provideAuthRepository(@ApplicationContext context: Context): AuthRepository {
+            return AuthRepository(context)
         }
     }
 }

@@ -115,6 +115,9 @@ dependencies {
 
     // Facebook SDK
     implementation libs.facebook.login
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
 }
 kapt {
     correctErrorTypes = true
